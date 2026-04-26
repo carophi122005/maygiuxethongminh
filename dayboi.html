@@ -74,95 +74,216 @@ Họ & Tên ( <input type="checkbox" id="phuHuynhCha" class="chk"> Cha / <input 
 </div>
 
 <script>
-// DÁN LINK /exec MỚI NHẤT VÀO ĐÂY
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCn-ywXanKJ7Rh0Wl5A9Nkmau-VRePw1-aHOlU4-evuueMWuS-bJTKR1wzo_KcPw/exec";
 
-// Hàm load danh sách mã HV vào combo box
-async function fetchMaHVList() {
-    try {
+const select = document.getElementById("selectMaHV");
+
+// ====== CACHE ======
+const CACHE_KEY = "maHV_cache_v1";
+const CACHE_TIME = 5 * 60 * 1000; // 5 phút
+
+function setCache(data){
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+        time: Date.now(),
+        data
+    }));
+}
+function getCache(){
+    const raw = localStorage.getItem(CACHE_KEY);
+    if(!raw) return null;
+    const obj = JSON.parse(raw);
+    if(Date.now() - obj.time > CACHE_TIME) return null;
+    return obj.data;
+}
+
+// ====== LOADING UI ======
+function setLoading(state){
+    select.innerHTML = state 
+        ? '<option>⏳ Đang tải...</option>' 
+        : '<option value="">-- Chọn Mã HV --</option>';
+}
+
+// ====== LOAD LIST ======
+async function fetchMaHVList(retry = 1){
+    setLoading(true);
+
+    // dùng cache trước
+    const cache = getCache();
+    if(cache){
+        console.log("⚡ Load từ cache");
+        renderSelect(cache);
+    }
+
+    try{
         const res = await fetch(SCRIPT_URL + "?action=getList");
+
+        if(!res.ok) throw new Error("HTTP lỗi");
+
         const text = await res.text();
-        
-        // Kiểm tra nếu kết quả trả về không phải JSON (ví dụ trả về "ok" hoặc HTML login)
-        if (!text.trim().startsWith("[")) {
-            console.warn("Dữ liệu nhận được không phải danh sách hợp lệ:", text);
-            return;
+
+        if(text === "ok"){
+            throw new Error("Script chưa deploy đúng");
         }
 
         const list = JSON.parse(text);
-        const select = document.getElementById("selectMaHV");
-        select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
-        list.forEach(ma => {
-            let opt = document.createElement("option");
-            opt.value = ma; opt.textContent = ma;
-            select.appendChild(opt);
-        });
-    } catch (err) { 
-        console.log("Chưa thể load danh sách học viên cũ.");
+
+        if(!Array.isArray(list)){
+            throw new Error("Data không hợp lệ");
+        }
+
+        setCache(list);
+        renderSelect(list);
+
+        console.log("✅ Load danh sách thành công");
+
+    }catch(err){
+        console.error("❌ Lỗi load:", err.message);
+
+        if(retry > 0){
+            console.log("🔄 Thử lại...");
+            setTimeout(()=>fetchMaHVList(retry - 1), 1500);
+        }else{
+            alert("Không tải được danh sách. Kiểm tra Apps Script!");
+        }
     }
 }
 
-// Hàm load dữ liệu chi tiết khi chọn từ Combo Box
-async function loadStudentData() {
-    const id = document.getElementById("selectMaHV").value;
-    if (!id) return;
-    try {
-        const res = await fetch(SCRIPT_URL + "?action=getDetail&id=" + id);
-        const text = await res.text();
-        if (!text.trim().startsWith("{")) return;
-        
-        const data = JSON.parse(text);
-        if (data) {
-            Object.keys(data).forEach(key => {
-                const el = document.getElementById(key);
-                if (el) {
-                    if (el.type === "date" && data[key]) {
-                        el.value = new Date(data[key]).toISOString().split('T')[0];
-                    } else {
-                        el.value = data[key];
-                    }
-                }
-            });
-        }
-    } catch (err) { console.error("Lỗi khi lấy thông tin chi tiết."); }
+// ====== RENDER SELECT + SEARCH ======
+function renderSelect(list){
+    select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
+
+    list.forEach(ma=>{
+        if(!ma) return;
+        const opt = document.createElement("option");
+        opt.value = ma;
+        opt.textContent = ma;
+        select.appendChild(opt);
+    });
+
+    enableSearch();
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+// ====== SEARCH TRONG SELECT ======
+function enableSearch(){
+    let search = "";
+
+    select.addEventListener("keydown", e=>{
+        if(e.key.length === 1){
+            search += e.key.toLowerCase();
+        }
+
+        if(e.key === "Backspace"){
+            search = search.slice(0,-1);
+        }
+
+        const options = [...select.options];
+
+        const found = options.find(opt =>
+            opt.value.toLowerCase().includes(search)
+        );
+
+        if(found){
+            select.value = found.value;
+        }
+
+        setTimeout(()=> search = "", 800);
+    });
+}
+
+// ====== LOAD DETAIL ======
+async function loadStudentData(){
+    const id = select.value;
+    if(!id) return;
+
+    try{
+        const res = await fetch(SCRIPT_URL + "?action=getDetail&id=" + id);
+        const data = await res.json();
+
+        if(!data || typeof data !== "object"){
+            throw new Error("Data rỗng");
+        }
+
+        Object.keys(data).forEach(key=>{
+            const el = document.getElementById(key);
+            if(!el) return;
+
+            if(el.type === "date" && data[key]){
+                el.value = new Date(data[key]).toISOString().split('T')[0];
+            }
+            else if(el.classList.contains('money')){
+                el.value = formatNumber(data[key]);
+            }
+            else{
+                el.value = data[key];
+            }
+        });
+
+        // checkbox
+        document.getElementById("gioiTinhNam").checked = (data.gioiTinh === "Nam");
+        document.getElementById("gioiTinhNu").checked = (data.gioiTinh === "Nữ");
+        document.getElementById("phuHuynhCha").checked = (data.loaiPH === "Cha");
+        document.getElementById("phuHuynhMe").checked = (data.loaiPH === "Mẹ");
+
+    }catch(err){
+        console.error("❌ Lỗi load chi tiết:", err.message);
+        alert("Không load được dữ liệu học viên");
+    }
+}
+
+// ====== FORMAT ======
+function formatNumber(x){
+    return x 
+        ? x.toString().replace(/\D/g,'').replace(/\B(?=(\d{3})+(?!\d))/g,'.')
+        : "";
+}
+
+// ====== INIT ======
+window.addEventListener("DOMContentLoaded", ()=>{
     fetchMaHVList();
-    // Lấy mã ID tự động cho ô maHocVien
-    fetch(SCRIPT_URL).then(r => r.text()).then(id => {
-        if(id && id.length < 10) document.getElementById("maHocVien").value = id;
-    }).catch(e => {});
+
+    document.querySelectorAll('.money').forEach(input=>{
+        input.value = formatNumber(input.value);
+        input.addEventListener('input', function(){
+            this.value = formatNumber(this.value);
+        });
+    });
 });
 
-function exportPDF() { window.print(); }
-
-async function saveData() {
+// ====== SAVE ======
+async function saveData(){
     const btn = document.getElementById("btnSave");
-    btn.disabled = true; btn.innerText = "Đang lưu...";
-    
-    // Thu thập dữ liệu từ các ID hiện có
-    const payload = {
+    btn.disabled = true;
+    btn.innerText = "Đang lưu...";
+
+    const data = {
         maHocVien: document.getElementById("maHocVien").value,
         hocVien: document.getElementById("hocVien").value,
+        loaiBoi: document.getElementById("loaiBoi").value,
+        gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : "Nữ",
         tenPH: document.getElementById("tenPH").value,
         sdtPH: document.getElementById("sdtPH").value,
-        thoiGianAuto: new Date().toLocaleString("vi-VN")
+        time: new Date().toISOString()
     };
 
-    try {
+    try{
         await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify(payload)
+            method:"POST",
+            mode:"no-cors",
+            body: JSON.stringify(data)
         });
-        alert("✅ Đã lưu dữ liệu thành công!");
-        fetchMaHVList(); // Cập nhật lại combo box
-    } catch (e) {
-        alert("❌ Có lỗi xảy ra khi lưu.");
+
+        alert("✅ Đã lưu");
+        fetchMaHVList();
+
+    }catch(e){
+        alert("❌ Lỗi lưu");
     }
-    btn.disabled = false; btn.innerText = "LƯU";
+
+    btn.disabled = false;
+    btn.innerText = "LƯU";
 }
+
+function exportPDF(){ window.print(); }
 </script>
 </body>
 </html>
