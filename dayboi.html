@@ -29,7 +29,6 @@ button{padding:6px 12px;margin:10px}
     margin: 0;
   }
 
-
   body{
     margin:0;
     -webkit-print-color-adjust: exact;
@@ -61,6 +60,10 @@ button{padding:6px 12px;margin:10px}
   text-align-last:center;
 }
 }
+/* Tự động viết hoa chữ cái đầu khi hiển thị */
+#tenHLV, #hocVien, #tenPH, #tuVanVien {
+    text-transform: capitalize;
+}
 </style>
 </head>
 
@@ -71,7 +74,20 @@ button{padding:6px 12px;margin:10px}
   right:0;
   transform:translateX(-50%);
   z-index:999;
+  display: flex;
+  gap: 10px;
 ">
+<button onclick="saveData()" id="btnSave" style="
+  padding:10px 24px;
+  border-radius:6px;
+  border:none;
+  background:#16a34a;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+">
+  LƯU
+</button>
 <button onclick="exportPDF()" style="
   padding:10px 24px;
   border-radius:6px;
@@ -97,29 +113,29 @@ button{padding:6px 12px;margin:10px}
 <div class="content">
 
 <div class="row">
-Huấn luyện viên: <span class="line" style="width:220px"><input value="Nguyễn Bảo Trung" style="font-weight:bold"></span>
-&nbsp;&nbsp;&nbsp; ĐT: <span class="line" style="width:140px"><input value="08.345.357.99" style="font-weight:bold"></span>
-&nbsp;&nbsp;&nbsp; Mã số: <span class="line" style="width:50px"><input value="01" style="font-weight:bold"></span>
+Huấn luyện viên: <span class="line" style="width:220px"><input id="tenHLV" value="Nguyễn Bảo Trung" style="font-weight:bold"></span>
+&nbsp;&nbsp;&nbsp; ĐT: <span class="line" style="width:140px"><input id="sdtHLV" value="08.345.357.99" style="font-weight:bold"></span>
+&nbsp;&nbsp;&nbsp; Mã số: <span class="line" style="width:50px"><input id="maHLV" value="01" style="font-weight:bold"></span>
 </div>
 
 <div class="row">
-Học viên: <span class="line" style="width:300px"><input></span>
-&nbsp; ( <input type="checkbox" class="chk"> Nam ) ( <input type="checkbox" class="chk"> Nữ )
-&nbsp;&nbsp;&nbsp;&nbsp; Mã số: <span class="line" style="width:50px"><input></span>
+Học viên: <span class="line" style="width:300px"><input id="hocVien"></span>
+&nbsp; ( <input type="checkbox" id="gioiTinhNam" class="chk"> Nam ) ( <input type="checkbox" id="gioiTinhNu" class="chk"> Nữ )
+&nbsp;&nbsp;&nbsp;&nbsp; Mã số: <span class="line" style="width:50px"><input id="maHocVien"></span>
 </div>
 
 <div class="row">
 Ngày tháng năm sinh : 
 <span class="line" style="width:150px; text-align:center">
-  <input type="date" style="text-align:center">
+  <input type="date" id="ngaySinh" style="text-align:center">
 </span>
-&nbsp;&nbsp; Tuổi: <span class="line" style="width:70px"><input></span>
+&nbsp;&nbsp; Tuổi: <span class="line" style="width:70px"><input id="tuoi"></span>
 </div>
 
 <div class="row">
-Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" class="chk"> chiều 
+Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input type="checkbox" id="hocChieu" class="chk"> chiều 
 <span class="line" style="width:150px; display:inline-flex; align-items:center; gap:4px;">
-  <select style="border:none; outline:none; width:45px">
+  <select id="gioBatDau" style="border:none; outline:none; width:45px">
     <option>01h</option><option>02h</option><option>03h</option><option>04h</option><option>05h</option>
     <option>06h</option><option>07h</option><option>08h</option><option>09h</option><option>10h</option>
     <option>11h</option><option>12h</option><option>13h</option><option>14h</option><option>15h</option>
@@ -127,7 +143,7 @@ Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" 
     <option>21h</option><option>22h</option><option>23h</option><option>24h</option>
   </select>
    - 
-  <select style="border:none; outline:none; width:45px">
+  <select id="gioKetThuc" style="border:none; outline:none; width:45px">
     <option>01h</option><option>02h</option><option>03h</option><option>04h</option><option>05h</option>
     <option>06h</option><option>07h</option><option>08h</option><option>09h</option><option>10h</option>
     <option>11h</option><option>12h</option><option>13h</option><option>14h</option><option>15h</option>
@@ -136,23 +152,22 @@ Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" 
   </select>
 </span>
 &nbsp;&nbsp; Thứ: <span class="line" style="width:180px; display:inline-flex; gap:4px; align-items:center;">
-<select style="border:none; outline:none; width:40px">
+<select id="thu1" style="border:none; outline:none; width:40px">
 <option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option>
 </select> |
-<select style="border:none; outline:none; width:40px">
+<select id="thu2" style="border:none; outline:none; width:40px">
 <option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option>
 </select> |
-<select style="border:none; outline:none; width:40px">
+<select id="thu3" style="border:none; outline:none; width:40px">
 <option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option>
 </select>
 </span>
 </div>
 
-<!-- HỌC PHÍ BLOCK CHUẨN GIỐNG HÌNH -->
 <div style="margin-top:6px; position:relative;">
 
   <div style="flex:1">
-    <b>Học Phí Bơi <span class="line no-dots" style="width:45px"><select style="border:none; outline:none; width:100%; font-weight:bold; font-size: 14px;">
+    <b>Học Phí Bơi <span class="line no-dots" style="width:45px"><select id="loaiBoi" style="border:none; outline:none; width:100%; font-weight:bold; font-size: 14px;">
 <option selected>Ếch</option>
 <option>Sải</option>
 <option>Bướm</option>
@@ -162,10 +177,10 @@ Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" 
     <div class="indent" style="display:flex; align-items:center; gap:6px;">
       <span>*</span>
       <span>Học Phí Khóa 1:</span>
-      <span class="line" style="width:80px"><input style="text-align: right;" class="money" value="3000000"></span> VNĐ
+      <span class="line" style="width:80px"><input id="hocPhiK1" style="text-align: right;" class="money" value="3000000"></span> VNĐ
       / 
       <span class="line" style="width:50px">
-<select style="border:none; outline:none; width:100%">
+<select id="soBuoiK1" style="border:none; outline:none; width:100%">
 <option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
 <option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
 <option>11</option><option selected>12</option><option>13</option><option>14</option><option>15</option>
@@ -177,10 +192,10 @@ Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" 
     <div class="indent" style="display:flex; align-items:center; gap:6px; margin-top:2px;">
       <span>*</span>
       <span>Học Phí Khóa 2:</span>
-      <span class="line" style="width:80px"><input style="text-align: right;" class="money" value="2500000"></span> VNĐ
+      <span class="line" style="width:80px"><input id="hocPhiK2" style="text-align: right;" class="money" value="2500000"></span> VNĐ
       / 
       <span class="line" style="width:50px">
-<select style="border:none; outline:none; width:100%;">
+<select id="soBuoiK2" style="border:none; outline:none; width:100%;">
 <option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
 <option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
 <option>11</option><option selected>12</option><option>13</option><option>14</option><option>15</option>
@@ -192,21 +207,37 @@ Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" 
     <div class="indent" style="display:flex; align-items:center; gap:6px; margin-top:2px;">
       <span>*</span>
       <b>Học Phí:</b>
-      <b><span class="line" style="width:80px"><input style="font-weight:bold;text-align: right;" class="money" value="4000000"></span> VNĐ
+      <b><span class="line" style="width:80px"><input id="hocPhiTong" style="font-weight:bold;text-align: right;" class="money" value="4000000"></span> VNĐ
       / 
-      <span class="line" style="width:40px">
-<select style="border:none; outline:none; width:100%; font-weight:bold;text-align: center;font-size: 14px;">
-<option>&nbsp;</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
-<option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
-<option>11</option><option selected>12</option><option>13</option><option>14</option><option>15</option>
-<option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+      <span class="line" style="width:80px">
+<select id="tongSoBuoi" style="border:none; outline:none; width:100%; font-weight:bold; text-align: center; font-size: 14px;">
+  <option value="">&nbsp;</option>
+  <option value="01">01 buổi</option>
+  <option value="02">02 buổi</option>
+  <option value="03">03 buổi</option>
+  <option value="04">04 buổi</option>
+  <option value="05">05 buổi</option>
+  <option value="06">06 buổi</option>
+  <option value="07">07 buổi</option>
+  <option value="08">08 buổi</option>
+  <option value="09">09 buổi</option>
+  <option value="10">10 buổi</option>
+  <option value="11">11 buổi</option>
+  <option selected value="12">12 buổi</option>
+  <option value="13">13 buổi</option>
+  <option value="14">14 buổi</option>
+  <option value="15">15 buổi</option>
+  <option value="16">16 buổi</option>
+  <option value="17">17 buổi</option>
+  <option value="18">18 buổi</option>
+  <option value="19">19 buổi</option>
+  <option value="20">20 buổi</option>
 </select>
-</span> buổi
-      <span class="line" style="width:250px;"><input style="font-weight:bold;" value="1 kèm 1"></span></b>
+</span>
+      <span class="line" style="width:250px;"><input id="ghiChuLop" style="font-weight:bold;" value="1 kèm 1"></span></b>
     </div>
   </div>
 
-  <!-- BRACKET + TEXT RIGHT -->
   <div style="position:absolute; left:375px; top:20px; display:flex; align-items:center;">
     <div style="font-size:30px; line-height:42px;">]</div>
     <span class="line" style="width:160px; margin-left:4px"><input value="Lớp học 2,3 học viên"></span>
@@ -216,24 +247,24 @@ Ngày học: <input type="checkbox" class="chk"> sáng | <input type="checkbox" 
 <br>
 
 <div class="row"style="margin: 0 0 4px;">
-Họ & Tên ( <input type="checkbox" class="chk"> Cha / <input type="checkbox" class="chk"> Mẹ ):
-<span class="line" style="width:250px"><input></span>
-&nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input></span>
+Họ & Tên ( <input type="checkbox" id="phuHuynhCha" class="chk"> Cha / <input type="checkbox" id="phuHuynhMe" class="chk"> Mẹ ):
+<span class="line" style="width:250px"><input id="tenPH"></span>
+&nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtPH"></span>
 </div>
 
 <div class="row">
-Tư Vấn Viên: <span class="line" style="width:250px"><input value="Nguyễn Bảo Trung"></span>
-&nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input value="08.345.357.99"></span>
+Tư Vấn Viên: <span class="line" style="width:250px"><input id="tuVanVien" value="Nguyễn Bảo Trung"></span>
+&nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtTV" value="08.345.357.99"></span>
 </div>
 
 <div class="row">
-Học Phí: <span class="line" style="width:80px;text-align: right;"><input style="font-weight:bold;" class="money" value=""></span> VNĐ
+Học Phí: <span class="line" style="width:80px;text-align: right;"><input id="hocPhiThanhToan" style="font-weight:bold;" class="money" value=""></span> VNĐ
   
 &nbsp;&nbsp; Ngày đóng học phí:
   <span class="line" style="width:150px; text-align:center">
-  <input type="date" style="text-align:center">
+  <input type="date" id="ngayDongPhi" style="text-align:center">
 </span>
-&nbsp;&nbsp; Tuổi: <span class="line" style="width:70px"><input></span>
+
 </div>
 </div>
 
@@ -250,14 +281,14 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 
 <hr>
 
-<div class="indent">❖ Tặng: <span class="line" style="width:300px"><input></span></div>
-<div class="indent"><span style="padding-left: 18px; margin: 6px 0;">Lí do:</span> <span class="line" style="width:300px"><input value="Đóng học phí sau khi được tư vấn"></span></div>
+<div class="indent">❖ Tặng: <span class="line" style="width:300px"><input id="tang"></span></div>
+<div class="indent"><span style="padding-left: 18px; margin: 6px 0;">Lí do:</span> <span class="line" style="width:300px"><input id="lyDoTang" value="Đóng học phí sau khi được tư vấn"></span></div>
 
 <div style="text-align:center; margin:5px 0;"><b>*** Được học thử 01 buổi miễn phí rồi mới chuyển học phí ***</b></div>
 
 <div class="indent">+ Ngày học thử :
 <span class="line" style="width:130px; display:inline-flex; align-items:center;">
-<select style="border:none; outline:none; width:100%; text-align:center; text-align-last:right;font-size: 14px;">
+<select id="thuHocThu" style="border:none; outline:none; width:100%; text-align:center; text-align-last:right;font-size: 14px;">
 <option selected>&nbsp;</option>
 <option>Thứ hai</option>
 <option>Thứ ba</option>
@@ -270,11 +301,11 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 </span>
 (
 <span class="line" style="width:115px;">
-  <input type="date" style="text-align:left;">
+  <input type="date" id="ngayHocThu" style="text-align:left;">
 </span>
 )
 </div>
-<div class="indent">+ Lưu ý : <span class="line" style="width:90%"><input></span></div>
+<div class="indent">+ Lưu ý : <span class="line" style="width:90%"><input id="luuY"></span></div>
 
 <hr>
 
@@ -298,6 +329,8 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 </div>
 
 <script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCn-ywXanKJ7Rh0Wl5A9Nkmau-VRePw1-aHOlU4-evuueMWuS-bJTKR1wzo_KcPw/exec";
+
 function exportPDF(){
   // ẨN NGÀY HỌC THỬ NẾU CHƯA CHỌN
   document.querySelectorAll('input[type="date"]').forEach(el=>{
@@ -340,6 +373,159 @@ document.querySelectorAll('.money').forEach(input=>{
     this.value = formatNumber(raw);
   });
 });
+
+// TỰ ĐỘNG TÍNH TUỔI KHI CHỌN NGÀY SINH
+document.getElementById('ngaySinh').addEventListener('change', function() {
+    const birthday = new Date(this.value);
+    if (!isNaN(birthday)) {
+        const today = new Date();
+        let age = today.getFullYear() - birthday.getFullYear();
+        const monthDiff = today.getMonth() - birthday.getMonth();
+        
+        // Kiểm tra nếu chưa đến ngày sinh nhật trong năm nay thì trừ đi 1 tuổi
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+            age--;
+        }
+        
+        // Hiển thị số tuổi vào ô input có id là "tuoi"
+        document.getElementById('tuoi').value = age > 0 ? age : 0;
+    }
+});
+// TỰ ĐỘNG HIỆN THỨ KHI CHỌN NGÀY HỌC THỬ
+document.getElementById('ngayHocThu').addEventListener('change', function() {
+    const dateValue = new Date(this.value);
+    if (!isNaN(dateValue)) {
+        const days = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
+        const dayName = days[dateValue.getDay()];
+        
+        // Cập nhật giá trị vào ô select có id là "thuHocThu"
+        const selectThu = document.getElementById('thuHocThu');
+        selectThu.value = dayName;
+    }
+});
+// TỰ ĐỘNG ĐIỀN NGÀY HIỆN TẠI VÀO Ô NGÀY ĐÓNG HỌC PHÍ
+window.addEventListener('DOMContentLoaded', (event) => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1; // Tháng đi từ 0-11
+    let dd = today.getDate();
+
+    // Thêm số 0 phía trước nếu tháng hoặc ngày < 10
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    const formattedToday = yyyy + '-' + mm + '-' + dd;
+    
+    // Gán giá trị vào ô input
+    const ngayDongPhiInput = document.getElementById('ngayDongPhi');
+    if (ngayDongPhiInput) {
+        ngayDongPhiInput.value = formattedToday;
+    }
+});
+// Hàm chuẩn hóa viết hoa chữ cái đầu
+function capitalizeName(name) {
+    return name.toLowerCase().replace(/(^|\s)\S/g, function(l) {
+        return l.toUpperCase();
+    });
+}
+
+// Áp dụng cho các ô nhập họ tên khi người dùng rời khỏi ô nhập (blur)
+['tenHLV', 'hocVien', 'tenPH', 'tuVanVien'].forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.addEventListener('blur', function() {
+            this.value = capitalizeName(this.value);
+        });
+    }
+});
+
+// Tìm đoạn fetch mã học viên và thay bằng đoạn này:
+fetch(SCRIPT_URL + "?t=" + new Date().getTime()) // Thêm ?t=... để tránh bị lưu cache "OK"
+    .then(response => response.text())
+    .then(nextID => {
+        const maHVInput = document.getElementById('maHocVien');
+        // Kiểm tra nếu kết quả trả về đúng định dạng mã (bắt đầu bằng chữ A)
+        if (maHVInput && nextID.startsWith('A')) {
+            maHVInput.value = nextID;
+        } else {
+            console.log("Đang chờ Script cập nhật bản mới...");
+        }
+    })
+    .catch(err => console.error("Lỗi:", err));
+
+/* SAVE */
+async function saveData(){
+  const btn = document.getElementById("btnSave");
+  btn.disabled = true;
+  btn.innerText = "Đang lưu...";
+
+  const data = {
+    maHocVien: document.getElementById("maHocVien").value,
+    hocVien: document.getElementById("hocVien").value,
+    loaiBoi: document.getElementById("loaiBoi").value,
+
+    buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
+    thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].join(","),
+    gioBatDau: document.getElementById("gioBatDau").value,
+    gioKetThuc: document.getElementById("gioKetThuc").value,
+
+    hocPhiThanhToan: document.getElementById("hocPhiThanhToan").value,
+    ngayDongPhi: document.getElementById("ngayDongPhi").value,
+
+    thuHocThu: document.getElementById("thuHocThu").value,
+    ngayHocThu: document.getElementById("ngayHocThu").value,
+
+    gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : document.getElementById("gioiTinhNu").checked ? "Nữ" : "",
+    ngaySinh: document.getElementById("ngaySinh").value,
+    tuoi: document.getElementById("tuoi").value,
+
+    tenPH: document.getElementById("tenPH").value,
+    loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
+    sdtPH: document.getElementById("sdtPH").value,
+
+    tang: document.getElementById("tang").value,
+    lyDoTang: document.getElementById("lyDoTang").value,
+    luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
+    luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
+
+    hocPhiKhoa1: document.getElementById("hocPhiK1").value,
+    soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
+    hocPhiKhoa2: document.getElementById("hocPhiK2").value,
+    soBuoiK2: document.getElementById("soBuoiK2") ? document.getElementById("soBuoiK2").value : "",
+
+    hocPhiTong: document.getElementById("hocPhiTong").value,
+    tongSoBuoi: document.getElementById("tongSoBuoi") ? document.getElementById("tongSoBuoi").value + " buổi" : "",
+    ghiChuLop: document.getElementById("ghiChuLop").value,
+
+    tenHLV: document.getElementById("tenHLV").value,
+    sdtHLV: document.getElementById("sdtHLV").value,
+    maHLV: document.getElementById("maHLV").value,
+
+    tuVanVien: document.getElementById("tuVanVien").value,
+    sdtTV: document.getElementById("sdtTV").value,
+
+    thoiGianAuto: new Date().toLocaleString("vi-VN")
+};
+
+  try{
+    await fetch(SCRIPT_URL,{
+      method:"POST",
+      mode:"no-cors",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    alert("✅ Đã gửi dữ liệu!");
+
+  }catch(err){
+    alert("❌ Lỗi: "+err.message);
+  }
+
+  btn.disabled = false;
+  btn.innerText = "LƯU";
+}
 </script>
 
 </body>
