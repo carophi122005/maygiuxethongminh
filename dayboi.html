@@ -35,7 +35,7 @@ button{padding:6px 12px;margin:10px}
     print-color-adjust: exact;
   }
 
-  button{
+  button, #selectMaHV{
     display:none !important;
   }
  .no-print{
@@ -47,7 +47,7 @@ button{padding:6px 12px;margin:10px}
     margin:0;
     box-sizing:border-box;
   }
-  /* ẨN MŨI TÊN COMBO BOX */
+  /* ẨN MŨI TÊN COMBO BOX TRONG TRANG */
   select{
     -webkit-appearance:none !important;
     -moz-appearance:none !important;
@@ -76,7 +76,19 @@ button{padding:6px 12px;margin:10px}
   z-index:999;
   display: flex;
   gap: 10px;
+  align-items: center;
 ">
+<select id="selectMaHV" onchange="loadStudentData()" style="
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #16a34a;
+    font-weight:bold;
+    background: white;
+    cursor: pointer;
+">
+    <option value="">-- Chọn Mã HV --</option>
+</select>
+
 <button onclick="saveData()" id="btnSave" style="
   padding:10px 24px;
   border-radius:6px;
@@ -329,9 +341,90 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 </div>
 
 <script>
+// THAY URL SCRIPT CỦA BẠN VÀO ĐÂY
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCn-ywXanKJ7Rh0Wl5A9Nkmau-VRePw1-aHOlU4-evuueMWuS-bJTKR1wzo_KcPw/exec";
 
-// --- HÀM LẤY MÃ ID TỰ ĐỘNG (ĐÃ SỬA LỖI CÚ PHÁP) ---
+// --- HÀM 1: LOAD DANH SÁCH MÃ HV VÀO COMBO BOX ---
+async function fetchMaHVList() {
+    try {
+        const res = await fetch(SCRIPT_URL + "?action=getList");
+        const list = await res.json();
+        const select = document.getElementById("selectMaHV");
+        
+        // Giữ lại option mặc định đầu tiên
+        select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
+
+        list.forEach(ma => {
+            if(ma) {
+                let opt = document.createElement("option");
+                opt.value = ma;
+                opt.textContent = ma;
+                select.appendChild(opt);
+            }
+        });
+    } catch (err) {
+        console.error("Lỗi load danh sách mã:", err);
+    }
+}
+
+// --- HÀM 2: LOAD DỮ LIỆU CHI TIẾT KHI CHỌN MÃ ---
+async function loadStudentData() {
+    const id = document.getElementById("selectMaHV").value;
+    if (!id) return;
+
+    const select = document.getElementById("selectMaHV");
+    select.disabled = true;
+
+    try {
+        const res = await fetch(SCRIPT_URL + "?action=getDetail&id=" + id);
+        const data = await res.json();
+
+        if (data) {
+            // Điền các trường input văn bản và date dựa trên key (Header trong Sheet) trùng với ID HTML
+            Object.keys(data).forEach(key => {
+                const el = document.getElementById(key);
+                if (el) {
+                    if (el.type === "date" && data[key]) {
+                        const date = new Date(data[key]);
+                        if(!isNaN(date)) el.value = date.toISOString().split('T')[0];
+                    } else if (el.classList.contains('money')) {
+                        el.value = formatNumber(data[key]);
+                    } else {
+                        el.value = data[key];
+                    }
+                }
+            });
+
+            // Xử lý các Checkbox đặc thù
+            if (data.gioiTinh === "Nam") { document.getElementById("gioiTinhNam").checked = true; document.getElementById("gioiTinhNu").checked = false; }
+            if (data.gioiTinh === "Nữ") { document.getElementById("gioiTinhNu").checked = true; document.getElementById("gioiTinhNam").checked = false; }
+            
+            if (data.loaiPH === "Cha") { document.getElementById("phuHuynhCha").checked = true; document.getElementById("phuHuynhMe").checked = false; }
+            if (data.loaiPH === "Mẹ") { document.getElementById("phuHuynhMe").checked = true; document.getElementById("phuHuynhCha").checked = false; }
+            
+            if (data.buoi) {
+                document.getElementById("hocSang").checked = data.buoi.includes("Sáng");
+                document.getElementById("hocChieu").checked = data.buoi.includes("Chiều");
+            }
+            
+            // Xử lý các Thứ học (giả sử Sheet lưu dạng T2,T3)
+            if (data.thuHoc) {
+                const thuArr = data.thuHoc.split(",");
+                if(thuArr[0]) document.getElementById("thu1").value = thuArr[0].trim();
+                if(thuArr[1]) document.getElementById("thu2").value = thuArr[1].trim();
+                if(thuArr[2]) document.getElementById("thu3").value = thuArr[2].trim();
+            }
+
+            console.log("Đã load dữ liệu học viên: " + id);
+        }
+    } catch (err) {
+        alert("Lỗi khi load dữ liệu: " + err.message);
+    } finally {
+        select.disabled = false;
+    }
+}
+
+// --- HÀM LẤY MÃ ID TỰ ĐỘNG ---
 function getNextID() {
     const maInput = document.getElementById("maHocVien");
     if (!maInput) return;
@@ -342,14 +435,9 @@ function getNextID() {
     })
     .then(response => response.text())
     .then(data => {
-        // Làm sạch dữ liệu: xóa khoảng trắng và xuống dòng
         const cleanID = data.replace(/\s/g, ''); 
-        
         if (cleanID.includes("A")) {
             maInput.value = cleanID;
-            console.log("Mã đã điền: " + cleanID);
-        } else {
-            console.error("Dữ liệu nhận được không phải ID: [" + cleanID + "]");
         }
     })
     .catch(error => {
@@ -357,37 +445,34 @@ function getNextID() {
     });
 }
 
-// --- HÀM ĐỊNH DẠNG SỐ (GIỮ NGUYÊN) ---
+// --- ĐỊNH DẠNG SỐ ---
 function formatNumber(x) {
     if (!x) return "";
-    // Xóa mọi thứ không phải số, sau đó thêm dấu chấm phần ngàn
     return x.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-// --- KHỞI TẠO KHI TRANG TẢI XONG ---
+// --- KHỞI TẠO ---
 window.addEventListener('DOMContentLoaded', () => {
-    // 1. Điền ngày đóng học phí mặc định
+    // 1. Ngày mặc định
     const today = new Date();
     const formattedToday = today.toISOString().split('T')[0];
-    const ngayInput = document.getElementById('ngayDongPhi');
-    if (ngayInput) ngayInput.value = formattedToday;
+    if (document.getElementById('ngayDongPhi')) document.getElementById('ngayDongPhi').value = formattedToday;
 
-    // 2. Gọi hàm lấy mã ID
+    // 2. Lấy mã ID mới nhất
     getNextID();
 
-    // 3. Kích hoạt định dạng tiền tệ (CHẠY NGAY KHI LOAD)
+    // 3. Load danh sách mã vào Combo Box
+    fetchMaHVList();
+
+    // 4. Định dạng tiền
     document.querySelectorAll('.money').forEach(input => {
-        // Định dạng ngay lập tức các số có sẵn (như 3000000 -> 3.000.000)
         input.value = formatNumber(input.value);
-        
-        // Lắng nghe sự kiện gõ phím để thêm dấu chấm
         input.addEventListener('input', function() {
             this.value = formatNumber(this.value);
         });
     });
 });
 
-// --- CÁC HÀM PHỤ TRỢ ---
 function exportPDF() { window.print(); }
 
 document.addEventListener('focusin', (e) => {
@@ -424,47 +509,35 @@ async function saveData(){
     maHocVien: document.getElementById("maHocVien").value,
     hocVien: document.getElementById("hocVien").value,
     loaiBoi: document.getElementById("loaiBoi").value,
-
     buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
-    thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].join(","),
+    thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].filter(v => v !== "&nbsp;" && v !== "").join(","),
     gioBatDau: document.getElementById("gioBatDau").value,
     gioKetThuc: document.getElementById("gioKetThuc").value,
-
     hocPhiThanhToan: document.getElementById("hocPhiThanhToan").value,
     ngayDongPhi: document.getElementById("ngayDongPhi").value,
-
     thuHocThu: document.getElementById("thuHocThu").value,
     ngayHocThu: document.getElementById("ngayHocThu").value,
-
     gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : document.getElementById("gioiTinhNu").checked ? "Nữ" : "",
     ngaySinh: document.getElementById("ngaySinh").value,
     tuoi: document.getElementById("tuoi").value,
-
     tenPH: document.getElementById("tenPH").value,
     loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
     sdtPH: document.getElementById("sdtPH").value,
-
     tang: document.getElementById("tang").value,
     lyDoTang: document.getElementById("lyDoTang").value,
     luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
-    luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
-
-    hocPhiKhoa1: document.getElementById("hocPhiK1").value,
-    soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
-    hocPhiKhoa2: document.getElementById("hocPhiK2").value,
-    soBuoiK2: document.getElementById("soBuoiK2") ? document.getElementById("soBuoiK2").value : "",
-
+    hocPhiK1: document.getElementById("hocPhiK1").value,
+    soBuoiK1: document.getElementById("soBuoiK1").value,
+    hocPhiK2: document.getElementById("hocPhiK2").value,
+    soBuoiK2: document.getElementById("soBuoiK2").value,
     hocPhiTong: document.getElementById("hocPhiTong").value,
-    tongSoBuoi: document.getElementById("tongSoBuoi") ? document.getElementById("tongSoBuoi").value + " buổi" : "",
+    tongSoBuoi: document.getElementById("tongSoBuoi").value,
     ghiChuLop: document.getElementById("ghiChuLop").value,
-
     tenHLV: document.getElementById("tenHLV").value,
     sdtHLV: document.getElementById("sdtHLV").value,
     maHLV: document.getElementById("maHLV").value,
-
     tuVanVien: document.getElementById("tuVanVien").value,
     sdtTV: document.getElementById("sdtTV").value,
-
     thoiGianAuto: new Date().toLocaleString("vi-VN")
 };
 
@@ -472,14 +545,12 @@ async function saveData(){
     await fetch(SCRIPT_URL,{
       method:"POST",
       mode:"no-cors",
-      headers:{
-        "Content-Type":"application/json"
-      },
+      headers:{"Content-Type":"application/json"},
       body: JSON.stringify(data)
     });
-
     alert("✅ Đã gửi dữ liệu!");
-
+    // Sau khi lưu xong, cập nhật lại danh sách mã HV mới
+    fetchMaHVList();
   }catch(err){
     alert("❌ Lỗi: "+err.message);
   }
