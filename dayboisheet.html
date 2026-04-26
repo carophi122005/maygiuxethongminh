@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHIẾU ĐĂNG KÝ HỌC BƠI</title>
+
+<style>
+body{margin:0;background:#fff;font-family:Arial}
+.page{width:794px;margin:auto;font-size:11pt}
+.row{margin:6px 0}
+input,select{padding:4px;margin:2px}
+button{padding:8px 14px;border:none;border-radius:4px;cursor:pointer}
+</style>
+</head>
+
+<body>
+
+<div style="position:fixed;top:20px;right:20px;z-index:999;">
+<button onclick="saveData()" id="btnSave" style="background:#16a34a;color:#fff">LƯU</button>
+<button onclick="window.print()" style="background:#0d539f;color:#fff">PDF</button>
+</div>
+
+<div class="page">
+
+<div class="row">
+HLV: <input id="tenHLV" value="Nguyễn Bảo Trung">
+SĐT: <input id="sdtHLV" value="0834535799">
+Mã: <input id="maHLV" value="01">
+</div>
+
+<div class="row">
+Học viên: <input id="hocVien">
+<input id="gioiTinhNam" type="checkbox"> Nam
+<input id="gioiTinhNu" type="checkbox"> Nữ
+Mã HV: <input id="maHocVien">
+</div>
+
+<div class="row">
+Ngày sinh: <input id="ngaySinh" type="date">
+Tuổi: <input id="tuoi">
+</div>
+
+<div class="row">
+<input id="hocSang" type="checkbox"> Sáng
+<input id="hocChieu" type="checkbox"> Chiều
+<select id="gioBatDau"><option>16h</option></select>
+<select id="gioKetThuc"><option>17h</option></select>
+<select id="thu1"><option></option><option>T2</option></select>
+<select id="thu2"><option></option><option>T3</option></select>
+<select id="thu3"><option></option><option>T4</option></select>
+</div>
+
+<div class="row">
+Loại bơi:
+<select id="loaiBoi">
+<option>Ếch</option>
+<option>Sải</option>
+<option>Bướm</option>
+<option>Ngửa</option>
+</select>
+</div>
+
+<div class="row">
+HP Khóa 1: <input id="hocPhiK1" class="money" value="3000000">
+HP Khóa 2: <input id="hocPhiK2" class="money" value="2500000">
+HP Tổng: <input id="hocPhiTong" class="money" value="4000000">
+Ghi chú: <input id="ghiChuLop" value="1 kèm 1">
+</div>
+
+<div class="row">
+<input id="phuHuynhCha" type="checkbox"> Cha
+<input id="phuHuynhMe" type="checkbox"> Mẹ
+Tên PH: <input id="tenPH">
+SĐT PH: <input id="sdtPH">
+</div>
+
+<div class="row">
+TVV: <input id="tuVanVien" value="Nguyễn Bảo Trung">
+SĐT TV: <input id="sdtTV" value="0834535799">
+</div>
+
+<div class="row">
+Học phí đóng: <input id="hocPhiThanhToan" class="money">
+Ngày đóng: <input id="ngayDongPhi" type="date">
+</div>
+
+<div class="row">
+Tặng: <input id="tang">
+Lý do: <input id="lyDoTang">
+Lưu ý: <input id="luuY">
+</div>
+
+<div class="row">
+Học thử:
+<select id="thuHocThu"><option></option><option>Thứ hai</option></select>
+<input id="ngayHocThu" type="date">
+</div>
+
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCn-ywXanKJ7Rh0Wl5A9Nkmau-VRePw1-aHOlU4-evuueMWuS-bJTKR1wzo_KcPw/exec";
+
+/* FORMAT TIỀN */
+function formatMoney(x){
+  x = (x||'').toString().replace(/\D/g,'');
+  return x.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+}
+
+document.querySelectorAll('.money').forEach(input=>{
+  input.value = formatMoney(input.value);
+
+  input.addEventListener('input',function(){
+    const raw = this.value.replace(/\./g,'');
+    this.value = formatMoney(raw);
+  });
+});
+
+/* SAVE DATA */
+async function saveData(){
+
+  const btn = document.getElementById("btnSave");
+  btn.disabled = true;
+  btn.innerText = "Đang lưu...";
+
+  const data = {
+    tenHLV: tenHLV.value,
+    sdtHLV: sdtHLV.value,
+    maHLV: maHLV.value,
+
+    hocVien: hocVien.value,
+    gioiTinh: gioiTinhNam.checked?"Nam":gioiTinhNu.checked?"Nữ":"",
+    maHocVien: maHocVien.value,
+    ngaySinh: ngaySinh.value,
+    tuoi: tuoi.value,
+
+    buoi:(hocSang.checked?"Sáng ":"")+(hocChieu.checked?"Chiều":""),
+    gioBatDau: gioBatDau.value,
+    gioKetThuc: gioKetThuc.value,
+    thuHoc:[thu1.value,thu2.value,thu3.value].join(","),
+
+    loaiBoi: loaiBoi.value,
+    hocPhiKhoa1: hocPhiK1.value.replace(/\./g,''),
+    hocPhiKhoa2: hocPhiK2.value.replace(/\./g,''),
+    hocPhiTong: hocPhiTong.value.replace(/\./g,''),
+    ghiChuLop: ghiChuLop.value,
+
+    loaiPH: phuHuynhCha.checked?"Cha":phuHuynhMe.checked?"Mẹ":"",
+    tenPH: tenPH.value,
+    sdtPH: sdtPH.value,
+
+    tuVanVien: tuVanVien.value,
+    sdtTV: sdtTV.value,
+
+    hocPhiThanhToan: hocPhiThanhToan.value.replace(/\./g,''),
+    ngayDongPhi: ngayDongPhi.value,
+
+    thuHocThu: thuHocThu.value,
+    ngayHocThu: ngayHocThu.value,
+
+    tang: tang.value,
+    lyDoTang: lyDoTang.value,
+    luuY: luuY.value
+  };
+
+  try{
+    const res = await fetch(SCRIPT_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const text = await res.text();
+    console.log(text);
+
+    alert("✅ Đã lưu thành công!");
+
+  }catch(err){
+    alert("❌ Lỗi: "+err.message);
+  }
+
+  btn.disabled = false;
+  btn.innerText = "LƯU";
+}
+</script>
+
+</body>
+</html>
