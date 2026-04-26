@@ -68,13 +68,32 @@ button{padding:6px 12px;margin:10px}
 </head>
 
 <body>
-<div style="position:fixed; top:20px; right:0; transform:translateX(-50%); z-index:999; display: flex; gap: 10px; align-items: center;">
-<select id="selectMaHV" onchange="loadStudentData()" style="padding:10px; border-radius:6px; border:1px solid #16a34a; font-weight:bold; background: white; cursor: pointer;">
-    <option value="">-- Chọn Mã HV --</option>
+<div style="
+position:fixed;
+top:10px;
+right:10px;
+z-index:999;
+display:flex;
+flex-direction:column;
+gap:3px; /* sát hơn */
+align-items:flex-end;
+">
+
+<select id="selectMaHV" onchange="loadStudentData()" 
+style="padding:6px; border-radius:6px; border:1px solid #16a34a; font-weight:bold; background:white; cursor:pointer; width:80px; font-size:12px;">
+    <option value="">Mã HV</option>
 </select>
 
-<button onclick="saveData()" id="btnSave" style="padding:10px 24px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer;">LƯU</button>
-<button onclick="exportPDF()" style="padding:10px 24px; border-radius:6px; border:none; background:#0d539f; color:#fff; font-weight:bold; cursor:pointer;">PDF</button>
+<button onclick="saveData()" id="btnSave" 
+style="padding:6px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer; width:80px; font-size:12px;">
+    LƯU
+</button>
+
+<button onclick="exportPDF()" 
+style="padding:6px; border-radius:6px; border:none; background:#f12222; color:#fff; font-weight:bold; cursor:pointer; width:80px; font-size:12px;">
+    PDF
+</button>
+
 </div>
 
 <div class="page" id="form-area">
