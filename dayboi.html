@@ -360,6 +360,19 @@ function getNextID() {
     .catch(error => {
         console.error("Lỗi lấy mã ID:", error);
     });
+  .then(data => {
+    // Loại bỏ mọi ký tự lạ, xuống dòng hoặc khoảng trắng
+    const cleanID = data.replace(/\s/g, ''); 
+    
+    const maInput = document.getElementById("maHocVien");
+    if (maInput && cleanID.includes("A")) {
+        maInput.value = cleanID;
+        console.log("Mã đã điền: " + cleanID);
+    } else {
+        // Nếu vẫn ra OK, ta log ra để biết chắc chắn
+        console.error("Dữ liệu nhận được bị sai: [" + cleanID + "]");
+    }
+})
 }
 
 // --- KHỞI TẠO KHI TRANG TẢI XONG ---
