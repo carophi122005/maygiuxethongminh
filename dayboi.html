@@ -545,27 +545,6 @@ async function saveData(){
   btn.innerText = "LƯU";
 }
 
-// ===== LOAD DANH SÁCH MÃ HV =====
-async function fetchMaHVList(){
-  try{
-    const res = await fetch(SCRIPT_URL + "?action=getList");
-    const list = await res.json();
-
-    const select = document.getElementById("selectMaHV");
-    select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
-
-    list.forEach(ma=>{
-      if(!ma) return;
-      const opt = document.createElement("option");
-      opt.value = ma;
-      opt.textContent = ma;
-      select.appendChild(opt);
-    });
-
-  }catch(err){
-    console.error("Lỗi load danh sách:", err);
-  }
-}
 // ===== LOAD DỮ LIỆU THEO MÃ =====
 async function loadStudentData(){
   const id = document.getElementById("selectMaHV").value;
@@ -631,7 +610,13 @@ async function loadStudentData(){
         el.value = data[key];
       }
     });
+// ===== TÁCH THỨ HỌC =====
+const thuHoc = data["Thứ học"] || "";
+const thuArr = thuHoc.split(",").map(x => x.trim());
 
+document.getElementById("thu1").value = thuArr[0] || "";
+document.getElementById("thu2").value = thuArr[1] || "";
+document.getElementById("thu3").value = thuArr[2] || "";
     // ===== CHECKBOX =====
     document.getElementById("gioiTinhNam").checked = (data["Giới tính"] === "Nam");
     document.getElementById("gioiTinhNu").checked = (data["Giới tính"] === "Nữ");
