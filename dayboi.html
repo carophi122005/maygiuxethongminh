@@ -329,202 +329,151 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 </div>
 
 <script>
+// CHỈ KHAI BÁO MỘT LẦN DUY NHẤT
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCn-ywXanKJ7Rh0Wl5A9Nkmau-VRePw1-aHOlU4-evuueMWuS-bJTKR1wzo_KcPw/exec";
 
-function exportPDF(){
-  // ẨN NGÀY HỌC THỬ NẾU CHƯA CHỌN
-  document.querySelectorAll('input[type="date"]').forEach(el=>{
-    const wrapper = el.closest('.line');
-    if(!el.value){
-      if(wrapper) wrapper.style.display='none';
-    }
-  });
-
-  window.print();
-
-  // HIỆN LẠI SAU KHI IN
-  setTimeout(()=>{
-    document.querySelectorAll('input[type="date"]').forEach(el=>{
-      const wrapper = el.closest('.line');
-      if(wrapper) wrapper.style.display='inline-block';
-    });
-  },500);
+// --- HÀM ĐỊNH DẠNG SỐ (CÓ DẤU CHẤM) ---
+function formatNumber(x) {
+    if (!x) return "";
+    x = x.toString().replace(/\D/g, ''); // Loại bỏ mọi ký tự không phải số
+    return x.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-// AUTO SELECT ALL TEXT WHEN CLICK INPUT
-setTimeout(()=>{
-  document.querySelectorAll('input').forEach(el=>{
-    el.addEventListener('focus', function(){
-      this.select();
+// --- CHỨC NĂNG KHI TRANG TẢI XONG ---
+window.addEventListener('DOMContentLoaded', () => {
+    // 1. Điền ngày hiện tại
+    const today = new Date();
+    const formattedToday = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    if (document.getElementById('ngayDongPhi')) document.getElementById('ngayDongPhi').value = formattedToday;
+
+    // 2. Lấy mã học viên tự động (tránh hiện chữ OK)
+    fetch(SCRIPT_URL + "?t=" + new Date().getTime())
+        .then(res => res.text())
+        .then(id => {
+            const maInput = document.getElementById("maHocVien");
+            if (maInput && id.trim().includes("A")) {
+                maInput.value = id.trim();
+            }
+        })
+        .catch(err => console.error("Lỗi lấy mã:", err));
+
+    // 3. Kích hoạt định dạng tiền cho các ô có sẵn giá trị mặc định
+    document.querySelectorAll('.money').forEach(input => {
+        input.value = formatNumber(input.value);
+        input.addEventListener('input', function() {
+            this.value = formatNumber(this.value);
+        });
     });
-  });
-}, 300);
-
-function formatNumber(x){
-  x = (x||'').toString().replace(/\D/g,'');
-  return x.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-
-document.querySelectorAll('.money').forEach(input=>{
-  input.value = formatNumber(input.value);
-
-  input.addEventListener('input', function(){
-    const raw = this.value.replace(/\./g,'');
-    this.value = formatNumber(raw);
-  });
 });
 
-// TỰ ĐỘNG TÍNH TUỔI KHI CHỌN NGÀY SINH
+// --- CHỨC NĂNG PHỤ TRỢ ---
+function exportPDF() {
+    document.querySelectorAll('input[type="date"]').forEach(el => {
+        const wrapper = el.closest('.line');
+        if (!el.value && wrapper) wrapper.style.display = 'none';
+    });
+    window.print();
+    setTimeout(() => {
+        document.querySelectorAll('input[type="date"]').forEach(el => {
+            const wrapper = el.closest('.line');
+            if (wrapper) wrapper.style.display = 'inline-block';
+        });
+    }, 500);
+}
+
+// Tự động bôi đen khi click vào ô input
+document.addEventListener('focusin', (e) => {
+    if (e.target.tagName === 'INPUT') e.target.select();
+});
+
+// Tính tuổi
 document.getElementById('ngaySinh').addEventListener('change', function() {
     const birthday = new Date(this.value);
     if (!isNaN(birthday)) {
         const today = new Date();
         let age = today.getFullYear() - birthday.getFullYear();
-        const monthDiff = today.getMonth() - birthday.getMonth();
-        
-        // Kiểm tra nếu chưa đến ngày sinh nhật trong năm nay thì trừ đi 1 tuổi
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+        if (today.getMonth() < birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
             age--;
         }
-        
-        // Hiển thị số tuổi vào ô input có id là "tuoi"
         document.getElementById('tuoi').value = age > 0 ? age : 0;
     }
 });
-// TỰ ĐỘNG HIỆN THỨ KHI CHỌN NGÀY HỌC THỬ
+
+// Hiện thứ khi chọn ngày học thử
 document.getElementById('ngayHocThu').addEventListener('change', function() {
     const dateValue = new Date(this.value);
     if (!isNaN(dateValue)) {
         const days = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
-        const dayName = days[dateValue.getDay()];
-        
-        // Cập nhật giá trị vào ô select có id là "thuHocThu"
-        const selectThu = document.getElementById('thuHocThu');
-        selectThu.value = dayName;
+        document.getElementById('thuHocThu').value = days[dateValue.getDay()];
     }
 });
-// TỰ ĐỘNG ĐIỀN NGÀY HIỆN TẠI VÀO Ô NGÀY ĐÓNG HỌC PHÍ
-window.addEventListener('DOMContentLoaded', (event) => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1; // Tháng đi từ 0-11
-    let dd = today.getDate();
 
-    // Thêm số 0 phía trước nếu tháng hoặc ngày < 10
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-
-    const formattedToday = yyyy + '-' + mm + '-' + dd;
-    
-    // Gán giá trị vào ô input
-    const ngayDongPhiInput = document.getElementById('ngayDongPhi');
-    if (ngayDongPhiInput) {
-        ngayDongPhiInput.value = formattedToday;
-    }
-});
-// Hàm chuẩn hóa viết hoa chữ cái đầu
+// Viết hoa chữ cái đầu
 function capitalizeName(name) {
-    return name.toLowerCase().replace(/(^|\s)\S/g, function(l) {
-        return l.toUpperCase();
-    });
+    return name.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
 }
-
-// Áp dụng cho các ô nhập họ tên khi người dùng rời khỏi ô nhập (blur)
 ['tenHLV', 'hocVien', 'tenPH', 'tuVanVien'].forEach(id => {
-    const element = document.getElementById(id);
-    if (element) {
-        element.addEventListener('blur', function() {
-            this.value = capitalizeName(this.value);
-        });
+    const el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('blur', function() { this.value = capitalizeName(this.value); });
     }
 });
 
-// Tìm đoạn fetch mã học viên và thay bằng đoạn này:
-fetch(SCRIPT_URL + "?t=" + new Date().getTime()) // Thêm ?t=... để tránh bị lưu cache "OK"
-    .then(response => response.text())
-    .then(nextID => {
-        const maHVInput = document.getElementById('maHocVien');
-        // Kiểm tra nếu kết quả trả về đúng định dạng mã (bắt đầu bằng chữ A)
-        if (maHVInput && nextID.startsWith('A')) {
-            maHVInput.value = nextID;
-        } else {
-            console.log("Đang chờ Script cập nhật bản mới...");
-        }
-    })
-    .catch(err => console.error("Lỗi:", err));
+// --- LƯU DỮ LIỆU ---
+async function saveData() {
+    const btn = document.getElementById("btnSave");
+    btn.disabled = true;
+    btn.innerText = "Đang lưu...";
 
-/* SAVE */
-async function saveData(){
-  const btn = document.getElementById("btnSave");
-  btn.disabled = true;
-  btn.innerText = "Đang lưu...";
+    const data = {
+        maHocVien: document.getElementById("maHocVien").value,
+        hocVien: document.getElementById("hocVien").value,
+        loaiBoi: document.getElementById("loaiBoi").value,
+        buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
+        thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].join(","),
+        gioBatDau: document.getElementById("gioBatDau").value,
+        gioKetThuc: document.getElementById("gioKetThuc").value,
+        hocPhiThanhToan: document.getElementById("hocPhiThanhToan").value,
+        ngayDongPhi: document.getElementById("ngayDongPhi").value,
+        thuHocThu: document.getElementById("thuHocThu").value,
+        ngayHocThu: document.getElementById("ngayHocThu").value,
+        gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : (document.getElementById("gioiTinhNu").checked ? "Nữ" : ""),
+        ngaySinh: document.getElementById("ngaySinh").value,
+        tuoi: document.getElementById("tuoi").value,
+        tenPH: document.getElementById("tenPH").value,
+        loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : (document.getElementById("phuHuynhMe").checked ? "Mẹ" : ""),
+        sdtPH: document.getElementById("sdtPH").value,
+        tang: document.getElementById("tang").value,
+        lyDoTang: document.getElementById("lyDoTang").value,
+        luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
+        hocPhiKhoa1: document.getElementById("hocPhiK1").value,
+        soBuoiK1: document.getElementById("soBuoiK1").value,
+        hocPhiKhoa2: document.getElementById("hocPhiK2").value,
+        soBuoiK2: document.getElementById("soBuoiK2").value,
+        hocPhiTong: document.getElementById("hocPhiTong").value,
+        tongSoBuoi: document.getElementById("tongSoBuoi").value,
+        ghiChuLop: document.getElementById("ghiChuLop").value,
+        tenHLV: document.getElementById("tenHLV").value,
+        sdtHLV: document.getElementById("sdtHLV").value,
+        maHLV: document.getElementById("maHLV").value,
+        tuVanVien: document.getElementById("tuVanVien").value,
+        sdtTV: document.getElementById("sdtTV").value,
+        thoiGianAuto: new Date().toLocaleString("vi-VN")
+    };
 
-  const data = {
-    maHocVien: document.getElementById("maHocVien").value,
-    hocVien: document.getElementById("hocVien").value,
-    loaiBoi: document.getElementById("loaiBoi").value,
-
-    buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
-    thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].join(","),
-    gioBatDau: document.getElementById("gioBatDau").value,
-    gioKetThuc: document.getElementById("gioKetThuc").value,
-
-    hocPhiThanhToan: document.getElementById("hocPhiThanhToan").value,
-    ngayDongPhi: document.getElementById("ngayDongPhi").value,
-
-    thuHocThu: document.getElementById("thuHocThu").value,
-    ngayHocThu: document.getElementById("ngayHocThu").value,
-
-    gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : document.getElementById("gioiTinhNu").checked ? "Nữ" : "",
-    ngaySinh: document.getElementById("ngaySinh").value,
-    tuoi: document.getElementById("tuoi").value,
-
-    tenPH: document.getElementById("tenPH").value,
-    loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
-    sdtPH: document.getElementById("sdtPH").value,
-
-    tang: document.getElementById("tang").value,
-    lyDoTang: document.getElementById("lyDoTang").value,
-    luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
-    luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
-
-    hocPhiKhoa1: document.getElementById("hocPhiK1").value,
-    soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
-    hocPhiKhoa2: document.getElementById("hocPhiK2").value,
-    soBuoiK2: document.getElementById("soBuoiK2") ? document.getElementById("soBuoiK2").value : "",
-
-    hocPhiTong: document.getElementById("hocPhiTong").value,
-    tongSoBuoi: document.getElementById("tongSoBuoi") ? document.getElementById("tongSoBuoi").value + " buổi" : "",
-    ghiChuLop: document.getElementById("ghiChuLop").value,
-
-    tenHLV: document.getElementById("tenHLV").value,
-    sdtHLV: document.getElementById("sdtHLV").value,
-    maHLV: document.getElementById("maHLV").value,
-
-    tuVanVien: document.getElementById("tuVanVien").value,
-    sdtTV: document.getElementById("sdtTV").value,
-
-    thoiGianAuto: new Date().toLocaleString("vi-VN")
-};
-
-  try{
-    await fetch(SCRIPT_URL,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    alert("✅ Đã gửi dữ liệu!");
-
-  }catch(err){
-    alert("❌ Lỗi: "+err.message);
-  }
-
-  btn.disabled = false;
-  btn.innerText = "LƯU";
+    try {
+        await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data)
+        });
+        alert("✅ Đã gửi dữ liệu!");
+        location.reload(); // Reload để reset form và lấy mã mới
+    } catch (err) {
+        alert("❌ Lỗi: " + err.message);
+    }
+    btn.disabled = false;
+    btn.innerText = "LƯU";
 }
 </script>
 
