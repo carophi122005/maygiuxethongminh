@@ -62,153 +62,107 @@ Học viên: <span class="line" style="width:300px"><input id="hocVien"></span>
 &nbsp; ( <input type="checkbox" id="gioiTinhNam" class="chk"> Nam ) ( <input type="checkbox" id="gioiTinhNu" class="chk"> Nữ )
 &nbsp;&nbsp;&nbsp;&nbsp; Mã số: <span class="line" style="width:50px"><input id="maHocVien"></span>
 </div>
-
 <div class="row">
 Ngày tháng năm sinh : <span class="line" style="width:150px; text-align:center"><input type="date" id="ngaySinh" style="text-align:center"></span>
 &nbsp;&nbsp; Tuổi: <span class="line" style="width:70px"><input id="tuoi"></span>
 </div>
 
 <div class="row">
-Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input type="checkbox" id="hocChieu" class="chk"> chiều 
-<span class="line" style="width:150px; display:inline-flex; align-items:center; gap:4px;">
-  <select id="gioBatDau" style="border:none; outline:none; width:45px">
-    <option>01h</option><option>02h</option><option>03h</option><option>04h</option><option>05h</option>
-    <option>06h</option><option>07h</option><option>08h</option><option>09h</option><option>10h</option>
-    <option>11h</option><option>12h</option><option>13h</option><option>14h</option><option>15h</option>
-    <option selected>16h</option><option>17h</option><option>18h</option><option>19h</option><option>20h</option>
-    <option>21h</option><option>22h</option><option>23h</option><option>24h</option>
-  </select> - 
-  <select id="gioKetThuc" style="border:none; outline:none; width:45px">
-    <option>01h</option><option>02h</option><option>03h</option><option>04h</option><option>05h</option>
-    <option>06h</option><option>07h</option><option>08h</option><option>09h</option><option>10h</option>
-    <option>11h</option><option>12h</option><option>13h</option><option>14h</option><option>15h</option>
-    <option>16h</option><option selected>17h</option><option>18h</option><option>19h</option><option>20h</option>
-    <option>21h</option><option>22h</option><option>23h</option><option>24h</option>
-  </select>
-</span>
-&nbsp;&nbsp; Thứ: <span class="line" style="width:180px; display:inline-flex; gap:4px; align-items:center;">
-<select id="thu1" style="border:none; outline:none; width:40px"><option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option></select> |
-<select id="thu2" style="border:none; outline:none; width:40px"><option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option></select> |
-<select id="thu3" style="border:none; outline:none; width:40px"><option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option></select>
-</span>
+Họ & Tên ( <input type="checkbox" id="phuHuynhCha" class="chk"> Cha / <input type="checkbox" id="phuHuynhMe" class="chk"> Mẹ ): <span class="line" style="width:250px"><input id="tenPH"></span> &nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtPH"></span>
 </div>
-
-<div style="margin-top:6px; position:relative;">
-  <div style="flex:1">
-    <b>Học Phí Bơi <span class="line no-dots" style="width:45px"><select id="loaiBoi" style="border:none; outline:none; width:100%; font-weight:bold; font-size: 14px;"><option selected>Ếch</option><option>Sải</option><option>Bướm</option><option>Ngửa</option></select></span>:</b>
-    <div class="indent"><span>*</span> Học Phí Khóa 1: <span class="line" style="width:80px"><input id="hocPhiK1" style="text-align: right;" class="money" value="3000000"></span> VNĐ / <span class="line" style="width:50px"><select id="soBuoiK1" style="border:none; outline:none; width:100%"><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option selected>12</option></select></span> buổi</div>
-    <div class="indent"><span>*</span> Học Phí Khóa 2: <span class="line" style="width:80px"><input id="hocPhiK2" style="text-align: right;" class="money" value="2500000"></span> VNĐ / <span class="line" style="width:50px"><select id="soBuoiK2" style="border:none; outline:none; width:100%;"><option selected>12</option></select></span> buổi</div>
-    <div class="indent"><span>*</span> <b>Học Phí: <span class="line" style="width:80px"><input id="hocPhiTong" style="font-weight:bold;text-align: right;" class="money" value="4000000"></span> VNĐ / <span class="line" style="width:80px"><select id="tongSoBuoi" style="border:none; outline:none; width:100%; font-weight:bold; text-align: center; font-size: 14px;"><option selected value="12">12 buổi</option></select></span> <span class="line" style="width:250px;"><input id="ghiChuLop" style="font-weight:bold;" value="1 kèm 1"></span></b></div>
-  </div>
-  <div style="position:absolute; left:375px; top:20px; display:flex; align-items:center;"><div style="font-size:30px; line-height:42px;">]</div><span class="line" style="width:160px; margin-left:4px"><input value="Lớp học 2,3 học viên"></span></div>
-</div>
-
-<br>
-<div class="row">Họ & Tên ( <input type="checkbox" id="phuHuynhCha" class="chk"> Cha / <input type="checkbox" id="phuHuynhMe" class="chk"> Mẹ ): <span class="line" style="width:250px"><input id="tenPH"></span> &nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtPH"></span></div>
-<div class="row">Tư Vấn Viên: <span class="line" style="width:250px"><input id="tuVanVien" value="Nguyễn Bảo Trung"></span> &nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtTV" value="08.345.357.99"></span></div>
-<div class="row">Học Phí: <span class="line" style="width:80px;text-align: right;"><input id="hocPhiThanhToan" style="font-weight:bold;" class="money" value=""></span> VNĐ &nbsp;&nbsp; Ngày đóng: <span class="line" style="width:150px; text-align:center"><input type="date" id="ngayDongPhi" style="text-align:center"></span></div>
-</div>
-
-<div class="content" style="margin-top:8px">
-<div class="row">Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right"><input></span></div>
-<hr>
-<div class="indent">❖ Tặng: <span class="line" style="width:300px"><input id="tang"></span></div>
-<div class="indent">Lí do: <span class="line" style="width:300px"><input id="lyDoTang" value="Đóng học phí sau khi được tư vấn"></span></div>
-<div class="indent">+ Ngày học thử : <span class="line" style="width:130px"><select id="thuHocThu" style="border:none; width:100%"><option>Thứ hai</option><option>Thứ ba</option><option>Thứ tư</option><option>Thứ năm</option><option>Thứ sáu</option><option>Thứ bảy</option><option>Chủ nhật</option></select></span> (<span class="line" style="width:115px;"><input type="date" id="ngayHocThu"></span>)</div>
-<div class="indent">+ Lưu ý : <span class="line" style="width:90%"><input id="luuY"></span></div>
 </div>
 </div>
 
 <script>
-// THAY LINK MỚI CỦA BẠN VÀO ĐÂY
+// DÁN LINK /exec MỚI NHẤT VÀO ĐÂY
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCn-ywXanKJ7Rh0Wl5A9Nkmau-VRePw1-aHOlU4-evuueMWuS-bJTKR1wzo_KcPw/exec";
 
+// Hàm load danh sách mã HV vào combo box
 async function fetchMaHVList() {
     try {
         const res = await fetch(SCRIPT_URL + "?action=getList");
-        const list = await res.json();
-
-        const select = document.getElementById("selectMaHV");
-        select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
-
-        if (!Array.isArray(list)) {
-            console.error("Dữ liệu không hợp lệ:", list);
+        const text = await res.text();
+        
+        // Kiểm tra nếu kết quả trả về không phải JSON (ví dụ trả về "ok" hoặc HTML login)
+        if (!text.trim().startsWith("[")) {
+            console.warn("Dữ liệu nhận được không phải danh sách hợp lệ:", text);
             return;
         }
 
+        const list = JSON.parse(text);
+        const select = document.getElementById("selectMaHV");
+        select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
         list.forEach(ma => {
-            if (!ma) return;
             let opt = document.createElement("option");
-            opt.value = ma;
-            opt.textContent = ma;
+            opt.value = ma; opt.textContent = ma;
             select.appendChild(opt);
         });
-
-    } catch (err) {
-        console.error("Lỗi danh sách:", err);
+    } catch (err) { 
+        console.log("Chưa thể load danh sách học viên cũ.");
     }
 }
 
+// Hàm load dữ liệu chi tiết khi chọn từ Combo Box
 async function loadStudentData() {
     const id = document.getElementById("selectMaHV").value;
     if (!id) return;
     try {
         const res = await fetch(SCRIPT_URL + "?action=getDetail&id=" + id);
-        const data = await res.json();
+        const text = await res.text();
+        if (!text.trim().startsWith("{")) return;
+        
+        const data = JSON.parse(text);
         if (data) {
             Object.keys(data).forEach(key => {
                 const el = document.getElementById(key);
                 if (el) {
                     if (el.type === "date" && data[key]) {
                         el.value = new Date(data[key]).toISOString().split('T')[0];
-                    } else if (el.classList.contains('money')) {
-                        el.value = formatNumber(data[key]);
-                    } else { el.value = data[key]; }
+                    } else {
+                        el.value = data[key];
+                    }
                 }
             });
-            // Checkbox logic
-            document.getElementById("gioiTinhNam").checked = (data.gioiTinh === "Nam");
-            document.getElementById("gioiTinhNu").checked = (data.gioiTinh === "Nữ");
-            document.getElementById("phuHuynhCha").checked = (data.loaiPH === "Cha");
-            document.getElementById("phuHuynhMe").checked = (data.loaiPH === "Mẹ");
         }
-    } catch (err) { alert("Lỗi load chi tiết: " + err.message); }
+    } catch (err) { console.error("Lỗi khi lấy thông tin chi tiết."); }
 }
-
-function formatNumber(x) { return x ? x.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.') : ""; }
 
 window.addEventListener('DOMContentLoaded', () => {
     fetchMaHVList();
-    const maHocVienInput = document.getElementById("maHocVien");
-    fetch(SCRIPT_URL).then(r => r.text()).then(id => { if(id.includes("A")) maHocVienInput.value = id; });
-    
-    document.querySelectorAll('.money').forEach(input => {
-        input.value = formatNumber(input.value);
-        input.addEventListener('input', function() { this.value = formatNumber(this.value); });
-    });
+    // Lấy mã ID tự động cho ô maHocVien
+    fetch(SCRIPT_URL).then(r => r.text()).then(id => {
+        if(id && id.length < 10) document.getElementById("maHocVien").value = id;
+    }).catch(e => {});
 });
 
-async function saveData(){
+function exportPDF() { window.print(); }
+
+async function saveData() {
     const btn = document.getElementById("btnSave");
     btn.disabled = true; btn.innerText = "Đang lưu...";
-    const data = {
+    
+    // Thu thập dữ liệu từ các ID hiện có
+    const payload = {
         maHocVien: document.getElementById("maHocVien").value,
         hocVien: document.getElementById("hocVien").value,
-        loaiBoi: document.getElementById("loaiBoi").value,
-        gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : "Nữ",
         tenPH: document.getElementById("tenPH").value,
         sdtPH: document.getElementById("sdtPH").value,
         thoiGianAuto: new Date().toLocaleString("vi-VN")
-        // ... Thêm các trường khác tương tự ...
     };
+
     try {
-        await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
-        alert("✅ Thành công!");
-        fetchMaHVList();
-    } catch(e) { alert("❌ Lỗi"); }
+        await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(payload)
+        });
+        alert("✅ Đã lưu dữ liệu thành công!");
+        fetchMaHVList(); // Cập nhật lại combo box
+    } catch (e) {
+        alert("❌ Có lỗi xảy ra khi lưu.");
+    }
     btn.disabled = false; btn.innerText = "LƯU";
 }
-function exportPDF() { window.print(); }
 </script>
 </body>
 </html>
