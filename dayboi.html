@@ -4,15 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PHIẾU ĐĂNG KÝ HỌC BƠI</title>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 body{margin:0;background:#fff}
-.page{width:794px;margin:auto;font-family:Arial;font-size:11pt}
-.header{position:relative}
+.page{width:210mm;margin:0 auto;font-family:Arial;font-size:11pt;box-sizing: border-box}
+.content{
+  padding: 0 12mm; /* 👈 thụt 2 bên chuẩn A4 */
+  box-sizing: border-box;
+}
+.header{position:relative;left: -16px;width: calc(100% + 16px);}
 .header img{width:100%;height:190px}
 .header-title{position:absolute;top:24%;left:50%;transform:translate(-50%,-50%);width:90%}
 .header-title input{width:100%;border:none;background:transparent;color:#fff;text-align:center;font-weight:bold;font-size:32px;text-transform:uppercase}
-.content{padding:0px 32px}
+@media print{
+  .content{
+    padding:0 20px;
+  }
+}
+@media print{
+  body{
+    width:210mm;
+    height:297mm;
+  }
+}
 .line{display:inline-block;border-bottom:1px dotted #000;vertical-align:middle}
 .line.no-dots{border-bottom:none !important;}
 .line input{border:none;width:100%;outline:none;font-size:11pt}
@@ -26,43 +40,43 @@ button{padding:6px 12px;margin:0px}
 @media print{
   @page{
     size: A4;
-    margin: 0;
+    margin: 0; /* QUAN TRỌNG */
   }
 
-  body{
+  html, body{
     margin:0;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    padding:0;
+    width:210mm;
   }
 
-  button, #selectMaHV{
-    display:none !important;
-  }
- .no-print{
-    display:none !important;
-  }
   .page{
     width:210mm;
     height:297mm;
-    margin:0;
+    margin:0; /* CĂN GIỮA */
+    padding:0;
     box-sizing:border-box;
   }
-  /* ẨN MŨI TÊN COMBO BOX */
-  select{
-    -webkit-appearance:none !important;
-    -moz-appearance:none !important;
-    appearance:none !important;
-    background:none !important;
-    border:none !important;
+
+  button, #selectMaHV, .no-print{
+    display:none !important;
   }
+
   select{
-  text-align:center;
-  text-align-last:center;
-}
+    appearance:none !important;
+    border:none !important;
+    background:none !important;
+    text-align:center;
+    text-align-last:center;
+  }
 }
 /* Tự động viết hoa chữ cái đầu khi hiển thị */
 #tenHLV, #hocVien, #tenPH, #tuVanVien {
     text-transform: capitalize;
+}
+@media print{
+  .header-title{
+    transform: translate(-50%,-50%) !important;
+  }
 }
 </style>
 </head>
@@ -80,7 +94,7 @@ align-items:flex-end;
 ">
 
 <select id="selectMaHV" onchange="loadStudentData()" 
-style="padding:6px; border-radius:6px; border:1px solid #16a34a; font-weight:bold; background:white; cursor:pointer; width:110px; font-size:12px;">
+style="padding:6px; border-radius:6px; border:1px solid #16a34a; font-weight:bold; background:white; cursor:pointer; width:250px; font-size:12px;">
     <option value="">Mã HV</option>
 </select>
 
@@ -88,7 +102,15 @@ style="padding:6px; border-radius:6px; border:1px solid #16a34a; font-weight:bol
 style="padding:6px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer; width:110px; font-size:12px;">
     LƯU
 </button>
+<button onclick="capNhatHocVien(this)" 
+style="padding:6px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer; width:110px; font-size:12px;">
+    CẬP NHẬT
+</button>
 
+<button onclick="xoaHocVien()" 
+style="padding:6px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer; width:110px; font-size:12px;">
+    XÓA
+</button>
 <button onclick="exportPDF()" 
 style="padding:6px; border-radius:6px; border:none; background:#f12222; color:#fff; font-weight:bold; cursor:pointer; width:110px; font-size:12px;">
     PDF
@@ -119,7 +141,7 @@ Học viên: <span class="line" style="width:300px"><input id="hocVien"></span>
 &nbsp;&nbsp;&nbsp;&nbsp; Mã số: <span class="line" style="width:50px"><input id="maHocVien"></span>
 </div>
 
-<div class="row">
+<div class="row date-row">
 Ngày tháng năm sinh : 
 <span class="line" style="width:150px; text-align:center">
   <input type="date" id="ngaySinh" style="text-align:center">
@@ -252,7 +274,7 @@ Tư Vấn Viên: <span class="line" style="width:250px"><input id="tuVanVien" va
 &nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtTV" value="08.345.357.99"></span>
 </div>
 
-<div class="row">
+<div class="row date-row">
 Học Phí: <span class="line" style="width:80px;text-align: right;"><input id="hocPhiThanhToan" style="font-weight:bold;" class="money" value=""></span> VNĐ
   
 &nbsp;&nbsp; Ngày đóng học phí:
@@ -281,7 +303,7 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 
 <div style="text-align:center; margin:5px 0;"><b>*** Được học thử 01 buổi miễn phí rồi mới chuyển học phí ***</b></div>
 
-<div class="indent">+ Ngày học thử :
+<div class="indent date-row">+ Ngày học thử :
 <span class="line" style="width:130px; display:inline-flex; align-items:center;">
 <select id="thuHocThu" style="border:none; outline:none; width:100%; text-align:center; text-align-last:right;font-size: 14px;">
 <option selected>&nbsp;</option>
@@ -324,7 +346,8 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwLnABmDUdnP-4MKEBC466jNzLxRbdtyj3qiqWvxvvzZEFrHbCm-rczOij87HTceAU/exec"; // ✅ sửa exe -> exec
+let isEditing = false;
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzE4xa1Bdd1M3vPW9huRwQ178TPzIfP4hpjEQX6qhKm1S0a3vFjaIkxMksYr87ziW0/exec";
 
 const select = document.getElementById("selectMaHV");
 
@@ -353,7 +376,7 @@ function setLoading(state){
         : '<option value="">-- Chọn Mã HV --</option>';
 }
 
-// ====== LOAD LIST (GIỮ BẢN XỊN - CÓ CACHE) ======
+// ====== LOAD LIST ======
 async function fetchMaHVList(retry = 1){
     setLoading(true);
 
@@ -381,8 +404,30 @@ async function fetchMaHVList(retry = 1){
         }
 
         setCache(list);
-        renderSelect(list);
+        const oldValue = select.value; // lưu mã đang chọn
 
+		renderSelect(list);
+
+		if(oldValue){
+			select.value = oldValue; // gán lại sau khi load
+		}
+		// ===== AUTO MÃ MỚI (CHỈ khi KHÔNG chọn mã) =====
+		const selected = document.getElementById("selectMaHV").value;
+		const currentMa = document.getElementById("maHocVien").value;
+
+		if(!selected && !currentMa && list.length > 0){
+			let max = 0;
+
+			list.forEach(m=>{
+				const ma = typeof m === "string" ? m : m.ma;
+				const num = parseInt((ma || "").replace(/\D/g,'')) || 0;
+
+				if(num > max) max = num;
+			});
+
+			const next = "A" + String(max + 1).padStart(3,"0");
+			document.getElementById("maHocVien").value = next;
+		}
         console.log("✅ Load danh sách thành công");
 
     }catch(err){
@@ -400,13 +445,19 @@ async function fetchMaHVList(retry = 1){
 function renderSelect(list){
     select.innerHTML = '<option value="">-- Chọn Mã HV --</option>';
 
-    list.forEach(ma=>{
-        if(!ma) return;
-        const opt = document.createElement("option");
-        opt.value = ma;
-        opt.textContent = ma;
-        select.appendChild(opt);
-    });
+    list.forEach(item=>{
+    if(!item) return;
+
+    const opt = document.createElement("option");
+
+    const ma = typeof item === "string" ? item : item.ma;
+	const ten = item.ten || "";
+
+	opt.value = ma;
+	opt.textContent = ten ? (ma + " - " + ten) : ma;
+
+    select.appendChild(opt);
+});
 
     enableSearch();
 }
@@ -438,10 +489,38 @@ function enableSearch(){
     });
 }
 
+function cleanNumber(x){
+  return x ? x.replace(/\./g, '') : "";
+}
+
 // ===== FORMAT =====
 function formatNumber(x) {
     if (!x) return "";
     return x.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+function formatDateForInput(dateStr){
+  if(!dateStr) return "";
+
+  const d = new Date(dateStr);
+
+  if(isNaN(d)) return "";
+
+  return d.toISOString().split('T')[0];
+}
+
+// ===== HELPER: POST về Apps Script (dùng text/plain tránh CORS preflight) =====
+async function postToScript(payload) {
+    const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" }, // ✅ SỬA: tránh CORS preflight
+        body: JSON.stringify(payload)
+    });
+    const text = await res.text();
+    try {
+        return JSON.parse(text);
+    } catch(e) {
+        return { raw: text };
+    }
 }
 
 // ===== INIT =====
@@ -452,7 +531,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const ngayInput = document.getElementById('ngayDongPhi');
     if (ngayInput) ngayInput.value = formattedToday;
 
-    // ✅ FIX QUAN TRỌNG: gọi load list
     fetchMaHVList();
 
     document.querySelectorAll('.money').forEach(input => {
@@ -464,7 +542,43 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== PHỤ TRỢ =====
-function exportPDF() { window.print(); }
+function exportPDF() {
+  if (typeof hideEmptyDatesBeforePrint === "function") {
+    hideEmptyDatesBeforePrint(); // Gọi nếu hàm này có tồn tại trong code của bạn
+  }
+
+  const element = document.getElementById("form-area");
+
+  const ma = document.getElementById("maHocVien").value || "NOID";
+  const ten = document.getElementById("hocVien").value || "KhongTen";
+  const fileName = `${ma}-${ten}.pdf`;
+
+  // Tạm thời đưa margin về 0 để html2canvas không chụp khoảng trắng 2 bên
+  const originalMargin = element.style.margin;
+  element.style.margin = "0";
+
+  const opt = {
+    margin: 0, // Không có lề dư
+    filename: fileName,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { 
+      scale: 2, // Tăng độ nét cho chữ (rất quan trọng khi in giấy)
+      useCORS: true,
+      scrollX: 0,
+      scrollY: 0,
+    },
+    jsPDF: { 
+      unit: 'mm', // Sử dụng hệ đo lường chuẩn
+      format: 'a4', // Định dạng chuẩn A4 vật lý
+      orientation: 'portrait'
+    }
+  };
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    // Trả lại margin cũ sau khi xuất xong để UI hiển thị lại bình thường
+    element.style.margin = originalMargin;
+  });
+}
 
 document.addEventListener('focusin', (e) => {
     if (e.target.tagName === 'INPUT') e.target.select();
@@ -490,71 +604,74 @@ document.getElementById('ngayHocThu').addEventListener('change', function() {
     }
 });
 
-/* SAVE */
+/* ===== SAVE (ADD) ===== */
 async function saveData(){
+	isEditing = false;
   const btn = document.getElementById("btnSave");
   btn.disabled = true;
   btn.innerText = "Đang lưu...";
 
-  const data = {
-    maHocVien: document.getElementById("maHocVien").value,
-    hocVien: document.getElementById("hocVien").value,
-    loaiBoi: document.getElementById("loaiBoi").value,
+  // ✅ SỬA: bọc toàn bộ data vào { action, data: {...} } cho nhất quán với Apps Script
+  const payload = {
+    action: "add",
+    data: {
+      maHocVien: document.getElementById("maHocVien").value,
+      hocVien: document.getElementById("hocVien").value,
+      loaiBoi: document.getElementById("loaiBoi").value,
 
-    buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
-    thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].join(","),
-    gioBatDau: document.getElementById("gioBatDau").value,
-    gioKetThuc: document.getElementById("gioKetThuc").value,
+      buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
+      thuHoc: [document.getElementById("thu1").value, document.getElementById("thu2").value, document.getElementById("thu3").value].join(","),
+      gioBatDau: document.getElementById("gioBatDau").value,
+      gioKetThuc: document.getElementById("gioKetThuc").value,
 
-    hocPhiThanhToan: document.getElementById("hocPhiThanhToan").value,
-    ngayDongPhi: document.getElementById("ngayDongPhi").value,
+      hocPhiThanhToan: cleanNumber(document.getElementById("hocPhiThanhToan").value),
+      ngayDongPhi: document.getElementById("ngayDongPhi").value,
 
-    thuHocThu: document.getElementById("thuHocThu").value,
-    ngayHocThu: document.getElementById("ngayHocThu").value,
+      thuHocThu: document.getElementById("thuHocThu").value,
+      ngayHocThu: document.getElementById("ngayHocThu").value,
 
-    gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : document.getElementById("gioiTinhNu").checked ? "Nữ" : "",
-    ngaySinh: document.getElementById("ngaySinh").value,
-    tuoi: document.getElementById("tuoi").value,
+      gioiTinh: document.getElementById("gioiTinhNam").checked ? "Nam" : document.getElementById("gioiTinhNu").checked ? "Nữ" : "",
+      ngaySinh: document.getElementById("ngaySinh").value,
+      tuoi: document.getElementById("tuoi").value,
 
-    tenPH: document.getElementById("tenPH").value,
-    loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
-    sdtPH: document.getElementById("sdtPH").value,
+      tenPH: document.getElementById("tenPH").value,
+      loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
+      sdtPH: document.getElementById("sdtPH").value,
 
-    tang: document.getElementById("tang").value,
-    lyDoTang: document.getElementById("lyDoTang").value,
-    luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
-    luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
+      tang: document.getElementById("tang").value,
+      lyDoTang: document.getElementById("lyDoTang").value,
+      luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
+      luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
 
-    hocPhiKhoa1: document.getElementById("hocPhiK1").value,
-    soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
-    hocPhiKhoa2: document.getElementById("hocPhiK2").value,
-    soBuoiK2: document.getElementById("soBuoiK2") ? document.getElementById("soBuoiK2").value : "",
+      hocPhiKhoa1: cleanNumber(document.getElementById("hocPhiK1").value),
+      soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
+      hocPhiKhoa2: cleanNumber(document.getElementById("hocPhiK2").value),
+      soBuoiK2: document.getElementById("soBuoiK2") ? document.getElementById("soBuoiK2").value : "",
 
-    hocPhiTong: document.getElementById("hocPhiTong").value,
-    tongSoBuoi: document.getElementById("tongSoBuoi") ? document.getElementById("tongSoBuoi").value + " buổi" : "",
-    ghiChuLop: document.getElementById("ghiChuLop").value,
+      hocPhiTong: cleanNumber(document.getElementById("hocPhiTong").value),
+      tongSoBuoi: document.getElementById("tongSoBuoi") ? document.getElementById("tongSoBuoi").value + " buổi" : "",
+      ghiChuLop: document.getElementById("ghiChuLop").value,
 
-    tenHLV: document.getElementById("tenHLV").value,
-    sdtHLV: document.getElementById("sdtHLV").value,
-    maHLV: document.getElementById("maHLV").value,
+      tenHLV: document.getElementById("tenHLV").value,
+      sdtHLV: document.getElementById("sdtHLV").value,
+      maHLV: document.getElementById("maHLV").value,
 
-    tuVanVien: document.getElementById("tuVanVien").value,
-    sdtTV: document.getElementById("sdtTV").value,
+      tuVanVien: document.getElementById("tuVanVien").value,
+      sdtTV: document.getElementById("sdtTV").value,
 
-    thoiGianAuto: new Date().toLocaleString("vi-VN")
-};
+      thoiGianAuto: new Date().toLocaleString("vi-VN")
+    }
+  };
 
   try{
-    await fetch(SCRIPT_URL,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify(data)
-    });
+    const result = await postToScript(payload); // ✅ dùng helper đã sửa CORS
 
-    alert("✅ Đã gửi dữ liệu!");
+    alert("✅ Đã lưu! Mã HV: " + result.ma);
+
+    document.getElementById("maHocVien").value = result.ma;
+
+    localStorage.removeItem(CACHE_KEY); // ✅ xóa cache để load lại mới
+    fetchMaHVList();
 
   }catch(err){
     alert("❌ Lỗi: "+err.message);
@@ -566,6 +683,7 @@ async function saveData(){
 
 // ===== LOAD DỮ LIỆU THEO MÃ =====
 async function loadStudentData(){
+	isEditing = true;
   const id = document.getElementById("selectMaHV").value;
   if(!id) return;
 
@@ -573,15 +691,14 @@ async function loadStudentData(){
     const res = await fetch(SCRIPT_URL + "?action=getDetail&id=" + id);
     const data = await res.json();
 
-    console.log("DATA:", data); // debug
+    console.log("DATA:", data);
 
-    // ===== MAP HEADER -> ID =====
     const map = {
       "Mã học viên": "maHocVien",
       "Học viên": "hocVien",
       "Loại bơi": "loaiBoi",
       "Buổi": "buoi",
-      "Thứ học": "thu1", // hoặc bạn xử lý riêng nếu nhiều thứ
+      "Thứ học": "thu1",
       "Giờ bắt đầu": "gioBatDau",
       "Giờ kết thúc": "gioKetThuc",
       "Thanh toán": "hocPhiThanhToan",
@@ -612,41 +729,286 @@ async function loadStudentData(){
       "SĐT tư vấn": "sdtTV"
     };
 
-    Object.keys(data).forEach(key=>{
-      const id = map[key];
-      if(!id) return;
+    // ===== FIX CHẮC CHẮN =====
+const hvInput = document.getElementById("hocVien");
 
-      const el = document.getElementById(id);
-      if(!el) return;
+console.log("FIELD HỌC VIÊN:", data["Học viên"]);
+console.log("ELEMENT:", hvInput);
 
-      if(el.type === "date" && data[key]){
-        el.value = new Date(data[key]).toISOString().split('T')[0];
-      }
-      else if(el.classList.contains("money")){
-        el.value = formatNumber(data[key]);
-      }
-      else{
-        el.value = data[key];
-      }
-    });
-// ===== TÁCH THỨ HỌC =====
-const thuHoc = data["Thứ học"] || "";
-const thuArr = thuHoc.split(",").map(x => x.trim());
+if(hvInput){
+  hvInput.value = data["Học viên"] || "";
+} else {
+  console.error("❌ Không tìm thấy input #hocVien");
+}
 
-document.getElementById("thu1").value = thuArr[0] || "";
-document.getElementById("thu2").value = thuArr[1] || "";
-document.getElementById("thu3").value = thuArr[2] || "";
+// các field khác
+document.getElementById("maHocVien").value = data["Mã học viên"] || "";
+document.getElementById("loaiBoi").value = data["Loại bơi"] || "";
+
+document.getElementById("hocPhiThanhToan").value = formatNumber(data["Thanh toán"] || "");
+document.getElementById("tenPH").value = data["Tên phụ huynh"] || "";
+document.getElementById("sdtPH").value = data["SĐT phụ huynh"] || "";
+// ===== FIX LỖI KHÔNG LOAD =====
+document.getElementById("tuoi").value = data["Tuổi"] || "";
+document.getElementById("thuHocThu").value = data["Thứ học thử"] || "";
+    // ===== TÁCH THỨ HỌC =====
+    const thuHoc = data["Thứ học"] || "";
+    const thuArr = thuHoc.split(",").map(x => x.trim());
+
+    document.getElementById("thu1").value = thuArr[0] || "";
+    document.getElementById("thu2").value = thuArr[1] || "";
+    document.getElementById("thu3").value = thuArr[2] || "";
+
     // ===== CHECKBOX =====
     document.getElementById("gioiTinhNam").checked = (data["Giới tính"] === "Nam");
     document.getElementById("gioiTinhNu").checked = (data["Giới tính"] === "Nữ");
+	// ===== FIX DATE (QUAN TRỌNG NHẤT) =====
+	document.getElementById("ngaySinh").value = formatDateForInput(data["Ngày sinh"]);
+	document.getElementById("ngayDongPhi").value = formatDateForInput(data["Ngày đóng phí"]);
+	document.getElementById("ngayHocThu").value = formatDateForInput(data["Ngày học thử"]);
+// ===== FIX PHỤ HUYNH =====
+const ph = (data["Vai trò PH"] || "").trim().toLowerCase();
 
-    document.getElementById("phuHuynhCha").checked = (data["Vai trò PH"] === "Cha");
-    document.getElementById("phuHuynhMe").checked = (data["Vai trò PH"] === "Mẹ");
+// reset trước (tránh dính trạng thái cũ)
+document.getElementById("phuHuynhCha").checked = false;
+document.getElementById("phuHuynhMe").checked = false;
+
+// set lại
+document.getElementById("phuHuynhCha").checked = ph === "cha";
+document.getElementById("phuHuynhMe").checked = ph === "mẹ";
+	// ===== FIX LOAD HỌC PHÍ =====
+document.getElementById("hocPhiK1").value = formatNumber(data["Học phí K1"] || "");
+document.getElementById("hocPhiK2").value = formatNumber(data["Học phí K2"] || "");
+document.getElementById("hocPhiTong").value = formatNumber(data["Học phí tổng"] || "");
+
+// ===== SỐ BUỔI =====
+document.getElementById("soBuoiK1").value = data["Số buổi K1"] || "";
+document.getElementById("soBuoiK2").value = data["Số buổi K2"] || "";
+
+// ===== GHI CHÚ =====
+document.getElementById("ghiChuLop").value = data["Ghi chú lớp"] || "";
+
+// ===== LƯU Ý =====
+document.getElementById("luuY").value = data["Lưu ý"] || "";
+document.getElementById("tang").value = data["Quà tặng"] || "";
+// ===== FIX BUỔI (SÁNG / CHIỀU) =====
+const buoi = data["Buổi"] || "";
+document.getElementById("hocSang").checked = buoi.includes("Sáng");
+document.getElementById("hocChieu").checked = buoi.includes("Chiều");
+document.getElementById("gioBatDau").value = data["Giờ bắt đầu"] || "";
+document.getElementById("gioKetThuc").value = data["Giờ kết thúc"] || "";
 
   }catch(err){
     console.error("Lỗi load:", err);
   }
 }
+
+function layDuLieuForm() {
+  return {
+    ma: document.getElementById("maHocVien").value,
+    hocVien: document.getElementById("hocVien").value,
+    loaiBoi: document.getElementById("loaiBoi").value,
+
+    buoi:
+      (document.getElementById("hocSang").checked ? "Sáng " : "") +
+      (document.getElementById("hocChieu").checked ? "Chiều" : ""),
+
+    thuHoc: [
+      document.getElementById("thu1").value,
+      document.getElementById("thu2").value,
+      document.getElementById("thu3").value
+    ].join(","),
+
+    gioBatDau: document.getElementById("gioBatDau").value,
+    gioKetThuc: document.getElementById("gioKetThuc").value,
+
+    hocPhiThanhToan: cleanNumber(document.getElementById("hocPhiThanhToan").value),
+    ngayDongPhi: document.getElementById("ngayDongPhi").value,
+
+    thuHocThu: document.getElementById("thuHocThu").value,
+    ngayHocThu: document.getElementById("ngayHocThu").value,
+
+    gioiTinh:
+      document.getElementById("gioiTinhNam").checked ? "Nam" :
+      document.getElementById("gioiTinhNu").checked ? "Nữ" : "",
+
+    ngaySinh: document.getElementById("ngaySinh").value,
+    tuoi: document.getElementById("tuoi").value,
+
+    tenPH: document.getElementById("tenPH").value,
+    loaiPH:
+      document.getElementById("phuHuynhCha").checked ? "Cha" :
+      document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
+
+    sdtPH: document.getElementById("sdtPH").value,
+
+    tang: document.getElementById("tang").value,
+    lyDoTang: document.getElementById("lyDoTang").value,
+
+    luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
+    luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
+
+    hocPhiKhoa1: cleanNumber(document.getElementById("hocPhiK1").value),
+    soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
+
+    hocPhiKhoa2: cleanNumber(document.getElementById("hocPhiK2").value),
+    soBuoiK2: document.getElementById("soBuoiK2") ? document.getElementById("soBuoiK2").value : "",
+
+    hocPhiTong: cleanNumber(document.getElementById("hocPhiTong").value),
+    tongSoBuoi: document.getElementById("tongSoBuoi")
+      ? document.getElementById("tongSoBuoi").value + " buổi"
+      : "",
+
+    ghiChuLop: document.getElementById("ghiChuLop").value,
+
+    tenHLV: document.getElementById("tenHLV").value,
+    sdtHLV: document.getElementById("sdtHLV").value,
+    maHLV: document.getElementById("maHLV").value,
+
+    tuVanVien: document.getElementById("tuVanVien").value,
+    sdtTV: document.getElementById("sdtTV").value,
+
+    thoiGianAuto: new Date().toLocaleString("vi-VN")
+  };
+}
+
+function capNhatHocVien(btn) {
+
+  const data = layDuLieuForm();
+
+  const ma = document.getElementById("selectMaHV").value;
+
+  if (!ma) {
+    alert("Chưa chọn mã học viên!");
+    return;
+  }
+
+  data.ma = ma;
+
+  if (!confirm("Bạn có chắc muốn CẬP NHẬT học viên này không?")) return;
+
+  btn.disabled = true;
+  btn.innerText = "Đang cập nhật...";
+
+  // ✅ SỬA: dùng helper postToScript (text/plain, không có mode cors)
+  postToScript({ action: "update", data: data })
+  .then(res => {
+    console.log("UPDATE RESPONSE:", res);
+    alert("✅ Cập nhật thành công!");
+    localStorage.removeItem(CACHE_KEY); // ✅ xóa cache
+    const current = document.getElementById("selectMaHV").value;
+
+	fetchMaHVList();
+
+	setTimeout(()=>{
+	  document.getElementById("selectMaHV").value = current;
+	},300);
+  })
+  .catch(err => {
+    console.error(err);
+    alert("❌ Lỗi cập nhật!");
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.innerText = "Cập nhật";
+  });
+}
+
+function xoaHocVien() {
+  const ma = document.getElementById("selectMaHV").value;
+
+  if (!ma) {
+    alert("Chưa chọn mã học viên!");
+    return;
+  }
+
+  if (!confirm("⚠️ Bạn chắc chắn muốn XÓA học viên này?")) return;
+
+  // ✅ SỬA: dùng helper postToScript (text/plain, không có mode cors)
+  postToScript({ action: "delete", ma: ma })
+  .then(() => {
+    alert("✅ Đã xóa!");
+
+    localStorage.removeItem(CACHE_KEY); // ✅ xóa cache
+    fetchMaHVList();
+
+    document.getElementById("selectMaHV").value = "";
+
+		// chỉ clear field nhập
+	[
+	  "hocVien","maHocVien","tenPH","sdtPH","tang","lyDoTang","luuY",
+	  "hocPhiThanhToan","ngaySinh","tuoi","ngayHocThu","thuHocThu","thu1","thu2","thu3",
+	].forEach(id=>{
+	  const el = document.getElementById(id);
+	  if(el) el.value = "";
+	});
+
+	// reset checkbox
+	document.querySelectorAll("input[type='checkbox']").forEach(c => c.checked = false);
+
+	// reset ngày
+	document.getElementById("ngayDongPhi").value = new Date().toISOString().split('T')[0];
+
+    document.querySelectorAll("input[type='checkbox']").forEach(c => {
+      c.checked = false;
+    });
+
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("ngayDongPhi").value = today;
+  })
+  .catch(err => {
+    console.error(err);
+    alert("❌ Lỗi xóa!");
+  });
+}
+
+// ===== GIỚI TÍNH =====
+const nam = document.getElementById("gioiTinhNam");
+const nu = document.getElementById("gioiTinhNu");
+
+nam.addEventListener("change", () => {
+  if (nam.checked) nu.checked = false;
+});
+
+nu.addEventListener("change", () => {
+  if (nu.checked) nam.checked = false;
+});
+
+
+// ===== PHỤ HUYNH (CHA / MẸ) =====
+const cha = document.getElementById("phuHuynhCha");
+const me = document.getElementById("phuHuynhMe");
+
+cha.addEventListener("change", () => {
+  if (cha.checked) me.checked = false;
+});
+
+me.addEventListener("change", () => {
+  if (me.checked) cha.checked = false;
+});
+
+// ===== ẨN NGÀY KO CHỌN KHI IN =====
+function hideEmptyDatesBeforePrint() {
+  document.querySelectorAll(".date-row").forEach(row => {
+
+    const dateInputs = row.querySelectorAll("input[type='date']");
+    
+    let isEmpty = true;
+
+    dateInputs.forEach(input => {
+      if (input.value) isEmpty = false;
+    });
+
+    if (isEmpty) {
+      row.style.display = "none";
+    } else {
+      row.style.display = "";
+    }
+  });
+}
+
+// chạy khi bấm in
+window.addEventListener("beforeprint", hideEmptyDatesBeforePrint);
 </script>
 
 </body>
