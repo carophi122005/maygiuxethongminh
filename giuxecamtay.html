@@ -159,6 +159,79 @@
 		  transform: translateY(-2px);
 		}
 		/* nút cuộn */
+		.contact-section{
+			max-width:900px;
+			margin:40px auto;
+			padding:30px;
+			background:#fff;
+			border-radius:16px;
+			box-shadow:0 8px 25px rgba(0,0,0,0.08);
+		}
+
+		.contact-title{
+			font-size:24px;
+			font-weight:700;
+			margin-bottom:20px;
+			text-align:center;
+			color:#222;
+		}
+
+		.company-name{
+			font-size:20px;
+			font-weight:600;
+			color:#0d6efd;
+			text-align:center;
+			margin-bottom:5px;
+		}
+
+		.contact-item{
+			align-items:center;
+			gap:15px;
+			padding:12px 16px;
+			border-radius:10px;
+			transition:0.3s;
+			margin-bottom:10px;
+			color:#6c757d;
+		}
+
+		.contact-item:hover{
+			background:#f1f5ff;
+		}
+
+		.contact-item i{
+			display:flex;
+			align-items:center;
+			justify-content:center; /* thêm dòng này */
+			gap:15px;
+			padding:12px 16px;
+			border-radius:10px;
+			transition:0.3s;
+			margin-bottom:10px;
+		}
+
+		.contact-text{
+			font-size:16px;
+			color:#333;
+			text-align:center;
+		}
+
+		.contact-text a{
+			color:#0d6efd;
+			text-decoration:none;
+			font-weight:500;
+		}
+
+		.contact-text a:hover{
+			text-decoration:underline;
+		}
+
+		/* Responsive */
+		@media(max-width:600px){
+			.contact-section{
+				margin:20px;
+				padding:20px;
+			}
+		}
     </style>
 <!-- Top Navigation (Component Predicted) -->
 <nav class="flex justify-between items-center max-w-[100%] mx-auto px-6 h-24 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.05)]">
@@ -167,7 +240,7 @@
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site" style="">Máy giữ xe thông minh</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site" style="">Thiết bị bãi xe</a>
-<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site" style="">Liên Hệ</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site/lien-he.html" style="">Liên Hệ</a>
 </div>
 <div class="flex items-center gap-3">
 <a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;">
@@ -202,6 +275,7 @@
 <a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="tel:0986991505" style=""><span class="material-symbols-outlined text-lg text-primary" style="">call</span> Hotline: 0986 991 505</a>
 <a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="mailto:giuxekl@gmail.com" style=""><span class="material-symbols-outlined text-lg text-blue-600" style="">mail</span> giuxekl@gmail.com</a>
 </section>
+
 <!-- Mobile Parking Section -->
 <section class="py-2 fade-in-scroll delay-100">
 <div class="w-full">
@@ -500,7 +574,7 @@
 <a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Dự án</a>
 <a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Dịch vụ</a>
 <a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Thư viện</a>
-<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Liên hệ</a>
+<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site/lien-he.html" style="">Liên hệ</a>
 </div>
 </div>
 <!-- Contact Info -->
