@@ -100,7 +100,7 @@ style="padding:6px; border-radius:6px; border:1px solid #16a34a; font-weight:bol
 
 <button onclick="saveData()" id="btnSave" 
 style="padding:6px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer; width:110px; font-size:12px;">
-    LƯU
+    THÊM
 </button>
 <button onclick="capNhatHocVien(this)" 
 style="padding:6px; border-radius:6px; border:none; background:#16a34a; color:#fff; font-weight:bold; cursor:pointer; width:110px; font-size:12px;">
@@ -257,7 +257,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
 
   <div style="position:absolute; left:375px; top:20px; display:flex; align-items:center;">
     <div style="font-size:30px; line-height:42px;">]</div>
-    <span class="line" style="width:160px; margin-left:4px"><input value="Lớp học 2,3 học viên"></span>
+    <span class="line" style="width:160px; margin-left:4px"><input id="ndSoHVday" value="Lớp học 2,3 học viên"></span>
   </div>
   </div>
 
@@ -266,7 +266,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
 <div class="row"style="margin: 0 0 4px;">
 Họ & Tên ( <input type="checkbox" id="phuHuynhCha" class="chk"> Cha / <input type="checkbox" id="phuHuynhMe" class="chk"> Mẹ ):
 <span class="line" style="width:250px"><input id="tenPH"></span>
-&nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtPH"></span>
+&nbsp;&nbsp; ĐT ( Zalo ): <span class="line" style="width:180px"><input id="sdtPH" oninput="this.value = formatSDT(this.value)"></span>
 </div>
 
 <div class="row">
@@ -346,8 +346,36 @@ Chữ Ký Phụ Huynh: <span class="line" style="width:260px; text-align:right">
 </div>
 
 <script>
+function capitalizeWords(str) {
+  if (!str) return "";
+
+  return str
+    .toLowerCase()
+    .normalize("NFC") // 🔥 QUAN TRỌNG: chuẩn hóa Unicode tiếng Việt
+    .trim()
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .map(word => {
+      if (!word) return "";
+      return word[0].toLocaleUpperCase("vi-VN") + word.slice(1);
+    })
+    .join(" ");
+}
+function formatSDT(value) {
+  if (!value) return "";
+
+  value = value.replace(/\D/g, '');   // chỉ giữ số
+  value = value.substring(0, 10);     // tối đa 10 số
+
+  if (value.length <= 4) return value;
+  if (value.length <= 7) return value.replace(/(\d{4})(\d+)/, '$1 $2');
+
+  return value.replace(/(\d{4})(\d{3})(\d+)/, '$1 $2 $3');
+}
+
 let isEditing = false;
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEBJMYHLY9Jhla6_WB8L6-CSQytgTL4NJJLYpklVGTEQl0Ow5r3I1Q0c-JyOhonoA/exec";
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxZaia0VW34L3dPe9rv402H17oCykSSWxw9srgczQ7f-Nozr-xJKzRSmz0H7s9xAYE/exec";
 
 const select = document.getElementById("selectMaHV");
 
@@ -616,7 +644,7 @@ async function saveData(){
     action: "add",
     data: {
       maHocVien: document.getElementById("maHocVien").value,
-      hocVien: document.getElementById("hocVien").value,
+      hocVien: capitalizeWords(document.getElementById("hocVien").value),
       loaiBoi: document.getElementById("loaiBoi").value,
 
       buoi: (document.getElementById("hocSang").checked ? "Sáng " : "") + (document.getElementById("hocChieu").checked ? "Chiều" : ""),
@@ -634,7 +662,7 @@ async function saveData(){
       ngaySinh: document.getElementById("ngaySinh").value,
       tuoi: document.getElementById("tuoi").value,
 
-      tenPH: document.getElementById("tenPH").value,
+      tenPH: capitalizeWords(document.getElementById("tenPH").value),
       loaiPH: document.getElementById("phuHuynhCha").checked ? "Cha" : document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
       sdtPH: document.getElementById("sdtPH").value,
 
@@ -652,13 +680,13 @@ async function saveData(){
       tongSoBuoi: document.getElementById("tongSoBuoi") ? document.getElementById("tongSoBuoi").value + " buổi" : "",
       ghiChuLop: document.getElementById("ghiChuLop").value,
 
-      tenHLV: document.getElementById("tenHLV").value,
+      tenHLV: capitalizeWords(document.getElementById("tenHLV").value),
       sdtHLV: document.getElementById("sdtHLV").value,
       maHLV: document.getElementById("maHLV").value,
 
-      tuVanVien: document.getElementById("tuVanVien").value,
+      tuVanVien: capitalizeWords(document.getElementById("tuVanVien").value),  
       sdtTV: document.getElementById("sdtTV").value,
-
+	  ndSoHVday: document.getElementById("ndSoHVday").value,
       thoiGianAuto: new Date().toLocaleString("vi-VN")
     }
   };
@@ -666,7 +694,7 @@ async function saveData(){
   try{
     const result = await postToScript(payload); // ✅ dùng helper đã sửa CORS
 
-    alert("✅ Đã lưu! Mã HV: " + result.ma);
+    alert("✅ Đã thêm! Mã HV: " + result.ma);
 
     document.getElementById("maHocVien").value = result.ma;
 
@@ -678,7 +706,7 @@ async function saveData(){
   }
 
   btn.disabled = false;
-  btn.innerText = "LƯU";
+  btn.innerText = "THÊM";
 }
 
 // ===== LOAD DỮ LIỆU THEO MÃ =====
@@ -726,6 +754,7 @@ async function loadStudentData(){
       "SĐT HLV": "sdtHLV",
       "Mã HLV": "maHLV",
       "Tư vấn viên": "tuVanVien",
+	  "Nội dung số HV dạy": "ndSoHVday",
       "SĐT tư vấn": "sdtTV"
     };
 
@@ -744,7 +773,7 @@ if(hvInput){
 // các field khác
 document.getElementById("maHocVien").value = data["Mã học viên"] || "";
 document.getElementById("loaiBoi").value = data["Loại bơi"] || "";
-
+document.getElementById("sdtHLV").value = data["SĐT HLV"] || "";
 document.getElementById("hocPhiThanhToan").value = formatNumber(data["Thanh toán"] || "");
 document.getElementById("tenPH").value = data["Tên phụ huynh"] || "";
 document.getElementById("sdtPH").value = data["SĐT phụ huynh"] || "";
@@ -787,10 +816,13 @@ document.getElementById("soBuoiK2").value = data["Số buổi K2"] || "";
 
 // ===== GHI CHÚ =====
 document.getElementById("ghiChuLop").value = data["Ghi chú lớp"] || "";
-
+document.getElementById("ndSoHVday").value = data["Nội dung số HV dạy"] || "";
 // ===== LƯU Ý =====
 document.getElementById("luuY").value = data["Lưu ý"] || "";
 document.getElementById("tang").value = data["Quà tặng"] || "";
+// ===== TƯ VẤN VIÊN =====
+document.getElementById("tuVanVien").value = data["Tư vấn viên"] || "";
+document.getElementById("sdtTV").value = data["SĐT tư vấn"] || "";
 // ===== FIX BUỔI (SÁNG / CHIỀU) =====
 const buoi = data["Buổi"] || "";
 document.getElementById("hocSang").checked = buoi.includes("Sáng");
@@ -806,7 +838,7 @@ document.getElementById("gioKetThuc").value = data["Giờ kết thúc"] || "";
 function layDuLieuForm() {
   return {
     ma: document.getElementById("maHocVien").value,
-    hocVien: document.getElementById("hocVien").value,
+    hocVien: capitalizeWords(document.getElementById("hocVien").value),
     loaiBoi: document.getElementById("loaiBoi").value,
 
     buoi:
@@ -835,7 +867,7 @@ function layDuLieuForm() {
     ngaySinh: document.getElementById("ngaySinh").value,
     tuoi: document.getElementById("tuoi").value,
 
-    tenPH: document.getElementById("tenPH").value,
+    tenPH: capitalizeWords(document.getElementById("tenPH").value),
     loaiPH:
       document.getElementById("phuHuynhCha").checked ? "Cha" :
       document.getElementById("phuHuynhMe").checked ? "Mẹ" : "",
@@ -861,13 +893,13 @@ function layDuLieuForm() {
 
     ghiChuLop: document.getElementById("ghiChuLop").value,
 
-    tenHLV: document.getElementById("tenHLV").value,
+    tenHLV: capitalizeWords(document.getElementById("tenHLV").value),
     sdtHLV: document.getElementById("sdtHLV").value,
     maHLV: document.getElementById("maHLV").value,
 
-    tuVanVien: document.getElementById("tuVanVien").value,
+    tuVanVien: capitalizeWords(document.getElementById("tuVanVien").value),
     sdtTV: document.getElementById("sdtTV").value,
-
+	ndSoHVday: document.getElementById("ndSoHVday").value,
     thoiGianAuto: new Date().toLocaleString("vi-VN")
   };
 }
@@ -910,7 +942,7 @@ function capNhatHocVien(btn) {
   })
   .finally(() => {
     btn.disabled = false;
-    btn.innerText = "Cập nhật";
+    btn.innerText = "CẬP NHẬT";
   });
 }
 
