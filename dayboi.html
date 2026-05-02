@@ -90,8 +90,17 @@ button{padding:6px 12px;margin:0px}
 
   /* checkbox */
   input[type="checkbox"] {
-    background-color: transparent !important;
-    background-image: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+
+    background: transparent !important;
+    border: 1px solid #000; /* giữ hình checkbox */
+    width: 14px;
+    height: 14px;
+  }
+
+  input[type="checkbox"]:checked {
+    background: #000; /* khi tick sẽ đen */
   }
 
   /* date (thằng này hay bị xám nhất trên mobile) */
