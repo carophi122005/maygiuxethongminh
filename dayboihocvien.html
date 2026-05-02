@@ -25,6 +25,8 @@ body{margin:0;background:#fff}
   body{
     width:210mm;
     height:297mm;
+	-webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 .line{display:inline-block;border-bottom:1px dotted #000;vertical-align:middle}
@@ -70,13 +72,57 @@ button{padding:6px 12px;margin:0px}
   }
 }
 /* Tự động viết hoa chữ cái đầu khi hiển thị */
-#tenHLV, #hocVien, #tenPH, #tuVanVien {
+#tenHLV, #hocVien, #tenPH, #tuVanVien, #tang {
     text-transform: capitalize;
 }
 @media print{
   .header-title{
     transform: translate(-50%,-50%) !important;
   }
+  }
+@media print {
+  /* text input + select + textarea */
+  input, textarea, select {
+    background-color: transparent !important;
+    background-image: none !important;
+	-webkit-background-clip: padding-box !important;
+  }
+
+  /* checkbox */
+  input[type="checkbox"] {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+
+    background: transparent !important;
+    border: 1px solid #000; /* giữ hình checkbox */
+    width: 14px;
+    height: 14px;
+  }
+
+  input[type="checkbox"]:checked {
+    background: #000; /* khi tick sẽ đen */
+  }
+
+  /* date (thằng này hay bị xám nhất trên mobile) */
+  input[type="date"] {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+}
+/* ===== XÓA NỀN CHỈ CHO INPUT ===== */
+input,
+textarea,
+select {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* checkbox + date (mobile hay bị xám) */
+input[type="checkbox"],
+input[type="date"] {
+  background-color: transparent;
+  background-image: none;
 }
 </style>
 </head>
@@ -105,7 +151,7 @@ style="padding:6px; border-radius:6px; border:none; background:#f12222; color:#f
 <div class="header">
 <img src="https://i.ibb.co/CstGJbrr/bg-header.jpg">
 <div class="header-title">
-<input value="PHIẾU ĐĂNG KÝ HỌC BƠI">
+<input id="tenTieuDe" value="PHIẾU ĐĂNG KÝ HỌC BƠI">
 </div>
 </div>
 
@@ -134,7 +180,7 @@ Ngày tháng năm sinh :
 <div class="row">
 Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input type="checkbox" id="hocChieu" class="chk"> chiều 
 <span class="line" style="width:150px; display:inline-flex; align-items:center; gap:4px;">
-  <select id="gioBatDau" style="border:none; outline:none; width:45px">
+  <select id="gioBatDau" style="border:none; outline:none; width:45px;text-align:center">
     <option>01h</option><option>02h</option><option>03h</option><option>04h</option><option>05h</option>
     <option>06h</option><option>07h</option><option>08h</option><option>09h</option><option>10h</option>
     <option>11h</option><option>12h</option><option>13h</option><option>14h</option><option>15h</option>
@@ -142,7 +188,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
     <option>21h</option><option>22h</option><option>23h</option><option>24h</option>
   </select>
    - 
-  <select id="gioKetThuc" style="border:none; outline:none; width:45px">
+  <select id="gioKetThuc" style="border:none; outline:none; width:45px;text-align:center">
     <option>01h</option><option>02h</option><option>03h</option><option>04h</option><option>05h</option>
     <option>06h</option><option>07h</option><option>08h</option><option>09h</option><option>10h</option>
     <option>11h</option><option>12h</option><option>13h</option><option>14h</option><option>15h</option>
@@ -151,13 +197,13 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
   </select>
 </span>
 &nbsp;&nbsp; Thứ: <span class="line" style="width:180px; display:inline-flex; gap:4px; align-items:center;">
-<select id="thu1" style="border:none; outline:none; width:40px">
+<select id="thu1" style="border:none; outline:none; width:40px;text-align:center">
 <option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option>
 </select> |
-<select id="thu2" style="border:none; outline:none; width:40px">
+<select id="thu2" style="border:none; outline:none; width:40px;text-align:center">
 <option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option>
 </select> |
-<select id="thu3" style="border:none; outline:none; width:40px">
+<select id="thu3" style="border:none; outline:none; width:40px;text-align:center">
 <option selected>&nbsp;</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option><option>T6</option><option>T7</option><option>CN</option>
 </select>
 </span>
@@ -176,10 +222,9 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
     <div class="indent" style="display:flex; align-items:center; gap:6px;">
       <span>*</span>
       <span>Học Phí Khóa 1:</span>
-      <span class="line" style="width:80px"><input id="hocPhiK1" style="text-align: right;" class="money" value="3000000"></span> VNĐ
-      / 
+      <span class="line" style="width:80px"><input id="hocPhiK1" style="text-align: right;" class="money" value="3000000"></span>VNĐ&nbsp;/&nbsp;
       <span class="line" style="width:50px">
-<select id="soBuoiK1" style="border:none; outline:none; width:100%;text-align: center">
+<select id="soBuoiK1" style="border:none; outline:none; width:100%;text-align: right">
 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
 <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
 <option>11</option><option selected>12</option><option>13</option><option>14</option><option>15</option>
@@ -191,10 +236,9 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
     <div class="indent" style="display:flex; align-items:center; gap:6px; margin-top:2px;">
       <span>*</span>
       <span>Học Phí Khóa 2:</span>
-      <span class="line" style="width:80px"><input id="hocPhiK2" style="text-align: right;" class="money" value="2500000"></span> VNĐ
-      / 
+      <span class="line" style="width:80px"><input id="hocPhiK2" style="text-align: right;" class="money" value="2500000"></span>VNĐ&nbsp;/&nbsp; 
       <span class="line" style="width:50px">
-<select id="soBuoiK2" style="border:none; outline:none; width:100%;text-align: center">
+<select id="soBuoiK2" style="border:none; outline:none; width:100%;text-align: right">
 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
 <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
 <option>11</option><option selected>12</option><option>13</option><option>14</option><option>15</option>
@@ -206,8 +250,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
     <div class="indent" style="display:flex; align-items:center; gap:6px; margin-top:2px;">
       <span>*</span>
       <b>Học Phí:</b>
-      <b><span class="line" style="width:80px"><input id="hocPhiTong" style="font-weight:bold;text-align: right;" class="money" value="4000000"></span> VNĐ
-      / 
+      <b><span class="line" style="width:80px"><input id="hocPhiTong" style="font-weight:bold;text-align: right;" class="money" value="4000000"></span>&nbsp;VNĐ&nbsp;/&nbsp;
       <span class="line" style="width:80px">
 <select id="tongSoBuoi" style="border:none; outline:none; width:100%; font-weight:bold; text-align: center; font-size: 14px;">
   <option value="">&nbsp;</option>
@@ -238,7 +281,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
   </div>
 
   <div style="position:absolute; left:375px; top:20px; display:flex; align-items:center;">
-    <div style="font-size:30px; line-height:42px;">]</div>
+    <div style="font-size:40px; line-height:52px;font-family: Inter;">]</div>
     <span class="line" style="width:160px; margin-left:4px"><input id="ndSoHVday" value="Lớp học 2,3 học viên"></span>
   </div>
   </div>
@@ -357,7 +400,7 @@ function formatSDT(value) {
 
 let isEditing = false;
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxZaia0VW34L3dPe9rv402H17oCykSSWxw9srgczQ7f-Nozr-xJKzRSmz0H7s9xAYE/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygyIxJNW3GeQso4CsKoUT9yhr5S95x0tc-4Ennj4-ZpW9V6kj3gqIY71iuq27ircA/exec";
 
 const select = document.getElementById("selectMaHV");
 
@@ -651,7 +694,7 @@ async function saveData(){
       tang: document.getElementById("tang").value,
       lyDoTang: document.getElementById("lyDoTang").value,
       luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
-      luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
+      tenTieuDe: document.getElementById("tenTieuDe") ? document.getElementById("tenTieuDe").value : "",
 
       hocPhiKhoa1: cleanNumber(document.getElementById("hocPhiK1").value),
       soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
@@ -724,7 +767,7 @@ async function loadStudentData(){
       "Quà tặng": "tang",
       "Lý do tặng": "lyDoTang",
       "Lưu ý": "luuY",
-      "Lưu ý học thử": "luuYHocThu",
+      "Tiêu Đề": "tenTieuDe",
       "Học phí K1": "hocPhiK1",
       "Số buổi K1": "soBuoiK1",
       "Học phí K2": "hocPhiK2",
@@ -791,6 +834,8 @@ document.getElementById("phuHuynhMe").checked = ph === "mẹ";
 document.getElementById("hocPhiK1").value = formatNumber(data["Học phí K1"] || "");
 document.getElementById("hocPhiK2").value = formatNumber(data["Học phí K2"] || "");
 document.getElementById("hocPhiTong").value = formatNumber(data["Học phí tổng"] || "");
+
+document.getElementById("tenTieuDe").value = data["Tiêu Đề"] || "";
 
 // ===== SỐ BUỔI =====
 document.getElementById("soBuoiK1").value = data["Số buổi K1"] || "";
@@ -863,7 +908,7 @@ function layDuLieuForm() {
     lyDoTang: document.getElementById("lyDoTang").value,
 
     luuY: document.getElementById("luuY") ? document.getElementById("luuY").value : "",
-    luuYHocThu: document.getElementById("luuYHocThu") ? document.getElementById("luuYHocThu").value : "",
+    tenTieuDe: document.getElementById("tenTieuDe") ? document.getElementById("tenTieuDe").value : "",
 
     hocPhiKhoa1: cleanNumber(document.getElementById("hocPhiK1").value),
     soBuoiK1: document.getElementById("soBuoiK1") ? document.getElementById("soBuoiK1").value : "",
@@ -893,33 +938,42 @@ function capNhatHocVien(btn) {
 
   const data = layDuLieuForm();
 
-  const ma = document.getElementById("selectMaHV").value;
+  const maCu = document.getElementById("selectMaHV").value;   // mã cũ (A001)
+  const maMoi = document.getElementById("maHocVien").value;   // mã mới (A415)
 
-  if (!ma) {
+  if (!maCu) {
     alert("Chưa chọn mã học viên!");
     return;
   }
 
-  data.ma = ma;
+  data.maCu = maCu;   // để tìm dòng
+  data.ma = maMoi;    // để ghi đè mã mới
 
   if (!confirm("Bạn có chắc muốn CẬP NHẬT học viên này không?")) return;
 
   btn.disabled = true;
   btn.innerText = "Đang cập nhật...";
 
-  // ✅ SỬA: dùng helper postToScript (text/plain, không có mode cors)
   postToScript({ action: "update", data: data })
   .then(res => {
     console.log("UPDATE RESPONSE:", res);
+
+    if(res.status === "duplicate"){
+      alert("❌ Mã đã tồn tại!");
+      return;
+    }
+
     alert("✅ Cập nhật thành công!");
-    localStorage.removeItem(CACHE_KEY); // ✅ xóa cache
-    const current = document.getElementById("selectMaHV").value;
 
-	fetchMaHVList();
+    localStorage.removeItem(CACHE_KEY);
 
-	setTimeout(()=>{
-	  document.getElementById("selectMaHV").value = current;
-	},300);
+    const current = data.ma; // 👈 giữ mã mới (A415)
+
+    fetchMaHVList();
+
+    setTimeout(()=>{
+      document.getElementById("selectMaHV").value = current;
+    },300);
   })
   .catch(err => {
     console.error(err);
@@ -1006,21 +1060,22 @@ me.addEventListener("change", () => {
 
 // ===== ẨN NGÀY KO CHỌN KHI IN =====
 function hideEmptyDatesBeforePrint() {
-  document.querySelectorAll(".date-row").forEach(row => {
+  document.querySelectorAll("input[type='date']").forEach(input => {
 
-    const dateInputs = row.querySelectorAll("input[type='date']");
-    
-    let isEmpty = true;
+    if (!input.value) {
+      // ẨN RIÊNG Ô DATE
+      input.style.visibility = "hidden";
 
-    dateInputs.forEach(input => {
-      if (input.value) isEmpty = false;
-    });
-
-    if (isEmpty) {
-      row.style.display = "none";
     } else {
-      row.style.display = "";
+      // HIỆN LẠI NẾU CÓ DỮ LIỆU
+      input.style.visibility = "visible";
+
+      const line = input.closest(".line");
+      if (line) {
+        line.style.borderBottom = "1px dotted #000";
+      }
     }
+
   });
 }
 
