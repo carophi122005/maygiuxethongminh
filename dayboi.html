@@ -79,6 +79,28 @@ button{padding:6px 12px;margin:0px}
   .header-title{
     transform: translate(-50%,-50%) !important;
   }
+@media print {
+
+  /* text input + select + textarea */
+  input, textarea, select {
+    background-color: transparent !important;
+    background-image: none !important;
+	-webkit-background-clip: padding-box !important;
+  }
+
+  /* checkbox */
+  input[type="checkbox"] {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  /* date (thằng này hay bị xám nhất trên mobile) */
+  input[type="date"] {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+}
 }
 </style>
 </head>
