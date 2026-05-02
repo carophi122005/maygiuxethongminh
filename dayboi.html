@@ -79,8 +79,8 @@ button{padding:6px 12px;margin:0px}
   .header-title{
     transform: translate(-50%,-50%) !important;
   }
+  }
 @media print {
-
   /* text input + select + textarea */
   input, textarea, select {
     background-color: transparent !important;
@@ -101,6 +101,19 @@ button{padding:6px 12px;margin:0px}
   }
 
 }
+/* ===== XÓA NỀN CHỈ CHO INPUT ===== */
+input,
+textarea,
+select {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* checkbox + date (mobile hay bị xám) */
+input[type="checkbox"],
+input[type="date"] {
+  background-color: transparent;
+  background-image: none;
 }
 </style>
 </head>
