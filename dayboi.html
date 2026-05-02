@@ -72,7 +72,7 @@ button{padding:6px 12px;margin:0px}
   }
 }
 /* Tự động viết hoa chữ cái đầu khi hiển thị */
-#tenHLV, #hocVien, #tenPH, #tuVanVien {
+#tenHLV, #hocVien, #tenPH, #tuVanVien, #tang {
     text-transform: capitalize;
 }
 @media print{
@@ -268,8 +268,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
     <div class="indent" style="display:flex; align-items:center; gap:6px; margin-top:2px;">
       <span>*</span>
       <b>Học Phí:</b>
-      <b><span class="line" style="width:80px"><input id="hocPhiTong" style="font-weight:bold;text-align: right;" class="money" value="4000000"></span> VNĐ
-      / 
+      <b><span class="line" style="width:80px"><input id="hocPhiTong" style="font-weight:bold;text-align: right;" class="money" value="4000000"></span>&nbsp;VNĐ&nbsp;/&nbsp;
       <span class="line" style="width:80px">
 <select id="tongSoBuoi" style="border:none; outline:none; width:100%; font-weight:bold; text-align: center; font-size: 14px;">
   <option value="">&nbsp;</option>
@@ -300,7 +299,7 @@ Ngày học: <input type="checkbox" id="hocSang" class="chk"> sáng | <input typ
   </div>
 
   <div style="position:absolute; left:375px; top:20px; display:flex; align-items:center;">
-    <div style="font-size:30px; line-height:42px;">]</div>
+    <div style="font-size:40px; line-height:52px;font-family: Inter;">]</div>
     <span class="line" style="width:160px; margin-left:4px"><input id="ndSoHVday" value="Lớp học 2,3 học viên"></span>
   </div>
   </div>
@@ -957,33 +956,42 @@ function capNhatHocVien(btn) {
 
   const data = layDuLieuForm();
 
-  const ma = document.getElementById("selectMaHV").value;
+  const maCu = document.getElementById("selectMaHV").value;   // mã cũ (A001)
+  const maMoi = document.getElementById("maHocVien").value;   // mã mới (A415)
 
-  if (!ma) {
+  if (!maCu) {
     alert("Chưa chọn mã học viên!");
     return;
   }
 
-  data.ma = ma;
+  data.maCu = maCu;   // để tìm dòng
+  data.ma = maMoi;    // để ghi đè mã mới
 
   if (!confirm("Bạn có chắc muốn CẬP NHẬT học viên này không?")) return;
 
   btn.disabled = true;
   btn.innerText = "Đang cập nhật...";
 
-  // ✅ SỬA: dùng helper postToScript (text/plain, không có mode cors)
   postToScript({ action: "update", data: data })
   .then(res => {
     console.log("UPDATE RESPONSE:", res);
+
+    if(res.status === "duplicate"){
+      alert("❌ Mã đã tồn tại!");
+      return;
+    }
+
     alert("✅ Cập nhật thành công!");
-    localStorage.removeItem(CACHE_KEY); // ✅ xóa cache
-    const current = document.getElementById("selectMaHV").value;
 
-	fetchMaHVList();
+    localStorage.removeItem(CACHE_KEY);
 
-	setTimeout(()=>{
-	  document.getElementById("selectMaHV").value = current;
-	},300);
+    const current = data.ma; // 👈 giữ mã mới (A415)
+
+    fetchMaHVList();
+
+    setTimeout(()=>{
+      document.getElementById("selectMaHV").value = current;
+    },300);
   })
   .catch(err => {
     console.error(err);
@@ -1070,21 +1078,22 @@ me.addEventListener("change", () => {
 
 // ===== ẨN NGÀY KO CHỌN KHI IN =====
 function hideEmptyDatesBeforePrint() {
-  document.querySelectorAll(".date-row").forEach(row => {
+  document.querySelectorAll("input[type='date']").forEach(input => {
 
-    const dateInputs = row.querySelectorAll("input[type='date']");
-    
-    let isEmpty = true;
+    if (!input.value) {
+      // ẨN RIÊNG Ô DATE
+      input.style.visibility = "hidden";
 
-    dateInputs.forEach(input => {
-      if (input.value) isEmpty = false;
-    });
-
-    if (isEmpty) {
-      row.style.display = "none";
     } else {
-      row.style.display = "";
+      // HIỆN LẠI NẾU CÓ DỮ LIỆU
+      input.style.visibility = "visible";
+
+      const line = input.closest(".line");
+      if (line) {
+        line.style.borderBottom = "1px dotted #000";
+      }
     }
+
   });
 }
 
