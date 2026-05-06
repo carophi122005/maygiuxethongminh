@@ -10,45 +10,179 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#e11d48', // rose-600
-                        background: '#f4f4f5', // zinc-100
-                        surface: '#ffffff',
-                        dark: '#09090b', // zinc-950
-                        zinc: {
-                            50: '#fafafa',
-                            100: '#f4f4f5',
-                            200: '#e4e4e7',
-                            300: '#d4d4d8',
-                            400: '#a1a1aa',
-                            500: '#71717a',
-                            600: '#52525b',
-                            700: '#3f3f46',
-                            800: '#27272a',
-                            900: '#18181b',
-                            950: '#09090b',
-                        },
-                        rose: {
-                            400: '#fb7185',
-                            500: '#f43f5e',
-                            600: '#e11d48',
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-surface": "#2f3133",
+                "surface-variant": "#e2e2e5",
+                "surface": "#f9f9fc",
+                "on-background": "#1a1c1e",
+                "surface-container-high": "#e8e8ea",
+                "primary-fixed-dim": "#a9c7ff",
+                "tertiary-fixed": "#e0e3e6",
+                "on-secondary-fixed": "#161e00",
+                "inverse-primary": "#a9c7ff",
+                "on-secondary": "#ffffff",
+                "on-primary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-container": "#83aef5",
+                "on-tertiary-fixed": "#181c1e",
+                "inverse-on-surface": "#f0f0f3",
+                "surface-container-low": "#f3f3f6",
+                "secondary": "#506600",
+                "on-surface": "#1a1c1e",
+                "outline-variant": "#c3c6d2",
+                "on-secondary-container": "#546b00",
+                "secondary-fixed": "#ccf05f",
+                "on-tertiary-container": "#a9adb0",
+                "surface-bright": "#f9f9fc",
+                "on-secondary-fixed-variant": "#3c4d00",
+                "secondary-container": "#caee5d",
+                "primary-container": "#004080",
+                "surface-container-highest": "#e2e2e5",
+                "on-surface-variant": "#424750",
+                "surface-tint": "#305ea0",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#b1d446",
+                "on-tertiary-fixed-variant": "#43474a",
+                "on-primary-fixed-variant": "#0e4686",
+                "outline": "#737781",
+                "surface-container": "#eeeef0",
+                "tertiary-container": "#3d4144",
+                "surface-dim": "#dadadc",
+                "on-error": "#ffffff",
+                "tertiary": "#272b2e",
+                "primary": "#002a58",
+                "background": "#f9f9fc",
+                "tertiary-fixed-dim": "#c3c7ca",
+                "on-primary-fixed": "#001b3d",
+                "on-tertiary": "#ffffff",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#d6e3ff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin": "32px",
+                "container-max": "1280px",
+                "stack-lg": "32px",
+                "section-padding": "80px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Manrope"
+                ],
+                "headline-xl": [
+                        "Manrope"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Newsreader', 'serif'],
-                        body: ['Manrope', 'sans-serif'],
-                    }
-                }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "label-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+
+		@layer utilities {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            .bg-pattern-dots {
+                background-image: radial-gradient(rgba(0, 42, 88, 0.1) 1px, transparent 1px);
+                background-size: 20px 20px;
             }
         }
-    </script>
-<style>
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .animation-delay-100 { animation-delay: 100ms; }
+        .animation-delay-200 { animation-delay: 200ms; }
+        .animation-delay-300 { animation-delay: 300ms; }
+        .animation-delay-400 { animation-delay: 400ms; }
+        .animation-delay-500 { animation-delay: 500ms; }
+		
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -159,369 +293,321 @@
 		  transform: translateY(-2px);
 		}
 		/* nút cuộn */
-		.contact-section{
-			max-width:900px;
-			margin:40px auto;
-			padding:30px;
-			background:#fff;
-			border-radius:16px;
-			box-shadow:0 8px 25px rgba(0,0,0,0.08);
+		
+		/* menu mobile */
+		#menu {
+		  pointer-events: auto;
 		}
 
-		.contact-title{
-			font-size:24px;
-			font-weight:700;
-			margin-bottom:20px;
-			text-align:center;
-			color:#222;
-		}
+		/* MOBILE */
+		@media (max-width: 767px) {
 
-		.company-name{
-			font-size:20px;
-			font-weight:600;
-			color:#0d6efd;
-			text-align:center;
-			margin-bottom:5px;
-		}
+		  #menu {
+			flex-direction: column;
+			gap: 0;
+			padding: 12px;
+			border-radius: 0 0 16px 16px;
+		  }
 
-		.contact-item{
-			align-items:center;
-			gap:15px;
-			padding:12px 16px;
-			border-radius:10px;
-			transition:0.3s;
-			margin-bottom:10px;
-			color:#6c757d;
-		}
+		  #menu a {
+			display: block;
+			width: 100%;
+			padding: 14px 16px;
+			border-radius: 12px;
+			font-size: 15px;
+			color: #52525b;
+			transition: all 0.25s ease;
+		  }
 
-		.contact-item:hover{
-			background:#f1f5ff;
-		}
+		  #menu a:hover {
+			background: #f4f4f5;
+			color: #111;
+			transform: translateX(4px);
+		  }
 
-		.contact-item i{
-			display:flex;
-			align-items:center;
-			justify-content:center; /* thêm dòng này */
-			gap:15px;
-			padding:12px 16px;
-			border-radius:10px;
-			transition:0.3s;
-			margin-bottom:10px;
+		  #menu a + a {
+			border-top: 1px solid #eee;
+		  }
 		}
-
-		.contact-text{
-			font-size:16px;
-			color:#333;
-			text-align:center;
-		}
-
-		.contact-text a{
-			color:#0d6efd;
-			text-decoration:none;
-			font-weight:500;
-		}
-
-		.contact-text a:hover{
-			text-decoration:underline;
-		}
-
-		/* Responsive */
-		@media(max-width:600px){
-			.contact-section{
-				margin:20px;
-				padding:20px;
-			}
-		}
+}
     </style>
 <!-- Top Navigation (Component Predicted) -->
 <nav class="flex justify-between items-center max-w-[100%] mx-auto px-6 h-24 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.05)]">
+<div id="overlay"
+class="fixed inset-0 bg-black/40 hidden z-[998]"></div>
 <div class="text-2xl font-serif text-zinc-900 dark:text-zinc-50 font-bold tracking-tight" style="font-family: Newsreader, serif;font-weight: 900;">giuxethongminh</div>
-<div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site" style="">Máy giữ xe thông minh</a>
+<div id="menu"
+class="hidden md:flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium tracking-wide absolute md:static top-16 left-0 w-full bg-white md:bg-transparent p-6 md:p-0 shadow md:shadow-none z-[999]" style="padding-left:20px">
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="may-giu-xe-thong-minh.html" style="">Máy giữ xe thông minh</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
-<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site" style="">Thiết bị bãi xe</a>
-<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="https://giuxethongminh.site/lien-he.html" style="">Liên Hệ</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="lien-he.html" style="">Liên Hệ</a>
 </div>
-<div class="flex items-center gap-3">
-<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;">
+<div class="flex items-center gap-3" style="padding-left:5px">
+<button id="menuBtn" class="md:hidden text-2xl">
+☰
+</button>
+<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;padding-left:0px">
 <span class="material-symbols-outlined" style="">call</span> 0986.991.505
 </a>
 </div>
 </nav>
 <main class="px-4 md:px-8 max-w-[1400px] mx-auto space-y-4 pb-6 mt-4">
 <!-- Hero Section -->
-<section class="relative w-full rounded-3xl overflow-hidden min-h-[100%] h-[30vh] md:h-[450px] fade-in-scroll">
-<!-- Background Slider - Smart Parking Imagery -->
-<img alt="Hệ thống giữ xe thông minh" class="hero-slide" src="https://i.ibb.co/hRvgt1Pp/banner-1.jpg" style="">
-<img alt="Máy giữ xe cầm tay" class="hero-slide" src="https://i.ibb.co/RTNSFD6T/banner-2.jpg" style="">
-<img alt="Dự án triển khai" class="hero-slide active" src="https://i.ibb.co/GvNS6WZj/banner-3.jpg" style=""><div class="absolute inset-0 z-20 flex items-center justify-between px-4 pointer-events-none">
-<button class="pointer-events-auto w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all group" onclick="prevSlide()" style="">
-<span class="material-symbols-outlined group-active:-translate-x-1 transition-transform" style="">chevron_left</span>
-</button>
-<button class="pointer-events-auto w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all group" onclick="nextSlide()" style="">
-<span class="material-symbols-outlined group-active:translate-x-1 transition-transform" style="">chevron_right</span>
-</button>
+<section class="relative bg-gradient-to-br from-surface-container-low via-surface to-primary-fixed/5 overflow-hidden pt-8 pb-10 md:pt-12 md:pb-16 border-b border-outline-variant/20">
+<div class="absolute inset-0 z-0 bg-pattern-dots opacity-50"></div>
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+<div class="absolute -bottom-24 -left-24 w-72 h-72 bg-secondary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+<div class="absolute inset-0 z-0">
+<img alt="Hero background" class="w-full h-full object-cover opacity-10 mix-blend-overlay" data-alt="A professional, bright, and modern view of a well-organized automated parking facility. The lighting is crisp daylight, highlighting clean architectural lines and high-tech parking hardware. The aesthetic is corporate and high-trust, using a palette of cool grays, pristine whites, and subtle metallic tones. The mood is highly efficient and technologically advanced, suitable for a light-mode corporate SaaS landing page." src="https://lh3.googleusercontent.com/aida/ADBb0uhksJHuKSwHMwkiK1O7JTcqry8gHkYaiKyQKVEemeUX5LMppxDMHt7JuGxFO7akrAcQkH8jygvbKQAtckIat7U8gm69JWww_ak85F2kqKAzRCaLerAWQr5aMJaE4ggdfDWjivw98pvr5Vf3pqJ6dAAEBSiPv0vBUOLV6i-xpwyyu7oh_SWhdeAz_xaIB5oqNStAKm48sb4KVyrC9jXnVAUqRAKMaiJMP8AwbZvyRZ18qzkTQO-KAjygkH36pn4p6qw7KhOQvCVplw"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
 </div>
-<!-- Navigation Buttons -->
-<!-- Centered Text -->
-</section>
-<!-- New Section: Máy Giữ Xe Gói Tiết Kiệm -->
-	
-<!-- Social Links / Contact Quick Links -->
-<section class="flex flex-wrap justify-center gap-4 py-2 fade-in-scroll delay-100">
-<a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="https://www.facebook.com/giuxekl/" style="" target="_blank">
-<span class="w-5 h-5 bg-black rounded-full text-white flex items-center justify-center text-[10px]" style="">f</span> Facebook
-        </a>
-<a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="tel:0986991505" style=""><span class="material-symbols-outlined text-lg text-primary" style="">call</span> Hotline: 0986 991 505</a>
-<a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="mailto:giuxekl@gmail.com" style=""><span class="material-symbols-outlined text-lg text-blue-600" style="">mail</span> giuxekl@gmail.com</a>
-</section>
-
-<!-- Mobile Parking Section -->
-<section class="py-2 fade-in-scroll delay-100">
-<div class="w-full">
-<div class="mb-6 w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-4">
-<div class="flex items-center gap-3 md:w-1/4">
-<div class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></div>
-<span class="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500" style="">
-              Máy giữ xe thông minh cầm tay Mobile Parking
-            </span>
-</div>
-<h2 class="text-sm md:text-base font-extrabold text-zinc-900 leading-tight tracking-tight md:w-2/4" style="">
-              MÁY GIỮ XE CẦM TAY <span class="text-zinc-400 text-xs md:text-sm font-light block md:inline md:ml-2" style="">– MOBILE PARKING</span>
-</h2>
-<p class="text-zinc-500 text-[10px] md:text-xs md:w-1/4" style="">
-              TIẾT KIỆM VỚI CHI PHÍ THẤP NHẤT, PHÙ HỢP NHẤT VỚI MỌI BÃI XE NHỎ.
-            </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto">
-<!-- Main Award Card -->
-<div class="md:col-span-7 bg-white rounded-3xl p-6 flex flex-col justify-between border border-zinc-200 shadow-sm hover:-translate-y-1 transition-transform">
-<div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-<span class="material-symbols-outlined" style="">emoji_events</span>
-</div>
-<span class="material-symbols-outlined text-zinc-300" style="">north_east</span>
-</div>
-<div class="max-w-md mt-6">
-<h3 class="text-xl md:text-2xl font-bold text-zinc-900 mb-2 tracking-tight" style="">Tần suất ra vào:</h3>
-<p class="text-zinc-600 text-sm leading-relaxed mb-3" style="">
-                - Phù hợp với các bãi xe máy với tần suất ra vào trên dưới 300 lượt mỗi ngày.
-              </p>
-<p class="text-zinc-600 text-sm leading-relaxed mb-4" style="">
-                - Các loại hình bãi xe tương thích: Các bãi giữ xe chỉ có diện tích nhỏ hoặc không cần đầu tư một hệ thống giữ xe lớn, đây là giải pháp sẽ giúp chủ bãi giữ xe vừa đảm bảo an toàn vừa kiểm soát chặt chẽ doanh thu từ bãi giữ xe.
-              </p>
-<div class="flex flex-wrap items-center gap-4 pt-5 border-t border-zinc-200">
-<div class="flex items-center gap-2 bg-zinc-900 text-white px-4 py-2 rounded-full text-xs font-semibold">
-<span class="material-symbols-outlined text-[12px]" style="">check_circle</span>
-<span class="" style="">Được khách hàng đánh giá độ dễ sử dụng gọn nhẹ</span>
-</div>
-<div class="flex items-center -space-x-3">
-<img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmHTyzsg8svFy1SMDMPBKi4t1jNyD-V65Joya2r7O0MKsfiQnojn3zKy1x0Xy_xMwREKhsn9Lht-6QB3q0t_xd8XEegn0qnIPN4QlClNXG9sMWTwsqxIKN55ngR4Wlf07XzzWNjFUMfMH_0oKsO3wqROh1-znhAcytaJF4qjVhJCwwHKz533XdHlQcZh1EKtKSwZe89IUQfV2lKsbYLNMj2ryr4LvV_JTT8QTZArNqM5Cvy5peC996DOjDBqyBZiTqwtfFQAgEGTU" style="">
-<img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVNPCxiNSHStdIFMVNZS7OpkaRsh-lXdKYB9ubBfWEWaltuoLbf_lfZ1ghCZZGQu1V8MYKXt2GtIGMiSS-kFBwrXE7Ca4wgv-4TZYajHz09CJUDM65wIgK--WddZZRYlO1x5UoyOzryPGVrJ1F4enbfy4IQv7g8aYwBi7DOk7mgo9nl0KN-s4JErWiJ-r8xwwGAnoGvSVvswsuetYgkU_Zbf6OVC2pCG1uoQZuaDz4B9xFW4klKZ21YprXtyp_MVsHDerh9UN6D7o" style="">
-<img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4dSm7P4Za9r2O8WjfqsASl8j2ZgSIKsiy-Y-butSvEt7vky_Xcd-ORuX1OtbGeNvX4ZWiUBkHyAPaS23HZ1B3q8QUwGtGkPO6JggCCPJAOdPXTO9Umf0BG4gHA72Iat3oxCOriSl32s_uYYGgG1oCr8NKbJty1JrRJjE0eRVVLpVvBtURiz1JKr3FEJ0jdM-0uk7IruzucCjH4PuFdlq5NfD5Tx_QE29GyyIZcKiPZq7YuvhgvnQRI7aiSt8QI5Fdg7Z8tTj74zQ" style="">
-<div class="h-8 pl-6 pr-4 bg-zinc-100 border-2 border-white rounded-full flex items-center justify-center">
-<span class="text-[10px] font-bold text-zinc-600" style="">Những người sử dụng quen thuộc</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Image Card -->
-<div class="md:col-span-5 relative rounded-3xl overflow-hidden group min-h-[450px]" style="width:100%;">
-<img alt="Design portrait" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://i.ibb.co/PvjYZ2Tr/s1.jpg" style="">
-<!--<div class="absolute inset-0 bg-gradient-to-b from-zinc-900/60 via-transparent to-transparent p-6">
-<p class="relative z-10 text-white text-sm font-medium leading-relaxed max-w-[180px]" style="">
-                Tiết kiệm chi phí đầu tư ban đầu.
-              </p>
-</div>
- -->
+<div class="relative z-10 max-w-container-max mx-auto px-margin">
+<div class="max-w-2xl animate-fade-in-up">
+<span class="inline-block bg-secondary-container border border-secondary-fixed/50 text-on-secondary-container font-label-sm text-xs md:text-label-sm px-3 py-1.5 rounded-full mb-4 uppercase tracking-widest shadow-sm hover:scale-105 transition-transform duration-300">Giải pháp nhỏ gọn, linh hoạt</span>
+<h1 class="font-headline-xl text-[36px] md:text-headline-xl text-primary mb-4 md:mb-6 leading-tight drop-shadow-sm font-extrabold tracking-tight">MÁY GIỮ XE CẦM TAY <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#0055aa]">MOBILE PARKING</span></h1>
+<p class="font-body-lg text-body-md md:text-body-lg text-on-surface-variant mb-6 md:mb-8 max-w-xl leading-relaxed">Tiết kiệm, linh hoạt, phù hợp cho mọi bãi giữ xe nhỏ lẻ. Giải pháp tất cả-trong-một với phần mềm sử dụng vĩnh viễn.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="inline-flex justify-center items-center bg-secondary-fixed text-on-secondary-fixed font-headline-md text-[18px] md:text-headline-md px-6 py-3 md:px-8 md:py-4 rounded-full hover:bg-secondary hover:text-on-secondary hover:-translate-y-1 hover:shadow-[0_8px_20px_-4px_rgba(204,240,95,0.5)] transition-all duration-300 gap-2 md:gap-3 group" href="tel:0986991505">
+<span class="material-symbols-outlined text-2xl md:text-3xl group-hover:scale-110 transition-transform">phone_in_talk</span>
+                        GỌI NGAY: 0986 991 505
+                    </a>
 </div>
 </div>
 </div>
 </section>
-<!-- Services/Products Section -->
-<section class="relative overflow-hidden text-white rounded-[2.5rem] p-6 md:p-10 bg-gradient-to-br from-zinc-900 via-zinc-800 to-black fade-in-scroll delay-300">
-<!-- Abstract tech background highlights -->
-<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-rose-600/10 blur-[120px] rounded-full pointer-events-none -translate-y-1/4 translate-x-1/4"></div>
-<div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-zinc-500/10 blur-[100px] rounded-full pointer-events-none translate-y-1/4 -translate-x-1/4"></div>
-<div class="relative z-10">
-<div class="flex items-center gap-2 text-sm font-medium mb-8" style="">
-<span class="w-2 h-2 rounded-full bg-primary"></span> ƯU ĐIỂM MÁY GIỮ XE CẦM TAY
-        </div>
-<div class="flex flex-col items-start gap-8 mb-8">
-<h2 class="font-medium leading-tight text-base md:text-lg w-full" style="">
-                Các hình thức giữ xe bằng vé giấy hiện nay đang dần trở nên lỗi thời do rất nhiều bất cập xảy ra như bảo mật kém dễ làm giả, ướt khi trời mưa, xử lí chậm, tra cứu và quản lí số lượng xe thiếu khoa học,… <span class="text-zinc-400" style="">không hiệu quả</span>
-</h2>
-<div class="flex items-center gap-3 shrink-0">
-<button class="bg-white text-black px-6 py-3 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors" style="">Tính năng vượt trội</button>
-<button class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center hover:bg-rose-700 transition-colors" style="">
-<span class="material-symbols-outlined" style="">arrow_outward</span>
-</button>
+<!-- Features Section -->
+<section class="bg-surface relative py-8 md:py-12 border-b border-outline-variant/10">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-low/20 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-margin relative z-10">
+<div class="text-center animate-fade-in-up mb-6 md:mb-8">
+<h2 class="font-headline-lg text-[28px] md:text-headline-lg text-primary mb-2 md:mb-3 drop-shadow-sm font-bold tracking-tight">Tính năng nổi bật</h2>
+<p class="font-body-md text-sm md:text-body-md text-on-surface-variant max-w-3xl mx-auto">Thiết bị nhỏ gọn nhưng được tích hợp đầy đủ công năng quản lý chuyên nghiệp.</p>
 </div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-gutter mb-4 md:mb-6">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-2xl border border-outline-variant/40 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-fixed/50 hover:bg-surface-container-lowest transition-all duration-300 animate-fade-in-up animation-delay-100 group">
+<div class="w-10 h-10 md:w-12 md:h-12 bg-primary-fixed/30 rounded-xl flex items-center justify-center text-primary mb-4 shadow-sm group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
 </div>
-<div class="space-y-0 divide-y divide-zinc-700 border-t border-zinc-700">
-<!-- Product 1 -->
-<div class="py-6 flex flex-col md:flex-row items-start md:items-center gap-8 hover:bg-zinc-800/50 transition-colors rounded-xl p-4 -mx-4 cursor-pointer group">
-<div class="flex items-center gap-6 w-full md:w-1/3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-sm font-bold text-white group-hover:scale-110 transition-transform" style="">01</div>
-<h3 class="text-2xl font-medium text-white" style="">Tích hợp&nbsp; tính năng vượt trội</h3>
+<h3 class="font-headline-md text-[20px] md:text-[22px] text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">Nhận diện biển số</h3>
+<p class="font-body-md text-[14px] md:text-[15px] text-on-surface-variant leading-relaxed">Tích hợp camera nhận diện biển số tự động với tốc độ cực nhanh, dưới 2 giây.</p>
 </div>
-<div class="w-full md:w-1/3 text-zinc-400 leading-relaxed text-lg" style="">
-                    -&nbsp;Tích hợp camera chụp và nhận dạng biển số, tốc độ xử lý cực nhanh (dưới 2s)<div><div class="" style="">Chống nước, chống va đập, pin dung lượng cao</div><div class="" style="">- Thống kê doanh thu chi tiết theo ngày, theo nhân viên, theo ca, gửi mail doanh thu theo thời gian chọn</div><div class="" style="">- Tạo nhiều loại xe và công thức tính tiền đa dạng</div></div></div>
-<div class="w-full md:w-1/3 flex justify-end">
-<img alt="Barrier" class="w-48 h-48 rounded-xl object-cover shadow-2xl zoom-on-hover" src="https://i.ibb.co/67TqpR4p/MAYCAMTAY.jpg" style="width:100%;height:70%;">
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-2xl border border-outline-variant/40 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-fixed/50 hover:bg-surface-container-lowest transition-all duration-300 animate-fade-in-up animation-delay-200 group">
+<div class="w-10 h-10 md:w-12 md:h-12 bg-primary-fixed/30 rounded-xl flex items-center justify-center text-primary mb-4 shadow-sm group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">battery_charging_full</span>
 </div>
+<h3 class="font-headline-md text-[20px] md:text-[22px] text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">Bền bỉ, pin trâu</h3>
+<p class="font-body-md text-[14px] md:text-[15px] text-on-surface-variant leading-relaxed">Thiết kế chống nước, chống va đập, kết hợp pin dung lượng cao đảm bảo hoạt động liên tục.</p>
 </div>
-<!-- Product 2 -->
-<div class="py-6 flex flex-col md:flex-row items-start md:items-center gap-8 hover:bg-zinc-800/50 transition-colors rounded-xl p-4 -mx-4 cursor-pointer group">
-<div class="flex items-center gap-6 w-full md:w-1/3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-sm font-bold text-white group-hover:scale-110 transition-transform" style="">02</div>
-<h3 class="text-2xl font-medium text-white" style="">Sử dụng dễ dàng</h3>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-2xl border border-outline-variant/40 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-fixed/50 hover:bg-surface-container-lowest transition-all duration-300 animate-fade-in-up animation-delay-300 group">
+<div class="w-10 h-10 md:w-12 md:h-12 bg-primary-fixed/30 rounded-xl flex items-center justify-center text-primary mb-4 shadow-sm group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
 </div>
-<div class="w-full md:w-1/3 text-zinc-400 leading-relaxed text-lg" style=""><div class="" style="">- Ứng dụng quản lý cho chủ bãi xe (Android)</div><div class="" style="">- Thành thạo sau 5 phút hướng dẫn</div><div class="" style="">- Nhỏ gọn, tiết kiệm chi phí, di động hoàn toàn</div></div>
-<div class="w-full md:w-1/3 flex justify-end">
-<img alt="LPR Camera" class="w-48 h-48 rounded-xl object-cover shadow-2xl zoom-on-hover" src="https://i.ibb.co/dJz7PYLw/MAYCAMTAY1.jpg" style="width:100%;height:70%;">
+<h3 class="font-headline-md text-[20px] md:text-[22px] text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">Báo cáo chi tiết</h3>
+<p class="font-body-md text-[14px] md:text-[15px] text-on-surface-variant leading-relaxed">Thống kê doanh thu theo ngày, ca, nhân viên. Tự động gửi báo cáo qua Email.</p>
 </div>
+<!-- Feature 4 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-2xl border border-outline-variant/40 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-fixed/50 hover:bg-surface-container-lowest transition-all duration-300 animate-fade-in-up animation-delay-400 group">
+<div class="w-10 h-10 md:w-12 md:h-12 bg-primary-fixed/30 rounded-xl flex items-center justify-center text-primary mb-4 shadow-sm group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">calculate</span>
+</div>
+<h3 class="font-headline-md text-[20px] md:text-[22px] text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">Tính phí linh hoạt</h3>
+<p class="font-body-md text-[14px] md:text-[15px] text-on-surface-variant leading-relaxed">Hỗ trợ thiết lập nhiều loại xe khác nhau và công thức tính giá tiền linh hoạt theo nhu cầu.</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-2xl border border-outline-variant/40 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-fixed/50 hover:bg-surface-container-lowest transition-all duration-300 animate-fade-in-up animation-delay-500 md:col-span-2 lg:col-span-2 group">
+<div class="w-10 h-10 md:w-12 md:h-12 bg-primary-fixed/30 rounded-xl flex items-center justify-center text-primary mb-4 shadow-sm group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">touch_app</span>
+</div>
+<h3 class="font-headline-md text-[20px] md:text-[22px] text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">Dễ dàng sử dụng</h3>
+<p class="font-body-md text-[14px] md:text-[15px] text-on-surface-variant leading-relaxed">Phần mềm chạy trên hệ điều hành Android, giao diện thân thiện, chỉ cần 5 phút để thành thạo thao tác.</p>
 </div>
 </div>
 </div>
 </section>
-<!-- SEO Content Section -->
-<!-- FAQ Section -->
-<section class="py-4 md:py-6 max-w-[1440px] mx-auto px-4 md:px-8 fade-in-scroll delay-100">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-<!-- Image Column -->
-<div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-full min-h-[500px]" style="width:100%;">
-<img alt="Hệ thống đỗ xe tự động" class="absolute inset-0 w-full h-full object-cover" src="https://i.ibb.co/WQmssc4/s2.jpg" style="">
-<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white mb-6">
-<span class="material-symbols-outlined" style="">verified_user</span>
+<section class="bg-gradient-to-b from-surface to-surface-container-low border-b border-outline-variant/20 py-4 md:py-6">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="text-center animate-fade-in-up mb-4 md:mb-6">
+<h2 class="font-headline-lg text-[28px] md:text-headline-lg text-primary mb-2 md:mb-3 font-bold tracking-tight">Quy trình vận hành cầm tay</h2>
+<p class="font-body-md text-sm md:text-body-md text-on-surface-variant max-w-2xl mx-auto">Thao tác nhanh gọn, trực tiếp trên thiết bị di động.</p>
 </div>
-<h3 class="text-white text-3xl font-serif font-bold mb-3" style="">Lý Do Chọn Chúng Tôi?</h3>
-<p class="text-slate-200" style="">Tìm hiểu tại sao hàng ngàn bãi giữ xe tin dùng giải pháp của giuxethongminh-kl.</p>
+<!-- Process Flow -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-0">
+<!-- Xe VÀO -->
+<div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl border border-outline-variant/40 shadow-sm hover:shadow-md transition-shadow duration-300 animate-fade-in-up animation-delay-100 group">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container shadow-sm group-hover:bg-secondary-fixed group-hover:scale-110 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]">login</span>
 </div>
+<h3 class="font-headline-md text-[20px] md:text-headline-md text-primary uppercase font-bold tracking-wide">Xe VÀO</h3>
 </div>
-<!-- Accordion Column -->
-<div class="flex flex-col justify-center lg:py-8">
-<h2 class="font-bold text-slate-900 mb-6 leading-tight text-lg md:text-xl font-sans" style="">Lợi ích vượt trội từ <span class="text-blue-600" style="">hệ thống thông minh</span></h2>
-<div class="space-y-4">
-<!-- FAQ Item 1 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq1" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq1" style="">
-<span class="text-lg font-semibold text-slate-800" style="">1. Đảm bảo an ninh và an toàn</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Hệ thống tự động chụp ảnh biển số và người điều khiển, đối chiếu hình ảnh lúc ra/vào giúp ngăn chặn tuyệt đối tình trạng trộm cắp xe, mang lại sự an tâm cho khách hàng.</p>
+<div class="flex flex-wrap md:flex-nowrap items-start justify-between gap-3">
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">credit_card</span>
 </div>
+<p class="font-label-sm text-[12px] md:text-label-sm text-on-surface-variant group-hover/item:text-primary transition-colors">Quét thẻ</p>
 </div>
-<!-- FAQ Item 2 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq2" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq2" style="">
-<span class="text-lg font-semibold text-slate-800" style="">2. Tốc độ nhanh, giảm ùn tắc</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Thay vì ghi vé giấy thủ công, hệ thống sử dụng thẻ từ (RFID) hoặc nhận diện biển số (LPR), cho phép xe lưu thông nhanh chóng, chỉ mất từ 1-3 giây mỗi lượt, giải quyết triệt để vấn đề ùn tắc giờ cao điểm.</p>
+<div class="mt-4 md:mt-5 hidden md:block text-outline-variant/60"><span class="material-symbols-outlined text-[18px]">arrow_forward</span></div>
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">photo_camera</span>
 </div>
+<p class="font-label-sm text-[12px] md:text-label-sm text-on-surface-variant group-hover/item:text-primary transition-colors">Chụp ảnh</p>
 </div>
-<!-- FAQ Item 3 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq3" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq3" style="">
-<span class="text-lg font-semibold text-slate-800" style="">3. Quản lý doanh thu và báo cáo chặt chẽ</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Phần mềm tự động tính phí dựa trên thời gian và loại xe. Mọi giao dịch đều được lưu trữ, cung cấp các báo cáo thống kê chi tiết theo ngày, tháng, năm, giúp chủ bãi quản lý tài chính minh bạch, tránh thất thoát.</p>
+<div class="mt-4 md:mt-5 hidden md:block text-outline-variant/60"><span class="material-symbols-outlined text-[18px]">arrow_forward</span></div>
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">front_loader</span>
+</div>
+<p class="font-label-sm text-[12px] md:text-label-sm text-on-surface-variant group-hover/item:text-primary transition-colors">Đưa thẻ</p>
+</div>
+<div class="mt-4 md:mt-5 hidden md:block text-outline-variant/60"><span class="material-symbols-outlined text-[18px]">arrow_forward</span></div>
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">directions_car</span>
+</div>
+<p class="font-label-sm text-[12px] md:text-label-sm text-on-surface-variant group-hover/item:text-primary transition-colors">Vào bãi</p>
 </div>
 </div>
-<!-- FAQ Item 4 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq4" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq4" style="">
-<span class="text-lg font-semibold text-slate-800" style="">4. Tiết kiệm chi phí vận hành</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Với hệ thống tự động, bãi xe có thể hoạt động hiệu quả với số lượng nhân viên ít hơn, giảm thiểu chi phí nhân sự và chi phí in ấn vé giấy hàng tháng.</p>
 </div>
+<!-- Xe RA -->
+<div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl border border-outline-variant/40 shadow-sm hover:shadow-md transition-shadow duration-300 animate-fade-in-up animation-delay-200 group">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center text-on-primary shadow-sm group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]">logout</span>
 </div>
-<!-- FAQ Item 5 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq5" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq5" style="">
-<span class="text-lg font-semibold text-slate-800" style="">5. Tính năng hiện đại, tiện lợi</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Hỗ trợ đa dạng các hình thức thanh toán (tiền mặt, ví điện tử, chuyển khoản) và có thể tích hợp với các hệ thống quản lý tòa nhà, hướng dẫn đỗ xe, bảng LED hiển thị số chỗ trống.</p>
+<h3 class="font-headline-md text-[20px] md:text-headline-md text-primary uppercase font-bold tracking-wide">Xe RA</h3>
+</div>
+<div class="flex flex-wrap md:flex-nowrap items-start justify-between gap-2 md:gap-3">
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">contactless</span>
+</div>
+<p class="font-label-sm text-[11px] md:text-[13px] text-on-surface-variant group-hover/item:text-primary transition-colors">Quét thẻ</p>
+</div>
+<div class="mt-4 md:mt-5 hidden md:block text-outline-variant/60"><span class="material-symbols-outlined text-[16px]">arrow_forward</span></div>
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">compare</span>
+</div>
+<p class="font-label-sm text-[11px] md:text-[13px] text-on-surface-variant group-hover/item:text-primary transition-colors">So sánh</p>
+</div>
+<div class="mt-4 md:mt-5 hidden md:block text-outline-variant/60"><span class="material-symbols-outlined text-[16px]">arrow_forward</span></div>
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">payments</span>
+</div>
+<p class="font-label-sm text-[11px] md:text-[13px] text-on-surface-variant group-hover/item:text-primary transition-colors">Thu tiền</p>
+</div>
+<div class="mt-4 md:mt-5 hidden md:block text-outline-variant/60"><span class="material-symbols-outlined text-[16px]">arrow_forward</span></div>
+<div class="text-center flex-1 group/item">
+<div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary group-hover/item:bg-primary-fixed/50 group-hover/item:text-primary-container transition-all duration-300 group-hover/item:shadow-sm">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">task_alt</span>
+</div>
+<p class="font-label-sm text-[11px] md:text-[13px] text-on-surface-variant group-hover/item:text-primary transition-colors">Ra bãi</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<!-- Selected Projects / Solutions -->
-<section class="space-y-6">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start fade-in-scroll delay-200">
+<!-- Pricing Section -->
+<section class="bg-gradient-to-br from-surface-container-low via-surface to-surface-container-highest py-8 md:py-12">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-gutter">
+<!-- Pricing Table Card -->
+<div class="lg:col-span-7 bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl border border-outline-variant/40 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col animate-fade-in-up animation-delay-100 group">
+<div class="bg-gradient-to-r from-primary via-[#003366] to-primary-container p-5 md:p-6 text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-pattern-dots opacity-20 mix-blend-overlay"></div>
+<h3 class="font-headline-md text-[20px] md:text-headline-md text-on-primary relative z-10 font-bold tracking-tight">BẢNG GIÁ MÁY GIỮ XE CẦM TAY<br/><span class="text-secondary-fixed drop-shadow-sm inline-block mt-1">MOBILE PARKING</span></h3>
+</div>
+<div class="p-6 md:p-8 flex-grow">
+<h4 class="font-label-sm text-[13px] md:text-label-sm text-primary uppercase mb-4 tracking-widest font-bold">Chi tiết thiết bị:</h4>
+<ul class="space-y-3 md:space-y-4 mb-2">
+<li class="flex items-start gap-3 group/li">
+<div class="w-2 h-2 bg-secondary-fixed mt-1.5 md:mt-2 rounded-sm flex-shrink-0 shadow-sm group-hover/li:scale-125 transition-transform duration-300"></div>
+<span class="font-body-md text-[14px] md:text-body-md text-on-surface leading-snug">1 Máy giữ xe thông minh cầm tay (Đã bao gồm phần mềm sử dụng vĩnh viễn)</span>
+</li>
+<li class="flex items-start gap-3 group/li">
+<div class="w-2 h-2 bg-secondary-fixed mt-1.5 md:mt-2 rounded-sm flex-shrink-0 shadow-sm group-hover/li:scale-125 transition-transform duration-300"></div>
+<span class="font-body-md text-[14px] md:text-body-md text-on-surface font-semibold leading-snug">Thiết bị hỗ trợ (Quà tặng kèm):</span>
+</li>
+<li class="flex items-start gap-3 pl-5 md:pl-6 group/li">
+<div class="w-1.5 h-1.5 bg-outline mt-2 md:mt-2.5 rounded-full flex-shrink-0 group-hover/li:bg-primary transition-colors duration-300"></div>
+<span class="font-body-md text-[14px] md:text-body-md text-on-surface-variant group-hover/li:text-on-surface transition-colors duration-300">1 Bộ sạc</span>
+</li>
+<li class="flex items-start gap-3 pl-5 md:pl-6 group/li">
+<div class="w-1.5 h-1.5 bg-outline mt-2 md:mt-2.5 rounded-full flex-shrink-0 group-hover/li:bg-primary transition-colors duration-300"></div>
+<span class="font-body-md text-[14px] md:text-body-md text-on-surface-variant group-hover/li:text-on-surface transition-colors duration-300">100 Thẻ từ (In màu 2 mặt)</span>
+</li>
+<li class="flex items-start gap-3 pl-5 md:pl-6 group/li">
+<div class="w-1.5 h-1.5 bg-outline mt-2 md:mt-2.5 rounded-full flex-shrink-0 group-hover/li:bg-primary transition-colors duration-300"></div>
+<span class="font-body-md text-[14px] md:text-body-md text-on-surface-variant group-hover/li:text-on-surface transition-colors duration-300">Miễn phí giao hàng, cài đặt và hướng dẫn sử dụng.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Promotion Box -->
+<div class="lg:col-span-5 flex flex-col gap-6 animate-fade-in-up animation-delay-200 h-full">
+<!-- Promo Card -->
+<div class="bg-gradient-to-br from-[#002a58] via-[#001f42] to-[#001124] rounded-2xl p-6 md:p-8 border border-primary-fixed/30 shadow-[0_10px_30px_-10px_rgba(0,42,88,0.5)] relative overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,42,88,0.6)] transition-all duration-500 h-full flex flex-col justify-center">
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-primary-fixed/10 rounded-full blur-3xl group-hover:bg-primary-fixed/20 transition-all duration-500"></div>
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary-fixed/10 rounded-full blur-2xl group-hover:bg-secondary-fixed/20 transition-all duration-500"></div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-700 ease-out transform rotate-[-15deg]">
+<span class="material-symbols-outlined text-[120px] md:text-[180px] text-white">smartphone</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+<div class="relative z-10 text-center">
+<span class="inline-block bg-secondary-fixed/90 backdrop-blur-sm text-on-secondary-fixed font-label-sm text-[12px] md:text-label-sm px-4 py-1.5 rounded-full mb-4 md:mb-5 uppercase tracking-widest font-extrabold shadow-sm ring-2 ring-secondary-fixed/50 ring-offset-2 ring-offset-primary">Trọn gói chỉ với</span>
+<div class="text-transparent bg-clip-text bg-gradient-to-r from-secondary-fixed via-[#e8ff8f] to-white text-4xl sm:text-5xl md:text-[56px] font-extrabold block drop-shadow-lg my-2 md:my-4 tracking-tight group-hover:scale-[1.02] transition-transform duration-300">10,800,000đ</div>
+<p class="font-body-md text-[14px] md:text-body-md text-white/80 mt-3 md:mt-4 font-medium tracking-wide">Phần mềm bản quyền sử dụng vĩnh viễn.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Notes & Policy Section -->
+<section class="bg-surface py-6 md:py-8 border-t border-outline-variant/10">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="bg-gradient-to-br from-[#1a1d1f] to-[#111315] rounded-xl p-5 md:p-6 text-on-tertiary shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in-up border border-white/5 group">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-gutter items-center">
+<div class="col-span-1 md:col-span-3 mb-2 md:mb-3">
+<h3 class="font-headline-md text-[18px] md:text-headline-md flex items-center gap-2 text-white font-bold">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px] md:text-[24px]">info</span>
+                            Ghi chú &amp; Chính sách
+                        </h3>
+</div>
+<div class="flex items-start gap-3 group/item">
+<div class="p-1.5 md:p-2 bg-white/5 rounded-lg group-hover/item:bg-secondary-fixed/20 group-hover/item:text-secondary-fixed transition-colors duration-300">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px] group-hover/item:scale-110 transition-transform">verified_user</span>
+</div>
 <div>
-<div class="flex items-center gap-2 text-sm font-medium mb-4" style="">
-<span class="w-2 h-2 rounded-full bg-primary"></span> Dự Án &amp; Giải Pháp Tiêu Biểu
-                </div>
-<div class="flex items-center gap-3 mt-6">
-<button class="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors" style="">Xem Tất Cả Giải Pháp</button>
-<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-rose-700 transition-colors" style="">
-<span class="material-symbols-outlined text-sm" style="">arrow_outward</span>
-</button>
+<p class="font-label-sm text-[11px] md:text-[12px] text-tertiary-fixed-dim mb-0.5 tracking-widest font-bold">BẢO HÀNH</p>
+<p class="font-body-md text-[13px] md:text-[14px] font-medium text-white/80 leading-snug group-hover/item:text-white transition-colors">Bảo hành 12 tháng phần cứng &amp; phần mềm. (Pin và màn hình bảo hành 06 tháng).</p>
 </div>
+</div>
+<div class="flex items-start gap-3 group/item">
+<div class="p-1.5 md:p-2 bg-white/5 rounded-lg group-hover/item:bg-secondary-fixed/20 group-hover/item:text-secondary-fixed transition-colors duration-300">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px] group-hover/item:scale-110 transition-transform">support_agent</span>
 </div>
 <div>
-<h2 class="text-xl md:text-2xl font-semibold leading-relaxed text-zinc-800 font-sans" style="">Chuyên cung cấp linh kiện ( thẻ từ, tủ giữ xe, đầu đọc thẻ, camera, barrier, v.v...), cài đặt, sửa chữa hệ thống Máy Giữ Xe Thông Minh</h2>
+<p class="font-label-sm text-[11px] md:text-[12px] text-tertiary-fixed-dim mb-0.5 tracking-widest font-bold">TƯ VẤN THIẾT KẾ</p>
+<p class="font-body-md text-[13px] md:text-[14px] font-medium text-white/80 leading-snug group-hover/item:text-white transition-colors">Liên hệ Khải: <a class="text-secondary-fixed hover:text-[#e8ff8f] hover:underline transition-colors font-bold" href="tel:0986991505">0986 991 505</a> (Zalo)</p>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Project 1 -->
-<div class="space-y-4 fade-in-scroll delay-300">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Tủ giữ xe thông minh" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/6cLx3007/TU.jpg" style="">
+<div class="flex items-start gap-3 group/item">
+<div class="p-1.5 md:p-2 bg-white/5 rounded-lg group-hover/item:bg-secondary-fixed/20 group-hover/item:text-secondary-fixed transition-colors duration-300">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px] group-hover/item:scale-110 transition-transform">payments</span>
 </div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Tủ giữ xe thông minh</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Nhỏ / Lớn gắn camera</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
+<div>
+<p class="font-label-sm text-[11px] md:text-[12px] text-tertiary-fixed-dim mb-0.5 tracking-widest font-bold">THANH TOÁN</p>
+<p class="font-body-md text-[13px] md:text-[14px] font-medium text-white/80 leading-snug group-hover/item:text-white transition-colors">Tiền mặt hoặc Chuyển khoản linh hoạt.</p>
 </div>
 </div>
-<!-- Project 2 -->
-<div class="space-y-4 fade-in-scroll delay-400">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Đầu đọc thẻ Xe Máy / Ô tô" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/N6C35LY8/DAUDOCTHE.jpg" style="">
-</div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Đầu đọc thẻ Xe Máy / Ô tô</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Tầm gần / Tầm xa</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="space-y-4 fade-in-scroll delay-100">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Cung cấp Phần mềm giữ xe" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/GfpY7rhN/PHANMEM.jpg" style="">
-</div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Cung cấp Phần mềm giữ xe</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Có thể tùy biến</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
-</div>
-</div>
-<!-- Project 4 -->
-<div class="space-y-4 fade-in-scroll delay-200">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Cung cấp Thẻ Từ giữ xe" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/356sQscX/THETU.jpg" style="">
-</div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Cung cấp Thẻ Từ giữ xe</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Thẻ in 2 mặt / Thẻ trắng</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
 </div>
 </div>
 </div>
@@ -570,12 +656,13 @@
 <!-- Navigation Links -->
 <div class="md:col-span-3 space-y-4">
 <div class="flex flex-col space-y-4 text-[#6b7280] font-medium">
-<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Trang chủ</a>
-<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Dự án</a>
-<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Dịch vụ</a>
-<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site" style="">Thư viện</a>
-<a class="hover:text-zinc-900 transition-colors" href="https://giuxethongminh.site/lien-he.html" style="">Liên hệ</a>
+<a class="hover:text-zinc-900 transition-colors" href="/" style="">Trang chủ</a>
+<a class="hover:text-zinc-900 transition-colors" href="may-giu-xe-thong-minh.html" style="">Máy giữ xe thông minh</a>
+<a class="hover:text-zinc-900 transition-colors" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
+<a class="hover:text-zinc-900 transition-colors" href="lien-he.html" style="">Liên hệ</a>
 </div>
+<a href='https://free-hit-counters.net/'>Lượt view</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=48c1e7e452952a625f6dd048ec2898c293b7edb3'></script>
+<script type="text/javascript" src="https://freevisitorcounters.com/en/home/counter/1540838/t/1"></script>
 </div>
 <!-- Contact Info -->
 <div class="md:col-span-3 space-y-6">
@@ -663,5 +750,28 @@ function topFunction() {
         }
 
         window.addEventListener('DOMContentLoaded', startHeroSlider);
+	
     </script>
+	<script>
+	const menuBtn = document.getElementById("menuBtn");
+	const menu = document.getElementById("menu");
+	const overlay = document.getElementById("overlay");
+
+	menuBtn.addEventListener("click", () => {
+	  menu.classList.toggle("hidden");
+	  overlay.classList.toggle("hidden");
+	});
+
+	overlay.addEventListener("click", () => {
+	  menu.classList.add("hidden");
+	  overlay.classList.add("hidden");
+	});
+	<!--CLICK LINK TỰ ĐÓNG MENU-->
+	document.querySelectorAll("#menu a").forEach(link => {
+	  link.addEventListener("click", () => {
+		menu.classList.add("hidden");
+		overlay.classList.add("hidden");
+	  });
+	});
+	</script>
 	</body></html>
