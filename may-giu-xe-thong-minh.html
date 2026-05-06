@@ -10,45 +10,173 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#e11d48', // rose-600
-                        background: '#f4f4f5', // zinc-100
-                        surface: '#ffffff',
-                        dark: '#09090b', // zinc-950
-                        zinc: {
-                            50: '#fafafa',
-                            100: '#f4f4f5',
-                            200: '#e4e4e7',
-                            300: '#d4d4d8',
-                            400: '#a1a1aa',
-                            500: '#71717a',
-                            600: '#52525b',
-                            700: '#3f3f46',
-                            800: '#27272a',
-                            900: '#18181b',
-                            950: '#09090b',
-                        },
-                        rose: {
-                            400: '#fb7185',
-                            500: '#f43f5e',
-                            600: '#e11d48',
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-highest": "#e2e2e5",
+                "surface-container-high": "#e8e8ea",
+                "surface-container": "#eeeef0",
+                "outline-variant": "#c3c6d2",
+                "tertiary-fixed": "#e0e3e6",
+                "surface-tint": "#305ea0",
+                "secondary-container": "#caee5d",
+                "on-tertiary-fixed": "#181c1e",
+                "on-primary-container": "#83aef5",
+                "primary-fixed-dim": "#a9c7ff",
+                "inverse-primary": "#a9c7ff",
+                "error-container": "#ffdad6",
+                "secondary-fixed-dim": "#b1d446",
+                "background": "#f9f9fc",
+                "surface-container-low": "#f3f3f6",
+                "on-tertiary-container": "#a9adb0",
+                "on-surface": "#1a1c1e",
+                "inverse-surface": "#2f3133",
+                "tertiary-fixed-dim": "#c3c7ca",
+                "secondary": "#506600",
+                "secondary-fixed": "#ccf05f",
+                "error": "#ba1a1a",
+                "surface": "#f9f9fc",
+                "on-primary": "#ffffff",
+                "on-secondary-container": "#546b00",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#3c4d00",
+                "on-primary-fixed": "#001b3d",
+                "inverse-on-surface": "#f0f0f3",
+                "tertiary-container": "#3d4144",
+                "primary-fixed": "#d6e3ff",
+                "surface-container-lowest": "#ffffff",
+                "surface-variant": "#e2e2e5",
+                "on-surface-variant": "#424750",
+                "on-tertiary-fixed-variant": "#43474a",
+                "surface-dim": "#dadadc",
+                "tertiary": "#272b2e",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#161e00",
+                "on-primary-fixed-variant": "#0e4686",
+                "surface-bright": "#f9f9fc",
+                "primary-container": "#004080",
+                "primary": "#002a58",
+                "on-secondary": "#ffffff",
+                "on-background": "#1a1c1e",
+                "outline": "#737781",
+                "on-error-container": "#93000a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "stack-md": "16px",
+                "margin": "32px",
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "section-padding": "80px",
+                "container-max": "1280px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "headline-xl": [
+                        "Manrope"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Manrope"
+                ],
+                "body-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-xl": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Newsreader', 'serif'],
-                        body: ['Manrope', 'sans-serif'],
-                    }
-                }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+		@layer utilities {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             }
         }
-    </script>
-<style>
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .animation-delay-100 { animation-delay: 100ms; }
+        .animation-delay-200 { animation-delay: 200ms; }
+        .animation-delay-300 { animation-delay: 300ms; }
+        .animation-delay-400 { animation-delay: 400ms; }
+		
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -159,379 +287,374 @@
 		  transform: translateY(-2px);
 		}
 		/* nút cuộn */
+		
+		/* menu mobile */
+		#menu {
+		  pointer-events: auto;
+		}
+
+		/* MOBILE */
+		@media (max-width: 767px) {
+
+		  #menu {
+			flex-direction: column;
+			gap: 0;
+			padding: 12px;
+			border-radius: 0 0 16px 16px;
+		  }
+
+		  #menu a {
+			display: block;
+			width: 100%;
+			padding: 14px 16px;
+			border-radius: 12px;
+			font-size: 15px;
+			color: #52525b;
+			transition: all 0.25s ease;
+		  }
+
+		  #menu a:hover {
+			background: #f4f4f5;
+			color: #111;
+			transform: translateX(4px);
+		  }
+
+		  #menu a + a {
+			border-top: 1px solid #eee;
+		  }
+		}
+}
     </style>
 <!-- Top Navigation (Component Predicted) -->
 <nav class="flex justify-between items-center max-w-[100%] mx-auto px-6 h-24 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.05)]">
+<div id="overlay"
+class="fixed inset-0 bg-black/40 hidden z-[998]"></div>
 <div class="text-2xl font-serif text-zinc-900 dark:text-zinc-50 font-bold tracking-tight" style="font-family: Newsreader, serif;font-weight: 900;">giuxethongminh</div>
-<div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="#" style="">Máy giữ xe thông minh</a>
+<div id="menu"
+class="hidden md:flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium tracking-wide absolute md:static top-16 left-0 w-full bg-white md:bg-transparent p-6 md:p-0 shadow md:shadow-none z-[999]" style="padding-left:20px">
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="may-giu-xe-thong-minh.html" style="">Máy giữ xe thông minh</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
-<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="#" style="">Thiết bị bãi xe</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="thiet-bi-bai-xe.html" style="">Thiết bị bãi xe</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="lien-he.html" style="">Liên Hệ</a>
 </div>
-<div class="flex items-center gap-3">
-<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;">
+<div class="flex items-center gap-3" style="padding-left:5px">
+<button id="menuBtn" class="md:hidden text-2xl">
+☰
+</button>
+<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;padding-left:0px">
 <span class="material-symbols-outlined" style="">call</span> 0986.991.505
 </a>
 </div>
 </nav>
 <main class="px-4 md:px-8 max-w-[1400px] mx-auto space-y-4 pb-6 mt-4">
 <!-- Hero Section -->
-<section class="relative w-full rounded-3xl overflow-hidden min-h-[100%] h-[30vh] md:h-[450px] fade-in-scroll">
-<!-- Background Slider - Smart Parking Imagery -->
-<img alt="Hệ thống giữ xe thông minh" class="hero-slide" src="https://i.ibb.co/hRvgt1Pp/banner-1.jpg" style="">
-<img alt="Máy giữ xe cầm tay" class="hero-slide" src="https://i.ibb.co/RTNSFD6T/banner-2.jpg" style="">
-<img alt="Dự án triển khai" class="hero-slide active" src="https://i.ibb.co/GvNS6WZj/banner-3.jpg" style=""><div class="absolute inset-0 z-20 flex items-center justify-between px-4 pointer-events-none">
-<button class="pointer-events-auto w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all group" onclick="prevSlide()" style="">
-<span class="material-symbols-outlined group-active:-translate-x-1 transition-transform" style="">chevron_left</span>
-</button>
-<button class="pointer-events-auto w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all group" onclick="nextSlide()" style="">
-<span class="material-symbols-outlined group-active:translate-x-1 transition-transform" style="">chevron_right</span>
-</button>
+<section class="relative bg-gradient-to-b from-surface-container-low to-surface overflow-hidden pt-10 pb-12">
+<div class="absolute inset-0 z-0">
+<img alt="Hero background" class="w-full h-full object-cover opacity-15" data-alt="A professional, bright, and modern view of a well-organized automated parking facility. The lighting is crisp daylight, highlighting clean architectural lines and high-tech parking hardware. The aesthetic is corporate and high-trust, using a palette of cool grays, pristine whites, and subtle metallic tones. The mood is highly efficient and technologically advanced, suitable for a light-mode corporate SaaS landing page." src="https://lh3.googleusercontent.com/aida/ADBb0uhksJHuKSwHMwkiK1O7JTcqry8gHkYaiKyQKVEemeUX5LMppxDMHt7JuGxFO7akrAcQkH8jygvbKQAtckIat7U8gm69JWww_ak85F2kqKAzRCaLerAWQr5aMJaE4ggdfDWjivw98pvr5Vf3pqJ6dAAEBSiPv0vBUOLV6i-xpwyyu7oh_SWhdeAz_xaIB5oqNStAKm48sb4KVyrC9jXnVAUqRAKMaiJMP8AwbZvyRZ18qzkTQO-KAjygkH36pn4p6qw7KhOQvCVplw"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
 </div>
-<!-- Navigation Buttons -->
-<!-- Centered Text -->
+<div class="relative z-10 max-w-container-max mx-auto px-margin">
+<div class="max-w-2xl animate-fade-in-up">
+<span class="inline-block bg-secondary-container/90 backdrop-blur-sm text-on-secondary-container font-label-sm text-label-sm px-4 py-2 rounded-full mb-stack-md uppercase tracking-widest shadow-sm">KL.PARKING Solutions</span>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-stack-md leading-tight drop-shadow-sm">MÁY GIỮ XE THÔNG MINH</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl">Lợi ích cực lớn của máy giữ xe thông minh, điểm giữ xe quẹt thẻ. Tối ưu chi phí, nâng cao hiệu quả quản lý bãi đỗ xe của bạn.</p>
+<div class="flex flex-col sm:flex-row gap-stack-md">
+<a class="inline-flex justify-center items-center bg-secondary-fixed text-on-secondary-fixed font-headline-md text-headline-md px-8 py-4 rounded-xl hover:bg-secondary-fixed-dim hover:-translate-y-1 hover:shadow-xl transition-all duration-300 gap-3" href="tel:0986991505">
+<span class="material-symbols-outlined text-3xl">phone_in_talk</span>
+                        GỌI NGAY Hotline: 0986 991 505
+                    </a>
+</div>
+</div>
+</div>
+</section><section class="bg-surface-container-low py-10">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="text-center animate-fade-in-up mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm">Quy trình vận hành thông minh</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Hệ thống tự động hóa giúp việc ra vào bãi xe trở nên nhanh chóng, an toàn và chuyên nghiệp hơn bao giờ hết.</p>
+</div>
+<!-- Process Flow -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-8">
+<!-- Xe VÀO -->
+<div class="bg-surface-container-lowest p-stack-lg rounded-2xl border border-outline-variant/50 shadow-sm">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">login</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary uppercase">Xe VÀO</h3>
+</div>
+<div class="flex flex-wrap md:flex-nowrap items-start justify-between gap-4">
+<div class="text-center flex-1 mb-8">
+<div class="w-12 h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<p class="font-label-sm text-label-sm">Quét thẻ</p>
+</div>
+<div class="mt-6 hidden md:block text-outline-variant"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-12 h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<p class="font-label-sm text-label-sm">Chụp mặt &amp; biển số</p>
+</div>
+<div class="mt-6 hidden md:block text-outline-variant"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-12 h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">front_loader</span>
+</div>
+<p class="font-label-sm text-label-sm">Đưa thẻ</p>
+</div>
+<div class="mt-6 hidden md:block text-outline-variant"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-12 h-12 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<p class="font-label-sm text-label-sm">Vào bãi</p>
+</div>
+</div>
+</div>
+<!-- Xe RA -->
+<div class="bg-surface-container-lowest p-stack-lg rounded-2xl border border-outline-variant/50 shadow-sm">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">logout</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary uppercase">Xe RA</h3>
+</div>
+<div class="flex flex-wrap md:flex-nowrap items-start justify-between gap-2">
+<div class="text-center flex-1 mb-8">
+<div class="w-10 h-10 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">contactless</span>
+</div>
+<p class="font-label-sm text-[12px]">Quét thẻ</p>
+</div>
+<div class="mt-4 hidden md:block text-outline-variant text-sm"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-10 h-10 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">compare</span>
+</div>
+<p class="font-label-sm text-[12px]">So sánh hình</p>
+</div>
+<div class="mt-4 hidden md:block text-outline-variant text-sm"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-10 h-10 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<p class="font-label-sm text-[12px]">Thu tiền</p>
+</div>
+<div class="mt-4 hidden md:block text-outline-variant text-sm"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-10 h-10 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">gate</span>
+</div>
+<p class="font-label-sm text-[12px]">Mở Barrier</p>
+</div>
+<div class="mt-4 hidden md:block text-outline-variant text-sm"><span class="material-symbols-outlined">arrow_forward</span></div>
+<div class="text-center flex-1 mb-8">
+<div class="w-10 h-10 mx-auto mb-2 bg-surface-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<p class="font-label-sm text-[12px]">Ra bãi</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Info Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30">
+<h4 class="font-headline-md text-headline-md text-primary mb-3">Thẻ từ bền bỉ</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Thẻ từ thông minh có độ bền cực cao, chống nước, chống rách so với vé giấy truyền thống.</p>
+
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30">
+<h4 class="font-headline-md text-headline-md text-primary mb-3">Mất thẻ - Không mất xe</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Dữ liệu biển số được mã hóa vào thẻ. Nếu mất thẻ, người nhặt được cũng không thể lấy xe ra vì không khớp thông tin biển số thực tế.</p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30">
+<h4 class="font-headline-md text-headline-md text-primary mb-3">Bảo đảm tài sản</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Cơ chế hoạt động khép kín, minh bạch dữ liệu giúp hạn chế tối đa gian lận và đảm bảo an toàn tuyệt đối cho phương tiện của khách hàng.</p>
+</div>
+</div>
+</div>
 </section>
-<!-- New Section: Máy Giữ Xe Gói Tiết Kiệm -->
-<section class="fade-in-scroll delay-100 bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm">
-<div class="flex flex-col md:flex-row items-center md:items-start justify-between w-full mb-6 gap-4 text-left items-center text-center">
-<h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-zinc-900 leading-tight tracking-tight w-full font-sans" style="">MÁY GIỮ XE GÓI TIẾT KIỆM VỚI CHI PHÍ THẤP NHẤT, PHÙ HỢP NHẤT VỚI MỌI BÃI XE</h2>
+<!-- Benefits Section -->
+<section class="bg-surface relative py-10">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-low/30 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-margin relative z-10">
+<div class="text-center animate-fade-in-up mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm drop-shadow-sm">Tại sao chọn KL.PARKING?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mx-auto">Giải pháp quản lý bãi xe toàn diện, mang lại hiệu quả tối đa với chi phí tối thiểu.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-<!-- Intro Cards -->
-<div class="bg-zinc-50 rounded-2xl p-6 border border-zinc-100 hover:shadow-md transition-shadow">
-<div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
-<span class="material-symbols-outlined" style="">payments</span>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-8">
+<!-- Benefit 1 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm p-stack-lg rounded-xl border border-outline-variant/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-100">
+<div class="w-12 h-12 bg-primary-fixed/50 rounded-lg flex items-center justify-center text-primary mb-stack-md shadow-inner">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">payments</span>
 </div>
-<h3 class="text-xl font-bold mb-2" style="">Tối ưu chi phí</h3>
-<p class="text-zinc-600 text-sm" style="">Gói giải pháp được thiết kế đặc biệt để giảm thiểu chi phí đầu tư ban đầu mà vẫn đảm bảo hiệu quả quản lý cao.</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Chi phí rẻ</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Đầu tư ban đầu thấp, giải pháp tiết kiệm tối ưu cho mọi quy mô bãi xe.</p>
 </div>
-<div class="bg-zinc-50 rounded-2xl p-6 border border-zinc-100 hover:shadow-md transition-shadow">
-<div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
-<span class="material-symbols-outlined" style="">inventory_2</span>
+<!-- Benefit 2 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm p-stack-lg rounded-xl border border-outline-variant/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-200">
+<div class="w-12 h-12 bg-primary-fixed/50 rounded-lg flex items-center justify-center text-primary mb-stack-md shadow-inner">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">group_remove</span>
 </div>
-<h3 class="text-xl font-bold mb-2" style="">Gói tiết kiệm</h3>
-<p class="text-zinc-600 text-sm" style="">Cung cấp đầy đủ các thiết bị cơ bản cần thiết cho một hệ thống giữ xe hoạt động trơn tru và ổn định.</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Ít nhân lực</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Tự động hóa cao, giảm thiểu nhân sự quản lý trực tiếp tại bãi.</p>
 </div>
-<!-- Info Box -->
-<div class="bg-zinc-50 rounded-2xl p-6 border border-zinc-100 hover:shadow-md transition-shadow lg:row-span-2 flex flex-col justify-between">
-<div>
-<h3 class="text-xl font-bold mb-4 border-b pb-2" style="">Thông tin chi tiết</h3>
-<div class="mb-4">
-<strong class="block text-zinc-800 mb-1">Tần suất:</strong>
-<p class="text-zinc-600 text-sm" style="">Hoạt động liên tục 24/7, đáp ứng lưu lượng xe ra vào liên tục.</p>
+<!-- Benefit 3 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm p-stack-lg rounded-xl border border-outline-variant/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-300">
+<div class="w-12 h-12 bg-primary-fixed/50 rounded-lg flex items-center justify-center text-primary mb-stack-md shadow-inner">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">build</span>
 </div>
-<div>
-<strong class="block text-zinc-800 mb-1">Phù hợp:</strong>
-<ul class="text-zinc-600 text-sm space-y-1 list-disc pl-5">
-<li class="" style="">Chung cư, căn hộ mini</li>
-<li class="" style="">Bệnh viện, phòng khám</li>
-<li class="" style="">Trường học, trung tâm đào tạo</li>
-<li class="" style="">Bãi giữ xe tư nhân vừa và nhỏ</li>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Lắp đặt dễ dàng</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Hệ thống thiết kế module, triển khai nhanh chóng không ảnh hưởng mặt bằng.</p>
+</div>
+<!-- Benefit 4 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm p-stack-lg rounded-xl border border-outline-variant/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-400">
+<div class="w-12 h-12 bg-primary-fixed/50 rounded-lg flex items-center justify-center text-primary mb-stack-md shadow-inner">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Thu hồi vốn nhanh</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Kiểm soát doanh thu chặt chẽ, chống thất thoát, rút ngắn thời gian hoàn vốn.</p>
+</div>
+</div>
+<div class="bg-gradient-to-r from-tertiary-fixed to-surface-container-high rounded-xl p-stack-lg flex flex-col md:flex-row items-center gap-gutter animate-fade-in-up shadow-sm border border-outline-variant/30">
+<div class="md:w-1/3">
+<h3 class="font-headline-md text-headline-md text-on-tertiary-fixed mb-stack-sm">Phù hợp mọi mô hình</h3>
+<p class="font-body-md text-body-md text-on-tertiary-fixed-variant">Hệ thống tương thích hoàn hảo với đa dạng loại hình kinh doanh.</p>
+</div>
+<div class="md:w-2/3 flex flex-wrap gap-stack-sm">
+<span class="bg-surface-container-lowest px-4 py-2 rounded-full font-label-sm text-label-sm text-primary border border-outline-variant/50 shadow-sm hover:-translate-y-0.5 transition-transform">Chung cư</span>
+<span class="bg-surface-container-lowest px-4 py-2 rounded-full font-label-sm text-label-sm text-primary border border-outline-variant/50 shadow-sm hover:-translate-y-0.5 transition-transform">Bệnh viện</span>
+<span class="bg-surface-container-lowest px-4 py-2 rounded-full font-label-sm text-label-sm text-primary border border-outline-variant/50 shadow-sm hover:-translate-y-0.5 transition-transform">Trường học</span>
+<span class="bg-surface-container-lowest px-4 py-2 rounded-full font-label-sm text-label-sm text-primary border border-outline-variant/50 shadow-sm hover:-translate-y-0.5 transition-transform">Coopmart</span>
+<span class="bg-surface-container-lowest px-4 py-2 rounded-full font-label-sm text-label-sm text-primary border border-outline-variant/50 shadow-sm hover:-translate-y-0.5 transition-transform">BigC</span>
+<span class="bg-surface-container-lowest px-4 py-2 rounded-full font-label-sm text-label-sm text-primary border border-outline-variant/50 shadow-sm hover:-translate-y-0.5 transition-transform">Quán cafe</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing & Promotion Section -->
+<section class="bg-gradient-to-b from-surface-container-low to-surface-container-highest py-10">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="text-center animate-fade-in-up mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm drop-shadow-sm">Bảng giá 2024</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mx-auto">Chi phí đầu tư minh bạch, tối ưu cho bãi giữ xe dưới 5.000 lượt mỗi ngày.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Pricing Table Card -->
+<div class="lg:col-span-7 bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl border border-outline-variant/60 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col animate-fade-in-up animation-delay-100">
+<div class="bg-gradient-to-r from-primary to-primary-container p-stack-md text-center mb-8">
+<h3 class="font-headline-md text-headline-md text-on-primary">BẢNG GIÁ MÁY GIỮ XE THÔNG MINH 2024<br/><span class="text-secondary-fixed drop-shadow-sm">1 MÁY 2 LÀN</span></h3>
+</div>
+<div class="p-stack-lg flex-grow">
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg border-b border-outline-variant/50 pb-stack-md">Gói tiết kiệm dành cho bãi xe có tần suất dưới 5.000 lượt mỗi ngày.</p>
+<h4 class="font-label-sm text-label-sm text-primary uppercase mb-stack-md tracking-wide">Chi tiết bộ thiết bị:</h4>
+<ul class="space-y-stack-sm mb-stack-lg">
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface">1 Bộ vi tính chuyên dụng (Máy bộ Dell/HP)</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface">4 Camera IP chuyên dụng chụp biển số và toàn cảnh</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface">1 Đầu ghi hình 4 kênh</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface">2 Đầu đọc thẻ thông minh (Mifare/Proximity)</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface">1 Tủ sắt sơn tĩnh điện chuyên dụng đặt máy tính</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface">Phụ kiện (Switch, cáp mạng, cáp nguồn, ruột gà...)</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-2 h-2 bg-secondary-fixed mt-2 rounded-sm flex-shrink-0 shadow-sm"></div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Phần mềm quản lý bản quyền vĩnh viễn</span>
+</li>
 </ul>
 </div>
 </div>
+<!-- Promotion Box -->
+<div class="lg:col-span-5 flex flex-col gap-gutter animate-fade-in-up animation-delay-200">
+<!-- Promo Card -->
+<div class="bg-gradient-to-br from-[#002a58] to-[#001b3d] rounded-2xl p-stack-lg border border-primary-fixed/20 shadow-2xl relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+<div class="absolute -right-10 -top-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+<span class="material-symbols-outlined text-[150px] text-white">local_offer</span>
 </div>
-<!-- Lists -->
-<div class="bg-zinc-50 rounded-2xl p-6 border border-zinc-100 hover:shadow-md transition-shadow lg:col-span-2 flex flex-col md:flex-row gap-6">
-<div class="flex-1">
-<h3 class="text-lg font-bold mb-3 flex items-center gap-2" style=""><span class="material-symbols-outlined text-primary" style="">stars</span> Ưu điểm nổi bật</h3>
-<ul class="text-zinc-600 text-sm space-y-2">
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-green-500 text-[18px]" style="">check_circle</span> Quản lý doanh thu chặt chẽ, chống thất thoát.</li>
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-green-500 text-[18px]" style="">check_circle</span> Thao tác nhanh chóng, giảm ùn tắc giờ cao điểm.</li>
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-green-500 text-[18px]" style="">check_circle</span> Dễ dàng sử dụng và bảo trì.</li>
-</ul>
-</div>
-<div class="flex-1">
-<h3 class="text-lg font-bold mb-3 flex items-center gap-2" style=""><span class="material-symbols-outlined text-blue-500" style="">build</span> Bộ thiết bị bao gồm</h3>
-<ul class="text-zinc-600 text-sm space-y-2">
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-zinc-400 text-[18px]" style="">radio_button_checked</span> Máy tính cài sẵn phần mềm quản lý.</li>
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-zinc-400 text-[18px]" style="">radio_button_checked</span> Camera nhận diện biển số &amp; toàn cảnh.</li>
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-zinc-400 text-[18px]" style="">radio_button_checked</span> Đầu đọc thẻ từ (RFID).</li>
-<li class="flex items-start gap-2" style=""><span class="material-symbols-outlined text-zinc-400 text-[18px]" style="">radio_button_checked</span> Tủ thiết bị (Option).</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- Prominent CTA Box -->
-<div class="bg-gradient-to-r from-rose-600 to-rose-500 rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between shadow-lg items-center text-center">
-<div>
-<h3 class="text-2xl font-bold mb-2" style="">Gói lắp đặt trọn gói</h3>
-<p class="text-rose-100" style="">Liên hệ ngay để nhận báo giá chi tiết và khảo sát miễn phí.</p>
-</div>
-<div class="flex flex-col sm:flex-row items-center gap-4 mt-6 md:mt-0">
-<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="">
-<span class="material-symbols-outlined" style="">call</span> 0986.991.505
-</a>
-<a class="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-sm border border-blue-400" href="https://zalo.me/0986991505" style="">
-                Zalo
-</a>
-</div>
-</div>
-<div class="mt-6 flex justify-center">
-<a class="bg-black text-white px-8 py-4 rounded-full text-base font-bold hover:bg-gray-800 transition-colors shadow-md flex items-center gap-2" href="tel:0986991505" style="">
-        Nhận báo giá ngay - 0986.991.505
-        <span class="material-symbols-outlined text-sm" style="">arrow_forward</span>
-</a>
-</div>
-</section>
-<!-- Social Links / Contact Quick Links -->
-<section class="flex flex-wrap justify-center gap-4 py-2 fade-in-scroll delay-100">
-<a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="https://www.facebook.com/giuxekl/" style="" target="_blank">
-<span class="w-5 h-5 bg-black rounded-full text-white flex items-center justify-center text-[10px]" style="">f</span> Facebook
-        </a>
-<a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="tel:0986991505" style=""><span class="material-symbols-outlined text-lg text-primary" style="">call</span> Hotline: 0986 991 505</a>
-<a class="flex items-center gap-2 px-6 py-3 bg-white rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" href="mailto:giuxekl@gmail.com" style=""><span class="material-symbols-outlined text-lg text-blue-600" style="">mail</span> giuxekl@gmail.com</a>
-</section>
-<!-- Mobile Parking Section -->
-<section class="py-2 fade-in-scroll delay-100">
-<div class="w-full">
-<div class="mb-6 w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-4">
-<div class="flex items-center gap-3 md:w-1/4">
-<div class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></div>
-<span class="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500" style="">
-              Máy giữ xe thông minh cầm tay Mobile Parking
-            </span>
-</div>
-<h2 class="text-sm md:text-base font-extrabold text-zinc-900 leading-tight tracking-tight md:w-2/4" style="">
-              MÁY GIỮ XE CẦM TAY <span class="text-zinc-400 text-xs md:text-sm font-light block md:inline md:ml-2" style="">– MOBILE PARKING</span>
-</h2>
-<p class="text-zinc-500 text-[10px] md:text-xs md:w-1/4" style="">
-              TIẾT KIỆM VỚI CHI PHÍ THẤP NHẤT, PHÙ HỢP NHẤT VỚI MỌI BÃI XE NHỎ.
-            </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto">
-<!-- Main Award Card -->
-<div class="md:col-span-7 bg-white rounded-3xl p-6 flex flex-col justify-between border border-zinc-200 shadow-sm hover:-translate-y-1 transition-transform">
-<div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-<span class="material-symbols-outlined" style="">emoji_events</span>
-</div>
-<span class="material-symbols-outlined text-zinc-300" style="">north_east</span>
-</div>
-<div class="max-w-md mt-6">
-<h3 class="text-xl md:text-2xl font-bold text-zinc-900 mb-2 tracking-tight" style="">Tần suất ra vào:</h3>
-<p class="text-zinc-600 text-sm leading-relaxed mb-3" style="">
-                - Phù hợp với các bãi xe máy với tần suất ra vào trên dưới 300 lượt mỗi ngày.
-              </p>
-<p class="text-zinc-600 text-sm leading-relaxed mb-4" style="">
-                - Các loại hình bãi xe tương thích: Các bãi giữ xe chỉ có diện tích nhỏ hoặc không cần đầu tư một hệ thống giữ xe lớn, đây là giải pháp sẽ giúp chủ bãi giữ xe vừa đảm bảo an toàn vừa kiểm soát chặt chẽ doanh thu từ bãi giữ xe.
-              </p>
-<div class="flex flex-wrap items-center gap-4 pt-5 border-t border-zinc-200">
-<div class="flex items-center gap-2 bg-zinc-900 text-white px-4 py-2 rounded-full text-xs font-semibold">
-<span class="material-symbols-outlined text-[12px]" style="">check_circle</span>
-<span class="" style="">Được khách hàng đánh giá độ dễ sử dụng gọn nhẹ</span>
-</div>
-<div class="flex items-center -space-x-3">
-<img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmHTyzsg8svFy1SMDMPBKi4t1jNyD-V65Joya2r7O0MKsfiQnojn3zKy1x0Xy_xMwREKhsn9Lht-6QB3q0t_xd8XEegn0qnIPN4QlClNXG9sMWTwsqxIKN55ngR4Wlf07XzzWNjFUMfMH_0oKsO3wqROh1-znhAcytaJF4qjVhJCwwHKz533XdHlQcZh1EKtKSwZe89IUQfV2lKsbYLNMj2ryr4LvV_JTT8QTZArNqM5Cvy5peC996DOjDBqyBZiTqwtfFQAgEGTU" style="">
-<img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVNPCxiNSHStdIFMVNZS7OpkaRsh-lXdKYB9ubBfWEWaltuoLbf_lfZ1ghCZZGQu1V8MYKXt2GtIGMiSS-kFBwrXE7Ca4wgv-4TZYajHz09CJUDM65wIgK--WddZZRYlO1x5UoyOzryPGVrJ1F4enbfy4IQv7g8aYwBi7DOk7mgo9nl0KN-s4JErWiJ-r8xwwGAnoGvSVvswsuetYgkU_Zbf6OVC2pCG1uoQZuaDz4B9xFW4klKZ21YprXtyp_MVsHDerh9UN6D7o" style="">
-<img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4dSm7P4Za9r2O8WjfqsASl8j2ZgSIKsiy-Y-butSvEt7vky_Xcd-ORuX1OtbGeNvX4ZWiUBkHyAPaS23HZ1B3q8QUwGtGkPO6JggCCPJAOdPXTO9Umf0BG4gHA72Iat3oxCOriSl32s_uYYGgG1oCr8NKbJty1JrRJjE0eRVVLpVvBtURiz1JKr3FEJ0jdM-0uk7IruzucCjH4PuFdlq5NfD5Tx_QE29GyyIZcKiPZq7YuvhgvnQRI7aiSt8QI5Fdg7Z8tTj74zQ" style="">
-<div class="h-8 pl-6 pr-4 bg-zinc-100 border-2 border-white rounded-full flex items-center justify-center">
-<span class="text-[10px] font-bold text-zinc-600" style="">Những người sử dụng quen thuộc</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Image Card -->
-<div class="md:col-span-5 relative rounded-3xl overflow-hidden group min-h-[450px]" style="width:100%;">
-<img alt="Design portrait" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://i.ibb.co/PvjYZ2Tr/s1.jpg" style="">
-<!--<div class="absolute inset-0 bg-gradient-to-b from-zinc-900/60 via-transparent to-transparent p-6">
-<p class="relative z-10 text-white text-sm font-medium leading-relaxed max-w-[180px]" style="">
-                Tiết kiệm chi phí đầu tư ban đầu.
-              </p>
-</div>
- -->
-</div>
-</div>
-</div>
-</section>
-<!-- Services/Products Section -->
-<section class="relative overflow-hidden text-white rounded-[2.5rem] p-6 md:p-10 bg-gradient-to-br from-zinc-900 via-zinc-800 to-black fade-in-scroll delay-300">
-<!-- Abstract tech background highlights -->
-<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-rose-600/10 blur-[120px] rounded-full pointer-events-none -translate-y-1/4 translate-x-1/4"></div>
-<div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-zinc-500/10 blur-[100px] rounded-full pointer-events-none translate-y-1/4 -translate-x-1/4"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
 <div class="relative z-10">
-<div class="flex items-center gap-2 text-sm font-medium mb-8" style="">
-<span class="w-2 h-2 rounded-full bg-primary"></span> ƯU ĐIỂM MÁY GIỮ XE CẦM TAY
-        </div>
-<div class="flex flex-col items-start gap-8 mb-8">
-<h2 class="font-medium leading-tight text-base md:text-lg w-full" style="">
-                Các hình thức giữ xe bằng vé giấy hiện nay đang dần trở nên lỗi thời do rất nhiều bất cập xảy ra như bảo mật kém dễ làm giả, ướt khi trời mưa, xử lí chậm, tra cứu và quản lí số lượng xe thiếu khoa học,… <span class="text-zinc-400" style="">không hiệu quả</span>
-</h2>
-<div class="flex items-center gap-3 shrink-0">
-<button class="bg-white text-black px-6 py-3 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors" style="">Tính năng vượt trội</button>
-<button class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center hover:bg-rose-700 transition-colors" style="">
-<span class="material-symbols-outlined" style="">arrow_outward</span>
-</button>
-</div>
-</div>
-<div class="space-y-0 divide-y divide-zinc-700 border-t border-zinc-700">
-<!-- Product 1 -->
-<div class="py-6 flex flex-col md:flex-row items-start md:items-center gap-8 hover:bg-zinc-800/50 transition-colors rounded-xl p-4 -mx-4 cursor-pointer group">
-<div class="flex items-center gap-6 w-full md:w-1/3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-sm font-bold text-white group-hover:scale-110 transition-transform" style="">01</div>
-<h3 class="text-2xl font-medium text-white" style="">Tích hợp&nbsp; tính năng vượt trội</h3>
-</div>
-<div class="w-full md:w-1/3 text-zinc-400 leading-relaxed text-lg" style="">
-                    -&nbsp;Tích hợp camera chụp và nhận dạng biển số, tốc độ xử lý cực nhanh (dưới 2s)<div><div class="" style="">Chống nước, chống va đập, pin dung lượng cao</div><div class="" style="">- Thống kê doanh thu chi tiết theo ngày, theo nhân viên, theo ca, gửi mail doanh thu theo thời gian chọn</div><div class="" style="">- Tạo nhiều loại xe và công thức tính tiền đa dạng</div></div></div>
-<div class="w-full md:w-1/3 flex justify-end">
-<img alt="Barrier" class="w-48 h-48 rounded-xl object-cover shadow-2xl zoom-on-hover" src="https://i.ibb.co/67TqpR4p/MAYCAMTAY.jpg" style="width:100%;height:70%;">
-</div>
-</div>
-<!-- Product 2 -->
-<div class="py-6 flex flex-col md:flex-row items-start md:items-center gap-8 hover:bg-zinc-800/50 transition-colors rounded-xl p-4 -mx-4 cursor-pointer group">
-<div class="flex items-center gap-6 w-full md:w-1/3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-sm font-bold text-white group-hover:scale-110 transition-transform" style="">02</div>
-<h3 class="text-2xl font-medium text-white" style="">Sử dụng dễ dàng</h3>
-</div>
-<div class="w-full md:w-1/3 text-zinc-400 leading-relaxed text-lg" style=""><div class="" style="">- Ứng dụng quản lý cho chủ bãi xe (Android)</div><div class="" style="">- Thành thạo sau 5 phút hướng dẫn</div><div class="" style="">- Nhỏ gọn, tiết kiệm chi phí, di động hoàn toàn</div></div>
-<div class="w-full md:w-1/3 flex justify-end">
-<img alt="LPR Camera" class="w-48 h-48 rounded-xl object-cover shadow-2xl zoom-on-hover" src="https://i.ibb.co/dJz7PYLw/MAYCAMTAY1.jpg" style="width:100%;height:70%;">
+<span class="inline-block bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm px-4 py-1.5 rounded-full mb-stack-md uppercase tracking-wider font-bold shadow-sm">Ưu đãi đặc biệt</span>
+<h3 class="font-headline-lg text-headline-lg text-white mb-stack-md leading-tight">Hệ thống máy giữ xe thông minh KL.PARKING lắp đặt mới trọn gói chỉ còn <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary-fixed to-[#e8ff8f] text-6xl font-extrabold block mt-3 drop-shadow-md">31tr</span></h3>
+<div class="bg-white/10 backdrop-blur-md border border-white/10 p-stack-sm rounded-xl flex items-center gap-3 mt-6">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl">card_giftcard</span>
+<p class="font-headline-md text-headline-md text-white">Tặng kèm 200 thẻ in sẵn</p>
 </div>
 </div>
 </div>
+<!-- Mobile Solution -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm rounded-2xl p-stack-lg border border-outline-variant/50 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-gutter">
+<div class="w-16 h-16 bg-gradient-to-br from-surface-container to-surface-container-highest rounded-full flex items-center justify-center flex-shrink-0 text-primary shadow-inner border border-white/50">
+<span class="material-symbols-outlined text-4xl">smartphone</span>
 </div>
-</section>
-<!-- SEO Content Section -->
-<!-- FAQ Section -->
-<section class="py-4 md:py-6 max-w-[1440px] mx-auto px-4 md:px-8 fade-in-scroll delay-100">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-<!-- Image Column -->
-<div class="relative rounded-[2rem] overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-full min-h-[500px]" style="width:100%;">
-<img alt="Hệ thống đỗ xe tự động" class="absolute inset-0 w-full h-full object-cover" src="https://i.ibb.co/WQmssc4/s2.jpg" style="">
-<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white mb-6">
-<span class="material-symbols-outlined" style="">verified_user</span>
-</div>
-<h3 class="text-white text-3xl font-serif font-bold mb-3" style="">Lý Do Chọn Chúng Tôi?</h3>
-<p class="text-slate-200" style="">Tìm hiểu tại sao hàng ngàn bãi giữ xe tin dùng giải pháp của giuxethongminh-kl.</p>
-</div>
-</div>
-<!-- Accordion Column -->
-<div class="flex flex-col justify-center lg:py-8">
-<h2 class="font-bold text-slate-900 mb-6 leading-tight text-lg md:text-xl font-sans" style="">Lợi ích vượt trội từ <span class="text-blue-600" style="">hệ thống thông minh</span></h2>
-<div class="space-y-4">
-<!-- FAQ Item 1 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq1" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq1" style="">
-<span class="text-lg font-semibold text-slate-800" style="">1. Đảm bảo an ninh và an toàn</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Hệ thống tự động chụp ảnh biển số và người điều khiển, đối chiếu hình ảnh lúc ra/vào giúp ngăn chặn tuyệt đối tình trạng trộm cắp xe, mang lại sự an tâm cho khách hàng.</p>
-</div>
-</div>
-<!-- FAQ Item 2 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq2" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq2" style="">
-<span class="text-lg font-semibold text-slate-800" style="">2. Tốc độ nhanh, giảm ùn tắc</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Thay vì ghi vé giấy thủ công, hệ thống sử dụng thẻ từ (RFID) hoặc nhận diện biển số (LPR), cho phép xe lưu thông nhanh chóng, chỉ mất từ 1-3 giây mỗi lượt, giải quyết triệt để vấn đề ùn tắc giờ cao điểm.</p>
-</div>
-</div>
-<!-- FAQ Item 3 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq3" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq3" style="">
-<span class="text-lg font-semibold text-slate-800" style="">3. Quản lý doanh thu và báo cáo chặt chẽ</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Phần mềm tự động tính phí dựa trên thời gian và loại xe. Mọi giao dịch đều được lưu trữ, cung cấp các báo cáo thống kê chi tiết theo ngày, tháng, năm, giúp chủ bãi quản lý tài chính minh bạch, tránh thất thoát.</p>
-</div>
-</div>
-<!-- FAQ Item 4 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq4" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq4" style="">
-<span class="text-lg font-semibold text-slate-800" style="">4. Tiết kiệm chi phí vận hành</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Với hệ thống tự động, bãi xe có thể hoạt động hiệu quả với số lượng nhân viên ít hơn, giảm thiểu chi phí nhân sự và chi phí in ấn vé giấy hàng tháng.</p>
-</div>
-</div>
-<!-- FAQ Item 5 -->
-<div class="accordion-item border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-<input class="hidden" id="faq5" type="checkbox">
-<label class="flex items-center justify-between p-6 cursor-pointer select-none" for="faq5" style="">
-<span class="text-lg font-semibold text-slate-800" style="">5. Tính năng hiện đại, tiện lợi</span>
-<span class="material-symbols-outlined icon-plus text-slate-400 transition-transform duration-300" style="">add</span>
-</label>
-<div class="accordion-content px-6 text-slate-600 bg-slate-50">
-<p class="" style="">Hỗ trợ đa dạng các hình thức thanh toán (tiền mặt, ví điện tử, chuyển khoản) và có thể tích hợp với các hệ thống quản lý tòa nhà, hướng dẫn đỗ xe, bảng LED hiển thị số chỗ trống.</p>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-1">CẦM TAY MOBILE PARKING</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Máy giữ xe thông minh di động tiết kiệm, linh hoạt.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<!-- Selected Projects / Solutions -->
-<section class="space-y-6">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start fade-in-scroll delay-200">
+<!-- Notes & Policy Section -->
+<section class="bg-surface py-10 py-8">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="bg-gradient-to-br from-tertiary to-[#1a1d1f] rounded-2xl p-stack-lg text-on-tertiary shadow-lg animate-fade-in-up border border-tertiary-fixed/10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="col-span-1 md:col-span-3 mb-stack-sm">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-secondary-fixed">info</span>
+                            Ghi chú
+                        </h3>
+</div>
+<div class="flex items-start gap-3 group">
+<div class="p-2 bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-secondary-fixed">verified_user</span>
+</div>
 <div>
-<div class="flex items-center gap-2 text-sm font-medium mb-4" style="">
-<span class="w-2 h-2 rounded-full bg-primary"></span> Dự Án &amp; Giải Pháp Tiêu Biểu
-                </div>
-<div class="flex items-center gap-3 mt-6">
-<button class="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors" style="">Xem Tất Cả Giải Pháp</button>
-<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-rose-700 transition-colors" style="">
-<span class="material-symbols-outlined text-sm" style="">arrow_outward</span>
-</button>
+<p class="font-label-sm text-label-sm text-tertiary-fixed-dim mb-1 tracking-wider">BẢO HÀNH</p>
+<p class="font-body-md text-body-md font-medium text-white/90">Bảo hành 01 năm tận nơi cho toàn bộ hệ thống.</p>
 </div>
+</div>
+<div class="flex items-start gap-3 group">
+<div class="p-2 bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-secondary-fixed">support_agent</span>
 </div>
 <div>
-<h2 class="text-xl md:text-2xl font-semibold leading-relaxed text-zinc-800 font-sans" style="">Chuyên cung cấp linh kiện ( thẻ từ, tủ giữ xe, đầu đọc thẻ, camera, barrier, v.v...), cài đặt, sửa chữa hệ thống Máy Giữ Xe Thông Minh</h2>
+<p class="font-label-sm text-label-sm text-tertiary-fixed-dim mb-1 tracking-wider">TƯ VẤN THIẾT KẾ</p>
+<p class="font-body-md text-body-md font-medium text-white/90">Liên hệ Khải: <a class="text-secondary-fixed hover:text-[#e8ff8f] hover:underline transition-colors" href="tel:0898464174">0898 464 174</a></p>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Project 1 -->
-<div class="space-y-4 fade-in-scroll delay-300">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Tủ giữ xe thông minh" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/6cLx3007/TU.jpg" style="">
+<div class="flex items-start gap-3 group">
+<div class="p-2 bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-secondary-fixed">payments</span>
 </div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Tủ giữ xe thông minh</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Nhỏ / Lớn gắn camera</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="space-y-4 fade-in-scroll delay-400">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Đầu đọc thẻ Xe Máy / Ô tô" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/N6C35LY8/DAUDOCTHE.jpg" style="">
-</div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Đầu đọc thẻ Xe Máy / Ô tô</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Tầm gần / Tầm xa</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="space-y-4 fade-in-scroll delay-100">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Cung cấp Phần mềm giữ xe" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/GfpY7rhN/PHANMEM.jpg" style="">
-</div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Cung cấp Phần mềm giữ xe</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Có thể tùy biến</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
-</div>
-</div>
-<!-- Project 4 -->
-<div class="space-y-4 fade-in-scroll delay-200">
-<div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-200 group">
-<img alt="Cung cấp Thẻ Từ giữ xe" class="w-full h-full object-cover zoom-on-hover" src="https://i.ibb.co/356sQscX/THETU.jpg" style="">
-</div>
-<div class="flex justify-between items-center">
-<h3 class="text-xl font-medium" style="">Cung cấp Thẻ Từ giữ xe</h3>
-<span class="text-xs font-semibold text-primary uppercase flex items-center gap-1" style=""><span class="" style="color: oklch(0.554 0.046 257.417); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; letter-spacing: 0.6px; background-color: rgb(248, 250, 252);">Thẻ in 2 mặt / Thẻ trắng</span><span class="material-symbols-outlined text-[10px]" style="">arrow_outward</span></span>
+<div>
+<p class="font-label-sm text-label-sm text-tertiary-fixed-dim mb-1 tracking-wider">THANH TOÁN</p>
+<p class="font-body-md text-body-md font-medium text-white/90">Tiền mặt hoặc Chuyển khoản linh hoạt.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section>
 </section>
 <!-- nút cuộn -->
 <button onclick="topFunction()" id="backToTopBtn">
@@ -577,13 +700,12 @@
 <!-- Navigation Links -->
 <div class="md:col-span-3 space-y-4">
 <div class="flex flex-col space-y-4 text-[#6b7280] font-medium">
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Trang chủ</a>
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Dự án</a>
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Dịch vụ</a>
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Thư viện</a>
+<a class="hover:text-zinc-900 transition-colors" href="/" style="">Trang chủ</a>
+<a class="hover:text-zinc-900 transition-colors" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
+<a class="hover:text-zinc-900 transition-colors" href="thiet-bi-bai-xe.html" style="">Thiết bị bãi xe</a>
 <a class="hover:text-zinc-900 transition-colors" href="lien-he.html" style="">Liên hệ</a>
 </div>
-<a href='https://free-hit-counters.net/'>free-hit-counters</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=48c1e7e452952a625f6dd048ec2898c293b7edb3'></script>
+<a href='https://free-hit-counters.net/'>Lượt view</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=48c1e7e452952a625f6dd048ec2898c293b7edb3'></script>
 <script type="text/javascript" src="https://freevisitorcounters.com/en/home/counter/1540838/t/1"></script>
 </div>
 <!-- Contact Info -->
@@ -672,5 +794,28 @@ function topFunction() {
         }
 
         window.addEventListener('DOMContentLoaded', startHeroSlider);
+	
     </script>
+	<script>
+	const menuBtn = document.getElementById("menuBtn");
+	const menu = document.getElementById("menu");
+	const overlay = document.getElementById("overlay");
+
+	menuBtn.addEventListener("click", () => {
+	  menu.classList.toggle("hidden");
+	  overlay.classList.toggle("hidden");
+	});
+
+	overlay.addEventListener("click", () => {
+	  menu.classList.add("hidden");
+	  overlay.classList.add("hidden");
+	});
+	<!--CLICK LINK TỰ ĐÓNG MENU-->
+	document.querySelectorAll("#menu a").forEach(link => {
+	  link.addEventListener("click", () => {
+		menu.classList.add("hidden");
+		overlay.classList.add("hidden");
+	  });
+	});
+	</script>
 	</body></html>
