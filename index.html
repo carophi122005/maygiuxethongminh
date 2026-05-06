@@ -1,8 +1,4 @@
-<!DOCTYPE html><html class="light" lang="vi">
-	<head>
-		<link rel="icon" href="/favicon.png" sizes="48x48" type="image/png">
-		<link rel="shortcut icon" href="/logo-giuxethongminh.png">
-	</head><body class="bg-background text-zinc-900 font-sans antialiased overflow-x-hidden">
+<!DOCTYPE html><html class="light" lang="vi"><head><link rel="icon" type="image/svg+xml" href="https://i.ibb.co/SDhfqxLx/logo-giuxekl.png"></head><body class="bg-background text-zinc-900 font-sans antialiased overflow-x-hidden">
 
 
 <meta charset="utf-8">
@@ -163,18 +159,61 @@
 		  transform: translateY(-2px);
 		}
 		/* nút cuộn */
+		
+		/* menu mobile */
+		#menu {
+		  pointer-events: auto;
+		}
+
+		/* MOBILE */
+		@media (max-width: 767px) {
+
+		  #menu {
+			flex-direction: column;
+			gap: 0;
+			padding: 12px;
+			border-radius: 0 0 16px 16px;
+		  }
+
+		  #menu a {
+			display: block;
+			width: 100%;
+			padding: 14px 16px;
+			border-radius: 12px;
+			font-size: 15px;
+			color: #52525b;
+			transition: all 0.25s ease;
+		  }
+
+		  #menu a:hover {
+			background: #f4f4f5;
+			color: #111;
+			transform: translateX(4px);
+		  }
+
+		  #menu a + a {
+			border-top: 1px solid #eee;
+		  }
+		}
+}
     </style>
 <!-- Top Navigation (Component Predicted) -->
 <nav class="flex justify-between items-center max-w-[100%] mx-auto px-6 h-24 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.05)]">
+<div id="overlay"
+class="fixed inset-0 bg-black/40 hidden z-[998]"></div>
 <div class="text-2xl font-serif text-zinc-900 dark:text-zinc-50 font-bold tracking-tight" style="font-family: Newsreader, serif;font-weight: 900;">giuxethongminh</div>
-<div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+<div id="menu"
+class="hidden md:flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium tracking-wide absolute md:static top-16 left-0 w-full bg-white md:bg-transparent p-6 md:p-0 shadow md:shadow-none z-[999]" style="padding-left:20px">
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="may-giu-xe-thong-minh.html" style="">Máy giữ xe thông minh</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="thiet-bi-bai-xe.html" style="">Thiết bị bãi xe</a>
 <a class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hover:opacity-80 transition-all duration-300" href="lien-he.html" style="">Liên Hệ</a>
 </div>
-<div class="flex items-center gap-3">
-<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;">
+<div class="flex items-center gap-3" style="padding-left:5px">
+<button id="menuBtn" class="md:hidden text-2xl">
+☰
+</button>
+<a class="flex items-center gap-2 bg-white text-rose-600 px-6 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-sm" href="tel:0986991505" style="font-size:17px;padding-left:0px">
 <span class="material-symbols-outlined" style="">call</span> 0986.991.505
 </a>
 </div>
@@ -581,13 +620,12 @@
 <!-- Navigation Links -->
 <div class="md:col-span-3 space-y-4">
 <div class="flex flex-col space-y-4 text-[#6b7280] font-medium">
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Trang chủ</a>
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Dự án</a>
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Dịch vụ</a>
-<a class="hover:text-zinc-900 transition-colors" href="#" style="">Thư viện</a>
+<a class="hover:text-zinc-900 transition-colors" href="/" style="">Trang chủ</a>
+<a class="hover:text-zinc-900 transition-colors" href="giuxecamtay.html" style="">Máy giữ xe cầm tay</a>
+<a class="hover:text-zinc-900 transition-colors" href="thiet-bi-bai-xe.html" style="">Thiết bị bãi xe</a>
 <a class="hover:text-zinc-900 transition-colors" href="lien-he.html" style="">Liên hệ</a>
 </div>
-<a href='https://free-hit-counters.net/'>free-hit-counters</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=48c1e7e452952a625f6dd048ec2898c293b7edb3'></script>
+<a href='https://free-hit-counters.net/'>Lượt view</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=48c1e7e452952a625f6dd048ec2898c293b7edb3'></script>
 <script type="text/javascript" src="https://freevisitorcounters.com/en/home/counter/1540838/t/1"></script>
 </div>
 <!-- Contact Info -->
@@ -676,5 +714,28 @@ function topFunction() {
         }
 
         window.addEventListener('DOMContentLoaded', startHeroSlider);
+	
     </script>
+	<script>
+	const menuBtn = document.getElementById("menuBtn");
+	const menu = document.getElementById("menu");
+	const overlay = document.getElementById("overlay");
+
+	menuBtn.addEventListener("click", () => {
+	  menu.classList.toggle("hidden");
+	  overlay.classList.toggle("hidden");
+	});
+
+	overlay.addEventListener("click", () => {
+	  menu.classList.add("hidden");
+	  overlay.classList.add("hidden");
+	});
+	<!--CLICK LINK TỰ ĐÓNG MENU-->
+	document.querySelectorAll("#menu a").forEach(link => {
+	  link.addEventListener("click", () => {
+		menu.classList.add("hidden");
+		overlay.classList.add("hidden");
+	  });
+	});
+	</script>
 	</body></html>
